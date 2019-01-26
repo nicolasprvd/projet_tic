@@ -1,7 +1,9 @@
 <?php
   session_start();
   require_once("include/fonctions.php");
-  require_once("include/fonctions_sql.php"); ?>
+  require_once("include/fonctions_sql.php");
+  define('URL', 'index.php?page=');
+ ?>
 
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -17,7 +19,10 @@
 
     <!-- ENTETE -->
     <header>
-      <?php include "include/header.php"; ?>
+      <?php
+        include "include/header.php";
+        include "include/menu.php";
+      ?>
     </header>
 
     <!-- CONTENU -->
