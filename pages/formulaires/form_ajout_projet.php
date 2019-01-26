@@ -1,16 +1,11 @@
-<<<<<<< HEAD
+
 <form action = "form_ajout_projet.php" method = "POST">
 
         <div class="titre">
             <h1>Saisir un projet</h1>
         </div>
             
-=======
 
-	 <form action="" method="post">
-		<p> Saisir un projet </p>
-
->>>>>>> 4ed638a43d227d79ab8cd18a2aabc0aea3a29c7e
 		</BR></BR>
 
 		Client : <input type = "texte" name = "customer"/></BR>
@@ -31,16 +26,12 @@
 
 
 		<input type="button" value="Annuler" onclick="location.href='form_ajout_projet.php'" />
-<<<<<<< HEAD
+
 		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
 		
-=======
-		<input type = "submit" value = "Soumettre"/>
 
->>>>>>> 4ed638a43d227d79ab8cd18a2aabc0aea3a29c7e
 		</BR></BR>
 
-<<<<<<< HEAD
 		
 </form>
 
@@ -64,8 +55,3 @@ if(isset($_POST['btn_submit'])) {
 }
 
 ?>
-=======
-
-
-	</form>
->>>>>>> 4ed638a43d227d79ab8cd18a2aabc0aea3a29c7e
