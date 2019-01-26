@@ -1,4 +1,7 @@
 <?php
+/**
+* Page d'accueil de l'application
+**/
 
 echo '<h1>Je suis la page d\'accueil</h1>';
 

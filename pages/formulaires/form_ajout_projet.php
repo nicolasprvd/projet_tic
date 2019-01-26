@@ -1,10 +1,15 @@
-
+<?php
+/**
+* Formulaire permettant
+* d'ajouter un nouveau projet
+**/
+?>
 <form action = "form_ajout_projet.php" method = "POST">
 
         <div class="titre">
             <h1>Saisir un projet</h1>
         </div>
-            
+
 
 		</BR></BR>
 
@@ -28,11 +33,11 @@
 		<input type="button" value="Annuler" onclick="location.href='form_ajout_projet.php'" />
 
 		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
-		
+
 
 		</BR></BR>
 
-		
+
 </form>
 
 <?php
@@ -48,7 +53,7 @@ if(isset($_POST['btn_submit'])) {
 
 
     //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if ( !empty($_POST['customer']) AND !empty($_POST['title'] )  ) 
+    if ( !empty($_POST['customer']) AND !empty($_POST['title'] )  )
     {
         echo "Je vais pouvoir inserer ma requete";
     }

@@ -1,3 +1,10 @@
+<?php
+/**
+* Formulaire de connexion
+* permettant d'accéder à l'application
+**/
+?>
+
 <div id="signin" class="modal">
 
   <form method="post" class="modal-content animate" action="">

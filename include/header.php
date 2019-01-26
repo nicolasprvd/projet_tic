@@ -1,4 +1,9 @@
 <?php
+/**
+* Entete de l'application
+**/
+
+
   echo '<h1>Je suis l\'entete de la page</h1>';
   //Si une personne est authentifiée
   if(estConnecte()) {

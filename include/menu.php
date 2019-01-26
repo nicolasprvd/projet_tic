@@ -1,3 +1,9 @@
+<?php
+/**
+* Menu de l'application
+**/
+?>
+
 <h2>Menu</h2>
 
 <nav>

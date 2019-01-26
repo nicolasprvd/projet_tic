@@ -1,4 +1,10 @@
 <?php
+
+/**
+* Index principal de l'application
+* qui inclut les pages
+**/
+
   session_start();
   require_once("include/fonctions.php");
   require_once("include/fonctions_sql.php");

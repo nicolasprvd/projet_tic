@@ -1,3 +1,10 @@
+<?php
+/**
+* Formulaire d'inscription
+* pour une personne
+**/
+?>
+
 <div id="signup" class="modal">
 
   <form method="post" class="modal-content animate" action="">

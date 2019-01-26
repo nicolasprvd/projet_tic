@@ -1,3 +1,9 @@
+<?php
+/**
+* Vue permettant d'afficher
+* les erreurs de saisies 
+**/
+?>
 <div>
   <ul>
     <?php

@@ -1,4 +1,9 @@
 <?php
+/**
+* Fichier permettant de manipuler
+* les données de la BDD
+**/
+
   //Connexion à la base de données
   $GLOBALS['connex'] = connexionBD();
 
