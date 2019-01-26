@@ -28,7 +28,13 @@ function connexionBD() {
 * @return true ou false
 **/
 function estConnecte() {
-  return isset($_SESSION['idPersonne']);
+  return isset($_SESSION['name']);
+}
+
+function connecter($idStatus, $name, $firstname) {
+  $_SESSION['status'] = $idStatus;
+  $_SESSION['name'] = $name;
+  $_SESSION['firstname'] = $firstname;
 }
 
 /**
@@ -40,11 +46,11 @@ function deconnecter() {
 
 /**
 * Transforme une date au format anglais
-* @param $maDate date au format aaaa-mm-jj
+* @param $myDate date au format aaaa-mm-jj
 * @return $date date au format jj/mm/aaa
 **/
-function dateAnglaisVersFrancais($maDate) {
-  @list($annee, $mois, $jour) = explode('-', $maDate);
+function dateAnglaisVersFrancais($myDate) {
+  @list($annee, $mois, $jour) = explode('-', $myDate);
   $date = "$jour" . "/" . $mois . "/" . $annee;
   return $date;
 }
