@@ -1,35 +1,9 @@
-<?php
+<form action = "form_ajout_projet.php" method = "POST">
 
-    require('../../include/fonctions.php');
-
-    $connex = connexionBD();
-
-    session_start();
-
-    // Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if ( !empty($_POST['customer']) AND !empty($_POST['title'] ) ) 
-    {
-            echo "Je vais pouvoir inserer ma requete";
-    }
-
- ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-
-    <meta charset="utf-8" />
-	<p> Mettre ici le header  </p>
-	
-</head>
-<body>
-
-
-
-
-	 <form action = "form_ajout_projet.php" method = "POST">
-		<p> Saisir un projet </p>
-		
+        <div class="titre">
+            <h1>Saisir un projet</h1>
+        </div>
+            
 		</BR></BR>
 		
 		Client : <input type = "texte" name = "customer"/></BR>
@@ -46,16 +20,35 @@
         </BR>
 
         Description : <input type = "texte" name = "description"/></BR>
-        Fichier Joint </BR>
+        Fichier Joint : <input type="file" name="descriptionjoint" /></BR>
 
 	
 		<input type="button" value="Annuler" onclick="location.href='form_ajout_projet.php'" />
-		<input type = "submit" value = "Soumettre"/>
+		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
 		
 		</BR></BR>
 		
 
 		
-	</form>
-</body>
-</html>
+</form>
+
+<?php
+
+if(isset($_POST['btn_submit'])) {
+    //Si le formulaire a été envoyé
+
+    //if(empty($_POST['customer']) || empty($_POST['title']) ) {
+      //ajouterErreur('Vous devez renseigner tous les champs');
+      //include_once('./include/erreurs.php');
+    //}
+
+
+
+    //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
+    if ( !empty($_POST['customer']) AND !empty($_POST['title'] )  ) 
+    {
+        echo "Je vais pouvoir inserer ma requete";
+    }
+}
+
+?>
