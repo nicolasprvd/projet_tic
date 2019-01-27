@@ -55,6 +55,23 @@
     return $result;
   }
 
+   /**
+  * Récupère l'id de la personne inserer en parametre 
+  * @param $nom le nom de la personne
+  * @param $firstName le prénom de la personne
+  * @return $result l'id de la personne en question
+  **/
+  function getIdPeople($name, $firstName) {
+    $query = "SELECT idpersonne FROM personne WHERE nomPersonne = :name AND prenompersonne = :firstName";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'name' => $name,
+      'firstName' => $firstName
+    ));
+    $result = $prepQuery->fetch();
+    return $result;
+  }
+
 
   /*******************************
   * FONCTIONS INSERT
@@ -80,6 +97,73 @@
       'password' => $password
     ));
   }
+
+
+    /**
+  * Effectue l'insertion dans la base de données
+  * concernant l'inscription
+  * @param $idcustomer l'identifiant de la personne proposant le projet
+  * @param $title le titre du projet 
+  * @param $nbStudent le nombre d'étudiant requis pour le projet
+  * @param $description la desctiption de projet (texte)
+  * @param $descriptionJoint la description du projet (piece jointe)
+  * @param $automatique pour savoi si le projet peut être affecté automatiquement ou non
+  **/
+  function insertNewProject($idcustomer, $title, $nbStudent, $description, $descriptionJoint, $automatique) {
+
+    //On recupere si le projet peut être attribuer automatiquement (1) ou non (0)
+    if ($automatique == oui)
+    {
+      $boolautomatique = 1;
+    } else {
+      $boolautomatique = 0;
+    }
+
+    //description et descriptionJoint sont tous deux remplit
+    if (!empty($description) AND !empty($descriptionJoint))
+    {
+      
+      $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte, descriptifpdf, nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :descriptionJoint, :nbStudent, :boolautomatique)";
+      $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idcustomer' => $idcustomer,
+      'title' => $title,
+      'description' => $description,
+      'descriptionJoint' => $descriptionJoint,
+      'nbStudent' => $nbStudent,
+      'boolautomatique' => $boolautomatique
+    ));
+    }
+    //Uniquement descriptionJoint est remplit
+    elseif (empty($description))
+    {
+      $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptifpdf, nbEtudiants, automatique) VALUES (:idcustomer, :title, :descriptionJoint, :nbStudent, :boolautomatique)";
+      $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idcustomer' => $status,
+      'title' => $title,
+      'descriptionJoint' => $descriptionJoint,
+      'nbStudent' => $nbStudent,
+      'boolautomatique' => $boolautomatique
+    ));
+    }
+    //Uniquement descriptionJoint est remplit
+    else {
+      $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte,  nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :nbStudent, :boolautomatique)";
+      $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idcustomer' => $status,
+      'title' => $title,
+      'description' => $description,
+      'nbStudent' => $nbStudent,
+      'boolautomatique' => $boolautomatique
+    ));
+    }
+    
+  }
+
+
+
 
 
   /*******************************
