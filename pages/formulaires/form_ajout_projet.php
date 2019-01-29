@@ -13,21 +13,22 @@
 
 		</BR></BR>
 
-		Client : $_SESSION['name']    $_SESSION['firstname']  a faire quand variable session ok</BR></BR>
+		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?></BR></BR>
 		Titre  : <input type = "texte" name = "title"/></BR></BR>
 
         Nombre d'étudiant :
+        <select name="nbStudent">
         
-        <?php
-            echo '<select nbStudent="liste" name="nbStudent">';
+            <?php
             for($i=2; $i<=10; $i++){
                 echo '<option value="'.$i.'">'.$i.'</option>';
             }
-            echo '</select>';
-        ?>
-        </BR></BR>
+            ?>
+        </select><br><br> </BR></BR>
 
-        Description : <input type = "texte" name = "description"/></BR></BR>
+        Description :</BR>
+        <TEXTAREA name="description" rows=4 cols=40></TEXTAREA></BR></BR>
+
         Fichier Joint : <input type="file" name="descriptionJoint" /></BR>
 
         <p>Attribution automatique :</p>
@@ -56,27 +57,18 @@
 if(isset($_POST['btn_submit'])) {
     //Si le formulaire a été envoyé
 
-    //if(empty($_POST['customer']) || empty($_POST['title']) ) {
-      //ajouterErreur('Vous devez renseigner tous les champs');
-      //include_once('./include/erreurs.php');
-    //}
-
-
-
     //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
     if ( !empty($_POST['title'] ) AND ( !empty($_POST['description']) OR !empty($_POST['descriptionJoint'])) )
     {
-        echo "Je vais pouvoir inserer ma requete ";
-        echo "Attente des variables session pour activer le paragraphe ci-dessous qui inserera le projet";
-       /* $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
-
-        //Passder l'id du customer (faire requete qui cherche ca)
-        insertNewProject($idCustomer, $_POST['title'],  $_POST['title'], $_POST['description'], $_POST['descriptionJoint'], $_POST['automatique']);
-        header("Location: index.php");*/
+        //Permet de récupérer l'id du client
+        $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
+        
+        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $_POST['descriptionJoint'], $_POST['automatique']);
     }
     else 
     {
-        echo "Il manque des info";
+        ajouterErreur('Vous devez renseigner tous les champs');
+        include_once('./include/erreurs.php');
     }
 }
 
