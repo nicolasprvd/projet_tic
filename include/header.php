@@ -2,14 +2,13 @@
 /**
 * Entete de l'application
 **/
-
-
   echo '<h1>Je suis l\'entete de la page</h1>';
   //Si une personne est authentifiée
-  if(estConnecte()) {
-    $status = getStatusById($_SESSION['status']);
-    echo '<span>' . $status['libelle'] . ' : ' . $_SESSION['firstname'] . ' ' . $_SESSION['name'] . '</span>'; ?>
+  if(isset($_SESSION['status'])) {
 
+    $status = getStatusById($_SESSION['status']);
+    echo '<span>' . $status['libelle'] . ' : ' . $_SESSION['firstname'] . ' ' . $_SESSION['name'] . '</span>';
+    ?>
     <a href="<?php deconnecter(); ?>">Se déconnecter</a>
     <?php
   }else {

@@ -23,18 +23,19 @@ function connexionBD() {
   }
 }
 
+function connecter($idStatus, $name, $firstname) {
+  $_SESSION['status'] = $idStatus;
+  $_SESSION['name'] = $name;
+  $_SESSION['firstname'] = $firstname;
+}
+
 /**
 * Teste l'existence d'une connexion
 * @return true ou false
 **/
 function estConnecte() {
+    session_regenerate_id(true);
   return isset($_SESSION['name']);
-}
-
-function connecter($idStatus, $name, $firstname) {
-  $_SESSION['status'] = $idStatus;
-  $_SESSION['name'] = $name;
-  $_SESSION['firstname'] = $firstname;
 }
 
 /**
