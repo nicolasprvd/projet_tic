@@ -34,7 +34,7 @@ function connecter($idStatus, $name, $firstname) {
 * @return true ou false
 **/
 function estConnecte() {
-    session_regenerate_id(true);
+    
   return isset($_SESSION['name']);
 }
 
@@ -43,6 +43,7 @@ function estConnecte() {
 **/
 function deconnecter() {
   session_destroy();
+  header('Location: index.php');
 }
 
 /**

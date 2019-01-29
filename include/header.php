@@ -4,12 +4,16 @@
 **/
   echo '<h1>Je suis l\'entete de la page</h1>';
   //Si une personne est authentifiée
+  if(!empty($_GET['deconnexion']))
+  {
+    deconnecter();
+  }
   if(isset($_SESSION['status'])) {
 
     $status = getStatusById($_SESSION['status']);
     echo '<span>' . $status['libelle'] . ' : ' . $_SESSION['firstname'] . ' ' . $_SESSION['name'] . '</span>';
     ?>
-    <a href="<?php deconnecter(); ?>">Se déconnecter</a>
+    <a href="index.php?deconnexion=true">Se déconnecter</a>
     <?php
   }else {
     ?>

@@ -21,7 +21,8 @@
       echo "<script>document.getElementById('signin').style.display='block';</script>";
     }else {
       connecter($data['idStatut'], $data['nomPersonne'], $data['prenomPersonne']);
-      //header('Location: index.php');
+      header('Location: index.php');
+      exit();
     }
   }
 ?>

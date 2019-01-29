@@ -8,6 +8,7 @@
   require_once("include/fonctions.php");
   require_once("include/fonctions_sql.php");
   define('URL', 'index.php?page=');
+  
  ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
     <header>
       <?php
         include "include/header.php";
-        include "include/menu.php";
+        include "include/menu.php"; 
       ?>
     </header>
 
