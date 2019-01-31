@@ -150,7 +150,7 @@
   function insertNewProject($idcustomer, $title, $nbStudent, $description, $descriptionJoint, $automatique) {
 
     //On recupere si le projet peut être attribuer automatiquement (1) ou non (0)
-    if ($automatique == oui)
+    if ($automatique == "oui")
     {
       $boolautomatique = 1;
     } else {
@@ -178,7 +178,7 @@
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptifpdf, nbEtudiants, automatique) VALUES (:idcustomer, :title, :descriptionJoint, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
-      'idcustomer' => $status,
+      'idcustomer' => $idcustomer,
       'title' => $title,
       'descriptionJoint' => $descriptionJoint,
       'nbStudent' => $nbStudent,
@@ -190,14 +190,14 @@
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte,  nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
-      'idcustomer' => $status,
+      'idcustomer' => $idcustomer,
       'title' => $title,
       'description' => $description,
       'nbStudent' => $nbStudent,
       'boolautomatique' => $boolautomatique
     ));
     }
-
+    echo "Le projet a bien été créé";
   }
 
 

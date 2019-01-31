@@ -4,31 +4,31 @@
 * d'ajouter un nouveau projet
 **/
 ?>
-<form action = "index.php?page=form_ajout_projet.php" method = "POST">
+<form enctype="multipart/form-data" action = "index.php?page=form_ajout_projet.php" method = "POST">
 
-        
+
         <h1>Saisir un projet</h1>
-        
-
 
 		</BR></BR>
 
-		Client : $_SESSION['name']    $_SESSION['firstname']  a faire quand variable session ok</BR></BR>
+		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?></BR></BR>
 		Titre  : <input type = "texte" name = "title"/></BR></BR>
 
         Nombre d'étudiant :
-        
-        <?php
-            echo '<select nbStudent="liste" name="nbStudent">';
+        <select name="nbStudent">
+
+            <?php
             for($i=2; $i<=10; $i++){
                 echo '<option value="'.$i.'">'.$i.'</option>';
             }
-            echo '</select>';
-        ?>
-        </BR></BR>
+            ?>
+        </select><br><br> </BR></BR>
 
-        Description : <input type = "texte" name = "description"/></BR></BR>
-        Fichier Joint : <input type="file" name="descriptionJoint" /></BR>
+        Description :</BR>
+        <TEXTAREA name="description" rows=4 cols=40></TEXTAREA></BR></BR>
+
+        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee) </BR>
+        <input type="file" name="descriptionJoint" /></BR>
 
         <p>Attribution automatique :</p>
 
@@ -48,35 +48,44 @@
 
 		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
 
+        </BR>
 
 </form>
 
 <?php
 
+//Si le formulaire a été envoyé
+
 if(isset($_POST['btn_submit'])) {
-    //Si le formulaire a été envoyé
-
-    //if(empty($_POST['customer']) || empty($_POST['title']) ) {
-      //ajouterErreur('Vous devez renseigner tous les champs');
-      //include_once('./include/erreurs.php');
-    //}
-
-
 
     //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if ( !empty($_POST['title'] ) AND ( !empty($_POST['description']) OR !empty($_POST['descriptionJoint'])) )
+    if ( !empty($_POST['title'] ) AND ( !empty($_POST['description']) OR !empty($_FILES['descriptionJoint'])) )
     {
-        echo "Je vais pouvoir inserer ma requete ";
-        echo "Attente des variables session pour activer le paragraphe ci-dessous qui inserera le projet";
-       /* $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
+        $target_path = "";
+        if ($_FILES['descriptionJoint']['size'] <> 0){
 
-        //Passder l'id du customer (faire requete qui cherche ca)
-        insertNewProject($idCustomer, $_POST['title'],  $_POST['title'], $_POST['description'], $_POST['descriptionJoint'], $_POST['automatique']);
-        header("Location: index.php");*/
+            $target_path = "./Sujet_Client_pdf/";
+
+            $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
+
+            if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
+                echo "Fichier ajouter avec succès";
+                echo "</BR>" ;
+            } else{
+                echo "Une erreur s'est produite lors l'enregistrement du fichier, réésayez!";
+                exit();
+            }
+        }
+
+        //Permet de récupérer l'id du client
+        $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
+
+        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $target_path, $_POST['automatique']);
     }
-    else 
+    else
     {
-        echo "Il manque des info";
+        ajouterErreur('Vous devez renseigner tous les champs');
+        include_once('./include/erreurs.php');
     }
 }
 
