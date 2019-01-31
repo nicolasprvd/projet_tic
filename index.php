@@ -8,7 +8,7 @@
   require_once("include/fonctions.php");
   require_once("include/fonctions_sql.php");
   define('URL', 'index.php?page=');
-  
+
  ?>
 
 <!DOCTYPE html>
@@ -19,6 +19,7 @@
 		<meta name="keywords" content="TIC" />
 		<meta name="Projets TIC" content="Projets TIC"/>
     <link rel="stylesheet" href="css/style_connexion.css">
+    <link rel="stylesheet" href="css/style_projets.css">
     <title>Gestion des projets TIC</title>
   </head>
   <body>
@@ -27,7 +28,7 @@
     <header>
       <?php
         include "include/header.php";
-        include "include/menu.php"; 
+        include "include/menu.php";
       ?>
     </header>
 
