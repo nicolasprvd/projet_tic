@@ -254,9 +254,14 @@
     background-color: #666666;
     /*width: 100%;*/
     text-align: center;
+    color: #ffffff;
 }
 
 .theFooter .footer_liens a{
-    text-decoration: none;
     color: #ffffff;
+    text-decoration: none;
+}
+
+.theFooter .footer_liens a:hover {
+    text-decoration: underline;
 }
