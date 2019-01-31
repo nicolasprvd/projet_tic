@@ -19,6 +19,7 @@
 		<meta name="keywords" content="TIC" />
 		<meta name="Projets TIC" content="Projets TIC"/>
     <link rel="stylesheet" href="css/style_connexion.css">
+      <link rel="stylesheet" href="css/style.css" />
     <title>Gestion des projets TIC</title>
   </head>
   <body>

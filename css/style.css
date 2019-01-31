@@ -1,0 +1,262 @@
+/** Feuille de style pour toute l'application **/
+
+/** Écriture **/
+.font-small {
+    font: normal 10px Arial;
+}
+
+.font-x-small {
+    font: normal 12px Arial;
+}
+
+.font-xx-small {
+    font: normal 14px Arial;
+}
+
+.font-medium {
+    font: normal 16px Arial;
+}
+
+.font-x-medium {
+    font: normal 18px Arial;
+}
+
+.font-xx-medium {
+    font: normal 20px Arial;
+}
+
+.font-large {
+    font: normal 22px Arial;
+}
+
+.font-x-large {
+    font: normal 24px Arial;
+}
+
+.font-xx-large {
+    font: normal 26px Arial;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+/** ____________________________________________ **/
+/** Marges **/
+.man {
+    margin: 0;
+}
+
+.mats {
+    margin: 5px;
+}
+
+.mas {
+    margin: 10px;
+}
+
+.mam {
+    margin: 15px;
+}
+
+.mal {
+    margin: 20px;
+}
+
+.mtn {
+    margin-top: 0;
+}
+
+.mtts {
+    margin-top: 5px;
+}
+
+.mts {
+    margin-top: 10px;
+}
+
+.mtm {
+    margin-top: 15px;
+}
+
+.mtl {
+    margin-top: 20px;
+}
+
+.mbn {
+    margin-bottom: 0;
+}
+
+.mbts {
+    margin-bottom: 5px;
+}
+
+.mbs {
+    margin-bottom: 10px;
+}
+
+.mbm {
+    margin-bottom: 15px;
+}
+
+.mbl {
+    margin-bottom: 20px;
+}
+
+.mln {
+    margin-left: 0;
+}
+
+.mlts {
+    margin-left: 5px;
+}
+
+.mls {
+    margin-left: 10px;
+}
+
+.mlm {
+    margin-left: 15px;
+}
+
+.mll {
+    margin-left: 20px;
+ }
+
+.mrn {
+    margin-right: 0;
+}
+
+.mrts {
+    margin-right: 5px;
+}
+
+.mrs {
+    margin-right: 10px;
+}
+
+.mrm {
+    margin-right: 15px;
+}
+
+.mrl {
+    margin-right: 20px;
+}
+
+/** ____________________________________________ **/
+/** Padding **/
+.pan {
+    padding: 0;
+}
+
+.pats {
+    padding: 5px;
+}
+
+.pas {
+    padding: 10px;
+}
+
+.pam {
+    padding: 15px;
+}
+
+.pal {
+    padding: 20px;
+}
+
+.ptn {
+    padding-top: 0;
+}
+.ptts {
+    padding-top: 5px;
+}
+
+.pts {
+    padding-top: 10px;
+}
+
+.ptm {
+    padding-top: 15px;
+}
+
+.ptl {
+    padding-top: 20px;
+}
+
+.pbn {
+    padding-bottom: 0;
+}
+
+.pbts {
+    padding-bottom: 5px;
+}
+
+.pbs {
+    padding-bottom: 10px;
+}
+
+.pbm {
+    padding-bottom: 15px;
+}
+
+.pbl {
+    padding-bottom: 20px;
+}
+
+.pln {
+    padding-left: 0;
+}
+
+.plts {
+    padding-left: 5px;
+}
+
+.pls {
+    padding-left: 10px;
+}
+
+.plm {
+    padding-left: 15px;
+}
+
+.pll {
+    padding-left: 20px;
+}
+
+.prn {
+    padding-right: 0;
+}
+
+.prts {
+    padding-right: 5px;
+}
+
+.prs {
+    padding-right: 10px;
+}
+
+.prm {
+    padding-right: 15px;
+}
+
+.prl {
+    padding-right: 20px;
+}
+
+/** ____________________________________________ **/
+/** Footer **/
+.theFooter{
+    background-color: #666666;
+    /*width: 100%;*/
+    text-align: center;
+}
+
+.theFooter .footer_liens a{
+    text-decoration: none;
+    color: #ffffff;
+}
