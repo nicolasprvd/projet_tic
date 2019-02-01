@@ -64,7 +64,7 @@ if(isset($_POST['btn_submit'])) {
         $target_path = "";
         if ($_FILES['descriptionJoint']['size'] <> 0){
 
-            $target_path = "./Sujet_Client_pdf/";
+            $target_path = ".Documents/Sujet_Client/";
 
             $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
 
