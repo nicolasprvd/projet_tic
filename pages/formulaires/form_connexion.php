@@ -22,7 +22,6 @@
     }else {
       connecter($data['idStatut'], $data['nomPersonne'], $data['prenomPersonne']);
       header('Location: index.php');
-      exit();
     }
   }
 ?>

@@ -56,7 +56,7 @@
   }
 
    /**
-  * Récupère l'id de la personne inserer en parametre 
+  * Récupère l'id de la personne inserer en parametre
   * @param $nom le nom de la personne
   * @param $firstName le prénom de la personne
   * @return $result l'id de la personne en question
@@ -69,6 +69,44 @@
       'firstName' => $firstName
     ));
     $result = $prepQuery->fetch();
+    return $result;
+  }
+
+  /**
+  * Récupère la liste des projets
+  * @return array $result tableau des projets
+  **/
+  function getProjects() {
+    $query = "SELECT * FROM projet";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère les informations d'un projet
+  * en fonction de son identifiant
+  * @param $idProject identifiant du projet
+  * @return array $result tableau des informations
+  **/
+  function getProjectById($idProject) {
+    $query = "SELECT pro.idProjet, pro.idPersonneResp, nomProjet, descriptifTexte, descriptifPdf, nbEtudiants,
+    automatique, nomPersonne, prenomPersonne, mailPersonne FROM projet pro
+    INNER JOIN personne p
+    ON p.idpersonne = pro.idpersonneresp
+    INNER JOIN statut t
+    ON t.idstatut = p.idstatut
+    WHERE pro.idProjet = :id
+    AND t.libelle = :libelle_admin
+    OR t.libelle = :libelle_resp";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'id' => $idProject,
+      'libelle_admin' => 'Administrateur',
+      'libelle_resp' => 'Responsable projet'
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
 
@@ -103,7 +141,7 @@
   * Effectue l'insertion dans la base de données
   * concernant l'inscription
   * @param $idcustomer l'identifiant de la personne proposant le projet
-  * @param $title le titre du projet 
+  * @param $title le titre du projet
   * @param $nbStudent le nombre d'étudiant requis pour le projet
   * @param $description la desctiption de projet (texte)
   * @param $descriptionJoint la description du projet (piece jointe)
@@ -122,7 +160,7 @@
     //description et descriptionJoint sont tous deux remplit
     if (!empty($description) AND !empty($descriptionJoint))
     {
-      
+
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte, descriptifpdf, nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :descriptionJoint, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
@@ -159,9 +197,7 @@
       'boolautomatique' => $boolautomatique
     ));
     }
-
     echo "Le projet a bien été créé";
-    
   }
 
 

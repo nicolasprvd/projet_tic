@@ -6,9 +6,9 @@
 ?>
 <form enctype="multipart/form-data" action = "index.php?page=form_ajout_projet.php" method = "POST">
 
-        
+
         <h1>Saisir un projet</h1>
-        
+
 		</BR></BR>
 
 		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?></BR></BR>
@@ -16,7 +16,7 @@
 
         Nombre d'étudiant :
         <select name="nbStudent">
-        
+
             <?php
             for($i=2; $i<=10; $i++){
                 echo '<option value="'.$i.'">'.$i.'</option>';
@@ -64,12 +64,12 @@ if(isset($_POST['btn_submit'])) {
         $target_path = "";
         if ($_FILES['descriptionJoint']['size'] <> 0){
 
-            $target_path = "./Sujet_Client_pdf/";
-    
-            $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']); 
-            
+            $target_path = ".Documents/Sujet_Client/";
+
+            $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
+
             if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
-                echo "Fichier ajouter avec succès"; 
+                echo "Fichier ajouter avec succès";
                 echo "</BR>" ;
             } else{
                 echo "Une erreur s'est produite lors l'enregistrement du fichier, réésayez!";
@@ -79,10 +79,10 @@ if(isset($_POST['btn_submit'])) {
 
         //Permet de récupérer l'id du client
         $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
-        
+
         insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $target_path, $_POST['automatique']);
     }
-    else 
+    else
     {
         ajouterErreur('Vous devez renseigner tous les champs');
         include_once('./include/erreurs.php');
