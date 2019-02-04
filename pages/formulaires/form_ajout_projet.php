@@ -64,15 +64,15 @@ if(isset($_POST['btn_submit'])) {
         $target_path = "";
         if ($_FILES['descriptionJoint']['size'] <> 0){
 
-            $target_path = ".Documents/Sujet_Client/";
+            $target_path = "./documents/Sujet_Client/";
 
             $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
-
+            $fichier = $_FILES['descriptionJoint']['name'];
             if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
-                echo "Fichier ajouter avec succès";
+                echo "Fichier ajouté avec succès";
                 echo "</BR>" ;
             } else{
-                echo "Une erreur s'est produite lors l'enregistrement du fichier, réésayez!";
+                echo "Une erreur s'est produite lors l'enregistrement du fichier, réessayez!";
                 exit();
             }
         }
@@ -80,7 +80,7 @@ if(isset($_POST['btn_submit'])) {
         //Permet de récupérer l'id du client
         $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
 
-        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $target_path, $_POST['automatique']);
+        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
     }
     else
     {
