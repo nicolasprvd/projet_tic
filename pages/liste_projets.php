@@ -17,7 +17,7 @@
     <?php
       //On récupère la liste des projets
       $projects = getProjects();
-      
+
       foreach($projects as $project) {
         ?>
         <tr>
@@ -30,4 +30,11 @@
      ?>
 </table>
 <br><br>
-<a href="<?php echo URL.'form_ajout_projet.php'; ?>">Ajouter un projet</a>
+
+<?php
+  if($_SESSION['status'] != 2) {
+    ?>
+      <a href="<?php echo URL.'form_ajout_projet.php'; ?>">Ajouter un projet</a>
+    <?php
+  }
+  ?>
