@@ -197,7 +197,6 @@
       'boolautomatique' => $boolautomatique
     ));
     }
-    echo "Le projet a bien été créé";
   }
 
 
