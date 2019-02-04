@@ -66,18 +66,18 @@ if(isset($_POST['btn_submit'])) {
         if ($_FILES['descriptionJoint']['size'] <> 0){
 
             //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
-            if (file_exists("./Documents")){
-                if (!file_exists("./Documents/Sujet_Client")){
-                    mkdir("./Documents/Sujet_Client");
+            if (file_exists("./documents")){
+                if (!file_exists("./documents/sujet_client")){
+                    mkdir("./documents/sujet_client");
                 }
             }
             else {
-                mkdir("./Documents");
-                mkdir("./Documents/Sujet_Client");
+                mkdir("./documents");
+                mkdir("./documents/sujet_client");
             }
 
             // Permet l'insertion du fichier joint dans le dossier concerner
-            $target_path = "./Documents/Sujet_Client/";
+            $target_path = "./documents/sujet_client/";
             $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
             $fichier = $_FILES['descriptionJoint']['name'];
             if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
