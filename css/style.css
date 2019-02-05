@@ -125,7 +125,7 @@
 
 .mll {
     margin-left: 20px;
- }
+}
 
 .mrn {
     margin-right: 0;
@@ -172,6 +172,7 @@
 .ptn {
     padding-top: 0;
 }
+
 .ptts {
     padding-top: 5px;
 }
@@ -248,16 +249,40 @@
     padding-right: 20px;
 }
 
-/** ____________________________________________ **/
-/** Footer **/
-.theFooter{
-    background-color: #666666;
-    /*width: 100%;*/
-    text-align: center;
-    color: #ffffff;
+html, body {
+    height: 100%;
 }
 
-.theFooter .footer_liens a{
+/** ____________________________________________ **/
+/** Global **/
+.theGlobal {
+    min-height: 100%;
+    position: relative;
+}
+
+/** Menu **/
+.theMenu {
+    float:left;
+    width:20%;
+    grid-template-columns: fit-content(100%);
+}
+
+.theContenu {
+    margin-left: 20%;
+}
+
+/** ____________________________________________ **/
+/** Footer **/
+.theFooter {
+    background-color: #666666;
+    text-align: center;
+    color: #ffffff;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.theFooter .footer_liens a {
     color: #ffffff;
     text-decoration: none;
 }
