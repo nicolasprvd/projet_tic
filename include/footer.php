@@ -5,4 +5,3 @@
         •
         <a href="#" class="font-x-small bold upper">Contact</a>
 </footer>
-</html>
