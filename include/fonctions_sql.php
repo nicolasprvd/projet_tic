@@ -93,18 +93,11 @@
   function getProjectById($idProject) {
     $query = "SELECT pro.idProjet, pro.idPersonneResp, nomProjet, descriptifTexte, descriptifPdf, nbEtudiants,
     automatique, nomPersonne, prenomPersonne, mailPersonne FROM projet pro
-    INNER JOIN personne p
-    ON p.idpersonne = pro.idpersonneresp
-    INNER JOIN statut t
-    ON t.idstatut = p.idstatut
-    WHERE pro.idProjet = :id
-    AND t.libelle = :libelle_admin
-    OR t.libelle = :libelle_resp";
+    INNER JOIN personne p ON p.idpersonne = pro.idpersonneresp
+    WHERE pro.idProjet = :id";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
-      'id' => $idProject,
-      'libelle_admin' => 'Administrateur',
-      'libelle_resp' => 'Responsable projet'
+      'id' => $idProject
     ));
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
@@ -185,7 +178,7 @@
       'boolautomatique' => $boolautomatique
     ));
     }
-    //Uniquement descriptionJoint est remplit
+    //Uniquement descriptifTexte est remplit
     else {
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte,  nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
@@ -197,7 +190,6 @@
       'boolautomatique' => $boolautomatique
     ));
     }
-    echo "Le projet a bien été créé";
   }
 
 

@@ -16,5 +16,11 @@
   Mail client : <?php echo $project['mailPersonne']; ?> <br>
   Nombre d'étudiants : <?php echo $project['nbEtudiants']; ?> <br>
   Description : <?php echo $project['descriptifTexte']; ?> <br>
-  Fichier joint : <a href="Documents/questionnaire.pdf">Télécharger</a>
-  <!-- ouvrir le fichier dans un nouvel onglet ? dans la fenetre actuelle ? télécharger ?
+  <?php
+
+  if($project['descriptifPdf'] != null) {
+  ?>
+    Fichier joint : <a href="documents/sujet_client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
+  <?php
+  }
+  ?>
