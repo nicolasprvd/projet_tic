@@ -27,7 +27,7 @@
         Description :</BR>
         <TEXTAREA name="description" rows=4 cols=40></TEXTAREA></BR></BR>
 
-        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee) </BR>
+        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee. L'extension doit être du doc, docs ou pdf.) </BR>
         <input type="file" name="descriptionJoint" /></BR>
 
         <p>Attribution automatique :</p>
