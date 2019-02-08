@@ -20,7 +20,7 @@
 
   if($project['descriptifPdf'] != null) {
   ?>
-    Fichier joint : <a href="documents/Sujet_Client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
+    Fichier joint : <a href="documents/sujet_client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
   <?php
   }
 

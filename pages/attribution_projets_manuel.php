@@ -1,0 +1,1 @@
+<p> Page attribution manuel pour le client : attention faudra rendre visible que pour les projets des clients ou l'attribution est manuelle</p>

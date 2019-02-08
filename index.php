@@ -12,9 +12,9 @@ define('URL', 'index.php?page=');
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="TIC" />
+    <meta name="keywords" content="TIC"/>
     <meta name="Projets TIC" content="Projets TIC"/>
     <link rel="stylesheet" href="css/style_connexion.css">
     <link rel="stylesheet" href="css/style_projets.css">
@@ -23,33 +23,41 @@ define('URL', 'index.php?page=');
 </head>
 
 <body class="man">
+<div class="theGlobal">
 
-<!-- ENTETE -->
-<header>
-    <?php
-    include "include/header.php";
-    include "include/menu.php";
-    ?>
-</header>
+    <!-- ENTETE -->
+    <header>
+        <?php
+        include "include/header.php";
+        ?>
+    </header>
 
-<!-- CONTENU -->
-<div>
-    <?php
-    //Si $_GET['page'] n'est pas définie alors on affiche la page d'accueil
-    if(!isset($_GET['page'])) {
-        include "include/accueil.php";
-    }else if(isset($_GET['page']) && preg_match('/(form)/', $_GET['page'])){
-        //Si la page est définie et que c'est un formulaire alors on l'inclut
-        include "pages/formulaires/".$_GET['page'];
-    }else {
-        //Si la page est définie alors on l'inclut
-        include "pages/".$_GET['page'];
-    }
-    ?>
+    <!-- MENU -->
+    <div class="theMenu">
+        <?php
+        include "include/menu.php";
+        ?>
+    </div>
+
+    <!-- CONTENU -->
+    <div class="theContenu">
+        <?php
+        //Si $_GET['page'] n'est pas définie alors on affiche la page d'accueil
+        if (!isset($_GET['page'])) {
+            include "include/accueil.php";
+        } else if (isset($_GET['page']) && preg_match('/(form)/', $_GET['page'])) {
+            //Si la page est définie et que c'est un formulaire alors on l'inclut
+            include "pages/formulaires/" . $_GET['page'];
+        } else {
+            //Si la page est définie alors on l'inclut
+            include "pages/" . $_GET['page'];
+        }
+        ?>
+    </div>
+
+    <!-- PIED DE PAGE -->
+    <?php include "include/footer.php"; ?>
+
 </div>
-
-<!-- PIED DE PAGE -->
-<?php include "include/footer.php"; ?>
-
 </body>
 </html>
