@@ -103,6 +103,118 @@
     return $result;
   }
 
+  /**
+  * Récupère la liste des étudiants en fonction
+  * du status étudiant
+  * @param $status statut étudiant
+  * @param $loggedPersonne identifiant de la personne qui est connectée
+  * @return array $result tableau des étudiants
+  **/
+  function getPersonnes($status, $loggedPersonne) {
+    $query = "SELECT idPersonne, nomPersonne, prenomPersonne FROM personne WHERE idStatut = :status AND idPersonne != :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'status' => $status,
+      'idPersonne' => $loggedPersonne
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère les identifiants du projet, du groupe et du responsable de groupe
+  * @param $idChefGroup identifiant du chef de groupe
+  * @param $idProject identifiant du projet
+  * @return $result tableau des résultats
+  **/
+  function getChefGroupeProjet($idChefGroup, $idProject) {
+    $query = "SELECT ct.idProjet, ct.idGroupe, idPersonneChef FROM choix_temp ct INNER JOIN groupe_temp gt ON gt.idgroupe = ct.idgroupe WHERE idPersonneChef = :idChef AND ct.idProjet = :idProjet";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idChef' => $idChefGroup,
+      'idProjet' => $idProject
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère les identifiants du projet, du groupe et du responsable de groupe
+  * @return $result tableau des résultats
+  **/
+  function getDataChefGroupeProjet() {
+    $query = "SELECT ct.idProjet, ct.idGroupe, idPersonneChef FROM choix_temp ct INNER JOIN groupe_temp gt ON gt.idgroupe = ct.idgroupe";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
+  /**
+  * Récupère l'idenfiant du groupe pour un chef de groupe
+  * @param $idChef
+  * @return $result tableau des informations
+  **/
+  function getGroupeTemp($idChef) {
+    $query = "SELECT idGroupe, idPersonneChef FROM groupe_temp WHERE idPersonneChef = :idChef";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idChef' => $idChef
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère l'identifiant du groupe temporaire d'une personne
+  * @param $idPersonne identifiant de la personne
+  * @return $result identifiant ou null
+  **/
+  function getGroupeTempByPersonne($idPersonne) {
+    $query = "SELECT idGroupeTemp FROM personne WHERE idPersonne = :id";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'id' => $idPersonne
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère la ligne pour laquelle un groupe s'est positionné
+  * @param $idProject identifiant du projet
+  * @param $idGroup identifiant du groupe
+  * @return $result array tableau des infos
+  **/
+  function getChoixTemp($idProject, $idGroup) {
+    $query = "SELECT idProjet, idGroupe FROM choix_temp WHERE idProjet = :idProjet AND idGroupe = :idGroupe";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProjet' => $idProject,
+      'idGroupe' => $idGroup
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère la liste des personnes d'un projet pour un groupe temporaire
+  * @param $idProject identifiant du projet
+  * @param $idPersonne identifiant du chef de groupe
+  * @return $result array tableau des personnes
+  **/
+  function getPersonnesByProject($idProject, $idPersonne) {
+    $query="SELECT idPersonne, nomPersonne, prenomPersonne, idGroupeTemp, ct.idProjet FROM choix_temp ct INNER JOIN personne p ON ct.idGroupe = p.idgroupetemp WHERE ct.idprojet = :idProjet AND idPersonne != :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProjet' => $idProject,
+      'idPersonne' => $idPersonne
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
   /*******************************
   * FONCTIONS INSERT
@@ -182,7 +294,7 @@
     else {
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte,  nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
-    $prepQuery->execute(array(
+      $prepQuery->execute(array(
       'idcustomer' => $idcustomer,
       'title' => $title,
       'description' => $description,
@@ -190,8 +302,53 @@
       'boolautomatique' => $boolautomatique
     ));
     }
-    echo "Le projet a bien été créé";
   }
+
+  /**
+  * Insère l'identifiant du chef de groupe dans la table groupe_temp
+  * @param $id identifiant du chef de groupe
+  **/
+  function insertNewGroupeTemp($id) {
+    $query="INSERT INTO groupe_temp (idPersonneChef) VALUES (:id)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'id' => $id
+    ));
+  }
+
+  /**
+  * Insère l'identifiant du projet et l'identifiant du groupe dans la table choix_temp
+  * @param $idProject identifiant du projet
+  * @param $idGroup identifiant du groupe
+  **/
+  function insertNewChoixTemp($idProject, $idGroup) {
+    $query="INSERT INTO choix_temp VALUES (:idProject, :idGroup)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject,
+      'idGroup' => $idGroup
+    ));
+  }
+
+
+  /*******************************
+  * FONCTIONS DELETE
+  *******************************/
+
+  /**
+  * Insère l'idenifiant du groupe temporaire dans la table personne
+  * @param $idGroup identifiant du groupe
+  **/
+  function updatePersonneGroupeTemp($idGroup, $etu) {
+    $query="UPDATE personne SET idGroupeTemp = :idGroupTemp WHERE idPersonne = :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroupTemp' => $idGroup,
+      'idPersonne' => $etu
+    ));
+  }
+
+
 
 
 
