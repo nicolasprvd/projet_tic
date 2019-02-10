@@ -85,6 +85,35 @@
   }
 
   /**
+   * Récupère la liste des projets en attribution manuellement pour le cient en question
+   * @return array $result tableau de projets
+   */
+  function getManualProjects($persResp) {
+    $query = "SELECT * FROM projet WHERE automatique = 0 AND idpersonneresp = :idResp";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idResp' => $persResp
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+    /**
+   * Récupère la liste des projets en attribution manuellement pour le cient en question
+   * @return array $result tableau de projets
+   */
+  function getAutomaticProjects($persResp) {
+    $query = "SELECT * FROM projet WHERE automatique = 1 AND idpersonneresp = :idResp";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idResp' => $persResp
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
+  /**
   * Récupère les informations d'un projet
   * en fonction de son identifiant
   * @param $idProject identifiant du projet
