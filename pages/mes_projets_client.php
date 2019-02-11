@@ -21,19 +21,29 @@ $manuel = getManualProjects($idCustomer[0]) ;
     </tr>
 <?php
 if (!empty($manuel)) {
-?>
   
-
-      <?php
-        //On récupère la liste des projets
-        //$projects = getProjects();
-
         foreach($manuel as $project) {
           ?>
           <tr>
             <td><?php echo $project['nomprojet']; ?></td>
-            <td><?php echo $project['descriptiftexte']; ?></td>
-            <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet'];?>"> Vous devez attribuer ce projet</a></td>
+            <td><?php echo $project['idpersonneresp']; ?></td>
+
+            <?php
+            // Si le projet n'est pas attribué
+            $projetAttribuer = getprojetAttribuer($project['idprojet']);
+            if (empty($projetAttribuer)){
+            ?>
+              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet'];?>"> Vous devez attribuer ce projet</a></td>
+            <?php
+            // Si le projet est attribué
+            }
+            else {
+              ?>
+              <td><p> Le projet est attribué </p></td>
+            <?php
+            }
+            ?>
+
           </tr>
           <?php
         }
@@ -44,8 +54,7 @@ if (!empty($manuel)) {
 $automatic = getAutomaticProjects($idCustomer[0]) ;
 
 if (!empty($automatic)) {
-  ?>
-        <?php
+
           //On récupère la liste des projets
           //$projects = getProjects();
   
@@ -54,7 +63,25 @@ if (!empty($automatic)) {
             <tr>
               <td><?php echo $project['nomprojet']; ?></td>
               <td><?php echo $project['descriptiftexte']; ?></td>
-              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet'];?>"> Projet pas encore attribuer</a></td>
+
+
+
+              <?php
+            // Si le projet n'est pas attribué 
+            $projetAttribuer = getprojetAttribuer($project['idprojet']);
+            if (empty($projetAttribuer)){
+            ?>
+              <td><p> Le projet n'a pas encore été attribué </p></td>
+            <?php
+            // Si le projet est attribué
+            }
+            else {
+              ?>
+              <td><p> Le projet est attribué </p></td>
+            <?php
+            }
+            ?>
+
             </tr>
             <?php
           }

@@ -29,6 +29,8 @@
   $groupTempPers = getGroupeTempByPersonne($idPersonne[0]);
   $groupTempChef = getGroupeTemp($idPersonne[0]);
 
+  if($_SESSION['status'] == 2) {
+
   //Si la personne connectée est chef d'un groupe
   if($groupTempChef != null) {
     //Si la personne est chef de groupe pour le projet en question
@@ -52,4 +54,5 @@
       <?php
     }
   }
+}
   ?>

@@ -86,7 +86,7 @@
 
   /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
-   * @return array $result tableau de projets
+   * @return array $result tableau de projets en attribution automatique du client
    */
   function getManualProjects($persResp) {
     $query = "SELECT * FROM projet WHERE automatique = 0 AND idpersonneresp = :idResp";
@@ -99,8 +99,22 @@
   }
 
     /**
+   * Récupère la liste des projets manuel qui n'ont pas encore été attribués 
+   * @return array $result tableau de projets en attribution automatique du client
+   */
+  function getManualProjectsNoAttribuate() {
+    $query = "SELECT * FROM projet WHERE automatique = 0 AND idprojet NOT IN (SELECT idprojet FROM choix_temp)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
+
+    /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
-   * @return array $result tableau de projets
+   * @return array $result tableau de projets en atrtibution manuelle du client
    */
   function getAutomaticProjects($persResp) {
     $query = "SELECT * FROM projet WHERE automatique = 1 AND idpersonneresp = :idResp";
@@ -112,6 +126,19 @@
     return $result;
   }
 
+     /**
+   * Récupère la liste des projets en attribution manuellement pour le cient en question
+   * @return arrayString $result a qui est attribuer le projet
+   */
+  function getprojetAttribuer($idProjet) {
+    $query = "SELECT * FROM groupe WHERE idprojet = :idProjet";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProjet' => $idProjet
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
 
   /**
   * Récupère les informations d'un projet
