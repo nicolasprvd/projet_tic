@@ -22,14 +22,9 @@
           <?php
           if ($_SESSION['status'] == 1){
           ?>
-<<<<<<< HEAD
-            <li><a href=<?php echo URL.'attribution_projets_automatique.php'?>>Attributions des projets</a></li>
-          <?php
-=======
             <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
             <li><a href=<?php echo URL.'attribution_projets_admin.php'?>>Attributions des projets</a></li>
           <?php 
->>>>>>> 8e2e7a71661b1cef1a6dd2fbb723f76049bbd222
           }
           ?>
 
