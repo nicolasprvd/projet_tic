@@ -1,2 +1,1 @@
-<!DOCTYPE html>
- <h1>Coucou</h1>
+<h1>Coucou</h1>

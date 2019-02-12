@@ -277,7 +277,7 @@ html, body {
     background-color: #666666;
     text-align: center;
     color: #ffffff;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }

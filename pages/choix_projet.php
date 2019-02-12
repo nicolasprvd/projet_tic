@@ -82,13 +82,13 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
 <br>
 
   <input type="button" name="btn_cancel" value="Annuler" />
-  <input type="button" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+  <input type="submit" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
 </form>
 
 
 <?php
 
-
+  //Si la personne souhaite se positionner sur un projet
   if(isset($_POST['btn_submit_validate'])) {
 
     //On récupère l'identifiant du chef de groupe
@@ -111,6 +111,24 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
     }
     // On insère le choix du projet pour le groupe en base
     insertNewChoixTemp($_GET['id'], $idGroup);
+    echo 'Votre choix a été enregistré avec succès.';
+  }
+
+  //Si la personne souhaite se rétracter
+  if(isset($_POST['btn_submit_retract'])) {
+    //On supprime la ligne dans groupe temp pour la personne connectée (chef)
+    deleteGroupTemp($idPersonne[0]);
+
+    //On supprime la ligne dans choix temp pour le groupe de la personne connectée et le projet correspondant
+    $idGroup = getGroupeTempByPersonne($idPersonne[0]);
+    $_SESSION['group_temp'] = $idGroup['idGroupeTemp'];
+    deleteChoixTemp($_SESSION['group_temp'], $_GET['id']);
+
+    $etu = getPersonneByGroupTemp($_SESSION['group_temp']);
+    foreach($etu as $e) {
+      updatePersonneGroupeTemp(null, $e['idPersonne']);
+    }
+    unset($_SESSION['group_temp']);
     echo 'Votre choix a été enregistré avec succès.';
   }
 
