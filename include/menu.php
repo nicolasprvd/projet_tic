@@ -16,21 +16,20 @@
       ?>
       <nav>
         <ul>
-          <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
           <li><a href=<?php echo URL.'form_ajout_projet.php'?>>Ajouter un projet</a></li>
+          <li><a href=<?php echo URL.'mes_projets_client.php'?>>Mes projets</a></li>
           <!-- Si l'admin uniquement est connectée -->
           <?php
           if ($_SESSION['status'] == 1){
           ?>
+<<<<<<< HEAD
             <li><a href=<?php echo URL.'attribution_projets_automatique.php'?>>Attributions des projets</a></li>
           <?php
-          }
-
-          // Si le reponsable uniquement est connecté
-          if ($_SESSION['status'] == 3){
-          ?>
-            <li><a href=<?php echo URL.'attribution_projets_manuel.php'?>>Attributions des projets</a></li>
-          <?php
+=======
+            <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
+            <li><a href=<?php echo URL.'attribution_projets_admin.php'?>>Attributions des projets</a></li>
+          <?php 
+>>>>>>> 8e2e7a71661b1cef1a6dd2fbb723f76049bbd222
           }
           ?>
 
