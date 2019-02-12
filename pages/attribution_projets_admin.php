@@ -12,7 +12,7 @@ $projetNoAttribuate = getManualProjectsNoAttribuate();
 
 if (!empty($projetNoAttribuate)){
 ?>
-    <p> Liste des projets qui n'ont pas encore été attribué manuellement par le client : </p>
+    <p> Liste des projets qui n'ont pas encore été attribués manuellement par le client : </p>
     <table>
     <tr>
       <th>Nom</th>
@@ -34,15 +34,20 @@ if (!empty($projetNoAttribuate)){
        ?>
   </table>
 
-  <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leur client </p>
-  <p> Mettre le bouton automatique en grisé </p>
+  </BR></BR>
+
+  
+  <input disabled type = "submit" value = "Attribution Automatique"/>
+  <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs clients </p>
 
 <?php
 }
 else {
-    echo "Tous les projets manuel sont attribué";
-    echo "Mettre le bouton attribution automatique";
+  ?>
+  <input disabled type = "submit" value = "Attribution Automatique"/>
+  <?php
 }
+
 //Liste des projets qui n'ont pas encore été attribuer manuellement 
 
 
