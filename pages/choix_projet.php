@@ -94,23 +94,32 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
     //On récupère l'identifiant du chef de groupe
     $idChef = $_POST['chef'];
 
-    //On crée un groupe temporaire avec un chef
-    insertNewGroupeTemp($idChef);
+    //Si le chef de projet est déjà dans un groupe temporaire on ne crée pas un autre groupe
+    $idGroupChef = getGroupeTempByPersonne($idChef);
+    if($idGroupChef['idGroupeTemp'] == null) {
+      //On crée un groupe temporaire avec un chef
+      insertNewGroupeTemp($idChef);
 
-    //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
-    $idGroup = $GLOBALS['connex']->lastInsertId();
+      //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
+      $idGroup = $GLOBALS['connex']->lastInsertId();
 
-    $etu = array();
-    $etu = $_POST['etu'];
-    //On stocke dans le tableau $etu les identifiants des personnes du groupe
-    array_push($etu, $idChef);
+      $etu = array();
+      $etu = $_POST['etu'];
+      //On stocke dans le tableau $etu les identifiants des personnes du groupe
+      array_push($etu, $idChef);
 
-    //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
-    foreach($etu as $e) {
-      updatePersonneGroupeTemp($idGroup, $e);
+      //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
+      foreach($etu as $e) {
+        updatePersonneGroupeTemp($idGroup, $e);
+      }
+
+      // On insère le choix du projet pour le groupe en base
+      insertNewChoixTemp($_GET['id'], $idGroup);
+    }else {
+      // On insère le choix du projet pour le groupe en base
+      insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
     }
-    // On insère le choix du projet pour le groupe en base
-    insertNewChoixTemp($_GET['id'], $idGroup);
+
     echo 'Votre choix a été enregistré avec succès.';
   }
 

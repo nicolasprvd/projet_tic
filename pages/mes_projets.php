@@ -41,11 +41,12 @@
                 <td><a href="<?php echo URL.'infos_projets.php&id='.$project['idProjet'];?>">Voir</a></td>
                 <?php
               }
+            }
              ?>
 
           </tr>
         </table>
           <?php
-        }
+
       }
 ?>

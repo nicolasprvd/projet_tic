@@ -6,7 +6,6 @@
 ?>
 
 <?php
-
   $project = getProjectById($_GET['id']);
 ?>
 
@@ -17,46 +16,16 @@
   Nombre d'étudiants : <?php echo $project['nbEtudiants']; ?> <br>
   Description : <?php echo $project['descriptifTexte']; ?> <br>
   <?php
-
   if($project['descriptifPdf'] != null) {
   ?>
     Fichier joint : <a href="documents/sujet_client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
   <?php
   }
-
   $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
   $data = getChefGroupeProjet($idPersonne[0], $_GET['id']);
   $groupTempPers = getGroupeTempByPersonne($idPersonne[0]);
   $groupTempChef = getGroupeTemp($idPersonne[0]);
-
-<<<<<<< HEAD
-  //Si la personne connectée est un(e) étudiant(e)
   if($_SESSION['status'] == 2) {
-    //Si la personne connectée est chef d'un groupe
-    if($groupTempChef != null) {
-      //Si la personne est chef de groupe pour le projet en question
-      if($data != null) {
-        //La personne connectée peut uniquement se rétracter sur son projet
-        ?>
-          <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se rétracter</a>
-        <?php
-      }else {
-        //La personne connectée peut se positionner sur un autre projet
-        ?>
-          <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
-        <?php
-      }
-    }else { //Si la personne connectée n'est pas chef de groupe
-      //Si la personne connectée n'est pas dans un groupe
-      if($groupTempPers['idGroupeTemp'] == null) {
-        //La personne connectée peut se positionner sur un projet
-        ?>
-          <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
-        <?php
-      }
-=======
-  if($_SESSION['status'] == 2) {
-
   //Si la personne connectée est chef d'un groupe
   if($groupTempChef != null) {
     //Si la personne est chef de groupe pour le projet en question
@@ -78,7 +47,6 @@
       ?>
         <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
       <?php
->>>>>>> 8e2e7a71661b1cef1a6dd2fbb723f76049bbd222
     }
   }
 }
