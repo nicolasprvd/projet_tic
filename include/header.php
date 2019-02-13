@@ -1,28 +1,24 @@
 <p class="font-x-large bold upper">Accueil</p>
+
 <?php
-
-//Si une connexion existe
-if(estConnecte()) {
-
-    //Si l'admin ou un responsable projet est connecté
-    if($_SESSION['status'] == 1 || $_SESSION['status'] == 3) {
-        ?>
-        <nav>
-            <ul>
-                <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
-                <li><a href=<?php echo URL.'form_ajout_projet.php'?>>Ajouter un projet</a></li>
-            </ul>
-        </nav>
-        <?php
-    }else if($_SESSION['status'] == 2) {
-        ?>
-        <nav>
-            <ul>
-                <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
-            </ul>
-        </nav>
-        <?php
-    }
+//Si une personne souhaite se déconnecter
+if(!empty($_GET['deconnexion'])) {
+    deconnecter();
 }
+//Si une personne est authentifiée
+if(estConnecte()) {
+    $status = getStatusById($_SESSION['status']);
+    echo '<span>' . $status['libelle'] . ' : ' . $_SESSION['firstname'] . ' ' . $_SESSION['name'] . '</span>';
+    ?>
+    <a href="index.php?deconnexion=true">Se déconnecter</a>
+    <?php
+}else {
+    ?>
+    <a class="link_auth" onclick="document.getElementById('signin').style.display='block'">Se connecter</a>
+    <?php require_once('./pages/formulaires/form_connexion.php'); ?>
+    <a class="link_auth" onclick="document.getElementById('signup').style.display='block'">S'inscrire</a>
+    <?php
+    require_once('./pages/formulaires/form_inscription.php');
 
+}
 ?>
