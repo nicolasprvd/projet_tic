@@ -262,15 +262,50 @@ html, body {
 
 /** Menu **/
 .theMenu {
-    float:left;
-    width:20%;
-    grid-template-columns: fit-content(100%);
+    background-color: #ACD9EC;
+    float: left;
+    width: 17%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
 }
 
+#logo_universite {
+    height: 10%;
+    background: no-repeat bottom center;
+    background-image: url(../images/universite.png);
+}
+
+#main-menu {
+    list-style: none;
+}
+
+/** Header **/
+.theHeader {
+    margin-left: 17%;
+    background-color: #F1F1F1;
+    text-align: center;
+}
+
+/** Contenu **/
 .theContenu {
-    margin-left: 20%;
+    margin-top: 5%;
+    margin-left: 17%;
+    text-align: -webkit-center;
 }
 
+.accueil-text {
+    position: relative;
+    width: 80%;
+}
+
+.content {
+    position: absolute;
+    text-align: justify;
+    border: 1px solid black;
+}
 /** ____________________________________________ **/
 /** Footer **/
 .theFooter {
