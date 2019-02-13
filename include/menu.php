@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div id="logo_universite"></div>
 
 <nav id="nav" role="navigation">
