@@ -58,6 +58,7 @@ if (!empty($idgroupe)) {
 
  <form method="post">
  <?php
+ echo "Mettre l'adresse mail du chef de pro et dire qu'il peut le contacter pour choisir";
 }
 else {
     echo "Personne n'a choisis votre sujet pour le moment.. Revenez plus tard!";

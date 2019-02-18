@@ -30,7 +30,7 @@
         Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee. L'extension doit être du doc, docs ou pdf.) </BR>
         <input type="file" name="descriptionJoint" /></BR>
 
-        <p>Attribution automatique : (L'attribution automatique est conseillée sauf pour les projets "GALA" et "journée entreprise") </p>
+        <p>Attribution automatique : </p>
 
         <div>
             <input type="radio" id="oui" name="automatique" value="oui" checked>
