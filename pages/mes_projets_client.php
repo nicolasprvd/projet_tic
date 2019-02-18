@@ -26,14 +26,13 @@ if (!empty($manuel)) {
           ?>
           <tr>
             <td><?php echo $project['nomprojet']; ?></td>
-            <td><?php echo $project['idpersonneresp']; ?></td>
-
+            <td><?php echo $project['descriptiftexte']; ?></td>
             <?php
             // Si le projet n'est pas attribué
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)){
             ?>
-              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet'];?>"> Vous devez attribuer ce projet</a></td>
+              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet']. '&titre=' .$project['nomprojet'];?>"> Vous devez attribuer ce projet</a></td>
             <?php
             // Si le projet est attribué
             }
