@@ -3,7 +3,7 @@
 <nav id="nav" role="navigation">
     <ul id="main-menu">
         <li>
-            <a href="../index.php">Accueil</a>
+            <a href="index.php">Accueil</a>
         </li>
     </ul>
 </nav>
