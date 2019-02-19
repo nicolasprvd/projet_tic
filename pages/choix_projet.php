@@ -49,6 +49,7 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
     ?>
     Chef de groupe :
     <select name="chef">
+        <option selected disabled value="">Sélectionnez un étudiant</option>
         <option value="<?php echo $idPersonne[0]; ?>"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?></option>
         <?php
         foreach($personnes as $p) {
@@ -61,17 +62,19 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
   <br><br>
   <?php
       for($i=1; $i < $project['nbEtudiants']; $i++) {
-        echo 'Etudiant ' . ($i+1);
+        echo 'Etudiant ' . ($i+1) . ' : ';
         ?>
           <select name="etu[]">
+            <option selected disabled value="">Sélectionnez un étudiant</option>
             <?php
               foreach($personnes as $p) {
                 ?>
-                  <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option><br><br>
+                  <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
                 <?php
               }
              ?>
           </select>
+          <br><br>
         <?php
       }
      ?>
@@ -81,8 +84,11 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
  ?>
 <br>
 
-  <input type="button" name="btn_cancel" value="Annuler" />
-  <input type="submit" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+  <input type="button" name="btn_cancel" value="Retour" onclick="history.go(-1)" />
+  <?php if(empty($_POST)) { ?>
+    <input type="submit" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+    <?php
+    } ?>
 </form>
 
 
@@ -91,53 +97,72 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
   //Si la personne souhaite se positionner sur un projet
   if(isset($_POST['btn_submit_validate'])) {
 
-    //On récupère l'identifiant du chef de groupe
-    $idChef = $_POST['chef'];
-
-    //Si le chef de projet est déjà dans un groupe temporaire on ne crée pas un autre groupe
-    $idGroupChef = getGroupeTempByPersonne($idChef);
-    if($idGroupChef['idGroupeTemp'] == null) {
-      //On crée un groupe temporaire avec un chef
-      insertNewGroupeTemp($idChef);
-
-      //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
-      $idGroup = $GLOBALS['connex']->lastInsertId();
-
+    //Si le chef de groupe n'a pas été sélectionné ou si tous les étudiants n'ont pas été sélectionnés
+    if(empty($_POST['chef']) || empty($_POST['etu']) || (count($_POST['etu']) < $project['nbEtudiants']-1)) {
+      ajouterErreur('Vous devez choisir un chef de groupe et choisir chaque étudiant');
+      include('./include/erreurs.php');
+    }else {
       $etu = array();
       $etu = $_POST['etu'];
-      //On stocke dans le tableau $etu les identifiants des personnes du groupe
-      array_push($etu, $idChef);
+      //Gère les doublons
+      if(count(array_unique($etu)) < count($etu)) {
+        ajouterErreur('Vous ne pouvez pas choisir plusieurs fois la même personne');
+        include('./include/erreurs.php');
+      }else {
+        //On récupère l'identifiant du chef de groupe
+        $idChef = $_POST['chef'];
 
-      //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
-      foreach($etu as $e) {
-        updatePersonneGroupeTemp($idGroup, $e);
+        //Si le chef de projet est déjà dans un groupe temporaire on ne crée pas un autre groupe
+        $idGroupChef = getGroupeTempByPersonne($idChef);
+        if($idGroupChef['idGroupeTemp'] == null) {
+          //On crée un groupe temporaire avec un chef
+          insertNewGroupeTemp($idChef);
+
+          //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
+          $idGroup = $GLOBALS['connex']->lastInsertId();
+
+          //On stocke dans le tableau $etu les identifiants des personnes du groupe
+          array_push($etu, $idChef);
+
+          //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
+          foreach($etu as $e) {
+            updatePersonneGroupeTemp($idGroup, $e);
+          }
+
+          // On insère le choix du projet pour le groupe en base
+          insertNewChoixTemp($_GET['id'], $idGroup);
+        }else {
+          // On insère le choix du projet pour le groupe en base
+          insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
+        }
+        echo 'Votre choix a été enregistré avec succès.';
       }
-
-      // On insère le choix du projet pour le groupe en base
-      insertNewChoixTemp($_GET['id'], $idGroup);
-    }else {
-      // On insère le choix du projet pour le groupe en base
-      insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
     }
-
-    echo 'Votre choix a été enregistré avec succès.';
   }
 
   //Si la personne souhaite se rétracter
   if(isset($_POST['btn_submit_retract'])) {
-    //On supprime la ligne dans groupe temp pour la personne connectée (chef)
-    deleteGroupTemp($idPersonne[0]);
+
 
     //On supprime la ligne dans choix temp pour le groupe de la personne connectée et le projet correspondant
     $idGroup = getGroupeTempByPersonne($idPersonne[0]);
     $_SESSION['group_temp'] = $idGroup['idGroupeTemp'];
     deleteChoixTemp($_SESSION['group_temp'], $_GET['id']);
 
-    $etu = getPersonneByGroupTemp($_SESSION['group_temp']);
-    foreach($etu as $e) {
-      updatePersonneGroupeTemp(null, $e['idPersonne']);
+    //Nombre de choix effectués
+    $nbChoixProjets = count(getChoixProjets($_SESSION['group_temp']));
+
+    //Si tous les choix ont été annulés, on supprime le groupe temporaire
+    if($nbChoixProjets == 0) {
+      //On supprime la ligne dans groupe temp pour la personne connectée (chef)
+      deleteGroupTemp($idPersonne[0]);
+      $etu = getPersonneByGroupTemp($_SESSION['group_temp']);
+      foreach($etu as $e) {
+        updatePersonneGroupeTemp(null, $e['idPersonne']);
+      }
+      unset($_SESSION['group_temp']);
     }
-    unset($_SESSION['group_temp']);
+
     echo 'Votre choix a été enregistré avec succès.';
   }
 

@@ -1,10 +1,13 @@
-<?php
-/**
-* Menu de l'application
-**/
-?>
+<div id="logo_universite"></div>
 
-<h2>Menu</h2>
+<nav id="nav" role="navigation">
+    <ul id="main-menu">
+        <li>
+            <a href="index.php">Accueil</a>
+        </li>
+    </ul>
+</nav>
+
 
 <?php
   //Si une connexion existe

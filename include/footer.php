@@ -1,6 +1,3 @@
-<footer class="theFooter pas">
-    <p class="footer_liens man">
-        <a href="#" class="font-x-small bold upper">FAQ</a>
-        •
-        <a href="#" class="font-x-small bold upper">Contact</a>
+<footer class="theFooter pats">
+    <p class="font-small upper">&copy; Copyright 2019 - Université de Bordeaux</p>
 </footer>

@@ -25,18 +25,16 @@ define('URL', 'index.php?page=');
 <body class="man">
 <div class="theGlobal">
 
-    <!-- ENTETE -->
-    <header>
-        <?php
-        include "include/header.php";
-        ?>
-    </header>
-
     <!-- MENU -->
     <div class="theMenu">
         <?php
         include "include/menu.php";
         ?>
+    </div>
+
+    <!-- ENTETE -->
+    <div class="theHeader pas">
+        <?php include "include/header.php"; ?>
     </div>
 
     <!-- CONTENU -->
