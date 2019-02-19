@@ -110,8 +110,6 @@
     return $result;
   }
 
-
-
     /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
    * @return array $result tableau de projets en atrtibution manuelle du client
@@ -289,10 +287,10 @@
   /**
   * Récupère la liste des personnes pour un groupe temporaire
   * @param $idGroup identifiant du groupe temporaire
-  * @return $result array tableau des identifiants
+  * @return $result array tableau des identifiants noms et prenoms
   **/
   function getPersonneByGroupTemp($idGroup) {
-    $query = "SELECT idPersonne FROM personne WHERE idGroupeTemp = :idGroup";
+    $query = "SELECT idPersonne, prenompersonne, nompersonne FROM personne WHERE idGroupeTemp = :idGroup";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroup' => $idGroup
@@ -300,6 +298,22 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
+
+    /**
+  * Récupère l'id des groupes temporaire ayant postulé sur un projet donné
+  * @param $idprojet identifiant du projet
+  * @return $result array tableau des identifiants
+  **/
+  function getIdgroupeByIdproject($idProject){
+    $query = "SELECT idgroupe FROM choix_temp WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
 
   /*******************************

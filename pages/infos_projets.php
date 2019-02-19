@@ -28,6 +28,7 @@
   if($_SESSION['status'] == 2) {
   //Si la personne connectée est chef d'un groupe
   if($groupTempChef != null) {
+
     //Si la personne est chef de groupe pour le projet en question
     if($data != null) {
       //La personne connectée peut uniquement se rétracter sur son projet
@@ -41,13 +42,16 @@
       <?php
     }
   }else { //Si la personne connectée n'est pas chef de groupe
+
+
     //Si la personne connectée n'est pas dans un groupe
-    if($groupTempPers['idGroupeTemp'] == null) {
+    //if($groupTempPers['idGroupeTemp'] == null) {
+
       //La personne connectée peut se positionner sur un projet
       ?>
         <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
       <?php
-    }
+    //}
   }
 }
   ?>
