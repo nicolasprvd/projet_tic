@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 
 //Si une personne souhaite se déconnecter
 if(!empty($_GET['deconnexion'])) {
@@ -7,7 +6,6 @@ if(!empty($_GET['deconnexion'])) {
 }
 
 //Si une personne est authentifiée
-=======
 /**
 * Entete de l'application
 **/
@@ -16,9 +14,8 @@ if(!empty($_GET['deconnexion'])) {
 if(!empty($_GET['deconnexion'])) {
   deconnecter();
 }
- 
+
 //Si une personne est authentifiÃ©e
->>>>>>> e139aaf175ba84b0deffdb96eb5d5c40e35ecbc0
 if(estConnecte()) {
   $status = getStatusById($_SESSION['status']);
   echo '<span>' . $status['libelle'] . ' : ' . $_SESSION['firstname'] . ' ' . $_SESSION['name'] . '</span>';
@@ -28,7 +25,6 @@ if(estConnecte()) {
 }else {
   ?>
   <a class="link_auth" onclick="document.getElementById('signin').style.display='block'">Se connecter</a>
-<<<<<<< HEAD
   <?php require_once('./pages/formulaires/form_connexion.php'); ?>
   <a class="link_auth" onclick="document.getElementById('signup').style.display='block'">S'inscrire</a>
   <?php
@@ -36,11 +32,3 @@ if(estConnecte()) {
 
 }
 ?>
-=======
-   <?php require_once('./pages/formulaires/form_connexion.php'); ?>
-  <a class="link_auth" onclick="document.getElementById('signup').style.display='block'">S'inscrire</a>
-  <?php
-  require_once('./pages/formulaires/form_inscription.php');
-}
-?>
->>>>>>> e139aaf175ba84b0deffdb96eb5d5c40e35ecbc0
