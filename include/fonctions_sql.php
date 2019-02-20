@@ -103,7 +103,7 @@
    * @return array $result tableau de projets en attribution automatique du client
    */
   function getManualProjectsNoAttribuate() {
-    $query = "SELECT * FROM projet WHERE automatique = 0 AND idprojet NOT IN (SELECT idprojet FROM choix_temp)";
+    $query = "SELECT * FROM projet WHERE automatique = 0 AND idprojet NOT IN (SELECT idprojet FROM groupe)";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute();
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -314,6 +314,21 @@
     return $result;
   }
 
+     /**
+  * Récupère l'id du chef de projet du groupe temporaire
+  * @param $idG identifiant du groupe
+  * @return $result identifiant du chef de projet
+  **/
+  function getIdChefByIdGroup($idG){
+    $query = "SELECT idpersonneChef FROM groupe_temp WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
 
   /*******************************
@@ -431,6 +446,23 @@
   }
 
 
+/**
+  * Insère l'identifiant du groupe, du projet et du chef de projet dans la table groupe
+  * @param $idG identifiant du groupe
+  * @param $idP identifiant du projet
+  * @param $idChefO identifiant chef de groupe
+  **/
+  function insertNewGroupe($idG, $idP, $idChefP){
+    $query="INSERT INTO groupe VALUES (:idGroup, :idProject, :idPersonneChef)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG,
+      'idProject' => $idP,
+      'idPersonneChef' => $idChefP
+    ));
+  }
+
+
   /*******************************
   * FONCTIONS UPDATE
   *******************************/
@@ -480,5 +512,31 @@
       'idProjet' => $idProject
     ));
   }
+
+    /**
+  * Supprime dans la table choix_temp tous les choix donc le groupe est celui passé en paramètre 
+  * @param $idG identifiant du groupe
+  **/
+  function deleteChoixTempFROMGroupeId($idG){
+    $query = "DELETE FROM choix_temp WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
+    ));
+  }
+
+    /**
+  * Supprime dans la table groupe_temp le groupe passé en paramètre 
+  * @param $idG identifiant du groupe
+  **/
+  function deleteGroupTempFromGroupId($idG){
+    $query = "DELETE FROM groupe_temp WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
+    ));
+  }
+
+  
 
  ?>

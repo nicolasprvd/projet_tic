@@ -15,7 +15,6 @@ $idgroupe = getIdgroupeByIdproject($_GET['id']);
 
 if (!empty($idgroupe)) {
     ?>
-<form method="post">
 <?php
     ?>
 
@@ -40,7 +39,7 @@ if (!empty($idgroupe)) {
             $membre ='';
             $espace = " ";
             $separateur = ", ";
-
+            
             foreach($etu as $e) {
             $membre = $membre . $e['prenompersonne'] . $espace .$e['nompersonne']  . $separateur ;
             }
@@ -48,26 +47,19 @@ if (!empty($idgroupe)) {
             ?>
 
             <td><?php echo $membre; ?></td>
-
+            <form  enctype="multipart/form-data" action =   <?php echo URL.'mes_projets_client.php&id='.$_GET['id'];?> method = "POST"  >
+            <input type = "hidden" name = "id" value = '<?php echo $groupe['idgroupe'] ?>' />
             <td><input type = "submit" value = "Choisir ce groupe" name = "btn_choix"/></td>
+            
+            </form>
 
             </tr>
     <?php 
     }
     ?>
-
- <form method="post">
  <?php
- echo "Mettre l'adresse mail du chef de pro et dire qu'il peut le contacter pour choisir";
 }
 else {
     echo "Personne n'a choisis votre sujet pour le moment.. Revenez plus tard!";
 }  
 ?>  
-
-<?php
-//Si la personne souhaite se positionner sur un projet
-  if(isset($_POST['btn_choix'])) {
-    echo "Je veux ce groupe!";
-  }
- ?>

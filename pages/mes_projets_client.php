@@ -4,6 +4,19 @@
 **/
 ?>
 
+
+<?php
+//Si la personne souhaite se positionner sur un projet
+  if(isset($_POST['btn_choix'])) {
+    //selectionner le chef de p
+    $idChefG = getIdChefByIdGroup($_POST['id']);
+ 
+    insertNewGroupe($_POST['id'], $_GET['id'], $idChefG['idpersonneChef']);
+    deleteChoixTempFROMGroupeId($_POST['id']);
+    deleteGroupTempFromGroupId($_POST['id']);
+  }
+ ?>
+
 <h1>Mes projets</h1>
 
 <?php
