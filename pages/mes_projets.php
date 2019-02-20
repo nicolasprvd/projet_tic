@@ -6,13 +6,19 @@
 
 <h1>Mes projets</h1>
 
-    <?php
-      //On récupère l'identifiant de la personne connectée
-      $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
-      //On récupère le groupe temporaire auquel elle appartient
-      $idGroupTemp = getGroupeTempByPersonne($idPersonne[0]);
+<?php   
+
+
+ //On récupère l'identifiant de la personne connectée
+ $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
+ //On récupère le groupe auquel elle appartient
+ $idGroup = getGroupeTempByPersonne($idPersonne[0]);
+
+ $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
+if (empty($attribuate))  { 
+    
       //On récupère la liste de ses choix
-      $projects = getChoixProjets($idGroupTemp['idGroupeTemp']);
+      $projects = getChoixProjets($idGroup['idGroupeTemp']);
 
       if($projects == null) {
         echo '<p>Vous n\'avez choisi aucun projet pour le moment.</p>';
@@ -49,4 +55,7 @@
           <?php
 
       }
+    } else {
+      echo "j'ai un projet attribuer";
+    }
 ?>

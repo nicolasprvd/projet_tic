@@ -13,6 +13,7 @@
  
     insertNewGroupe($_POST['id'], $_GET['id'], $idChefG['idpersonneChef']);
     deleteChoixTempFROMGroupeId($_POST['id']);
+    deleteChoixTempFromProjectId($_GET['id']);
     deleteGroupTempFromGroupId($_POST['id']);
   }
  ?>

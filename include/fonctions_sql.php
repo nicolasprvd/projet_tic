@@ -330,6 +330,21 @@
   }
 
 
+       /**
+  * Verifie si le groupe a un projet attribué ou non. Si oui, recupere l'id du chef de projet et l'id du projet
+  * @param $idG identifiant du groupe
+  * @return $result identifiant du chef de projet
+  **/
+  function getProjectAttribuate($idG){
+    $query = "SELECT * FROM groupe WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
   /*******************************
   * FONCTIONS INSERT
@@ -534,6 +549,18 @@
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroup' => $idG
+    ));
+  }
+
+    /**
+  * Supprime dans la table groupe_temp le projet qui a été attribuer 
+  * @param $idP identifiant du projet
+  **/
+  deleteChoixTempFromProjectId($idP){
+    $query = "DELETE FROM choix_temp WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idP
     ));
   }
 
