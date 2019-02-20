@@ -9,7 +9,7 @@ if(!empty($_GET['deconnexion'])) {
 /**
 * Entete de l'application
 **/
- echo '<h1>Je suis l\'entete de la page</h1>';
+ echo '<h1>Projet TIC</h1>';
 //Si une personne souhaite se dÃ©connecter
 if(!empty($_GET['deconnexion'])) {
   deconnecter();
