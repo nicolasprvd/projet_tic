@@ -556,7 +556,7 @@
   * Supprime dans la table groupe_temp le projet qui a été attribuer 
   * @param $idP identifiant du projet
   **/
-  deleteChoixTempFromProjectId($idP){
+  function deleteChoixTempFromProjectId($idP){
     $query = "DELETE FROM choix_temp WHERE idprojet = :idProject";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
