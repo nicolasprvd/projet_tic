@@ -84,7 +84,7 @@ if (!empty($automatic)) {
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)){
             ?>
-              <td><p> Le projet n'a pas encore été attribué </p></td>
+              <td><p> En attente d'attribution </p></td>
             <?php
             // Si le projet est attribué
             }

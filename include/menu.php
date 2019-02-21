@@ -36,8 +36,30 @@
       ?>
       <nav>
         <ul>
-          <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
+        <?php
+        //On récupère l'identifiant de la personne connectée
+        $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
+        //On récupère le groupe auquel elle appartient
+        $idGroup = getGroupeTempByPersonne($idPersonne[0]);
+
+        $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
+        //Si le groupe n'a pas sont projet attribuer
+        if (empty($attribuate))  { 
+        ?>
+         <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
           <li><a href="<?php echo URL.'mes_projets.php' ?>">Mes projets</a></li>
+        <?php
+        //Si le groupe a son projet attribué
+        } else {
+        ?>
+          <li><a href="<?php echo URL.'mes_projets.php' ?>">Mon projet</a></li>
+        <?php
+        }
+
+        ?>
+
+
+         
         </ul>
       </nav>
       <?php

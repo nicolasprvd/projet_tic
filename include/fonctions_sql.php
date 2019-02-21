@@ -483,14 +483,29 @@
   *******************************/
 
   /**
-  * Insère l'idenifiant du groupe temporaire dans la table personne
+  * Insère l'identifiant du groupe temporaire dans la table personne
   * @param $idGroup identifiant du groupe
+  * @param $etu identidiant de l'etudiant
   **/
   function updatePersonneGroupeTemp($idGroup, $etu) {
     $query = "UPDATE personne SET idGroupeTemp = :idGroupTemp WHERE idPersonne = :idPersonne";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroupTemp' => $idGroup,
+      'idPersonne' => $etu
+    ));
+  }
+
+   /**
+  * Insère l'identifiant du groupe  dans la table personne
+  * @param $idGroup identifiant du groupe
+  * @param $etu identidiant de l'etudiant
+  **/
+  function updatePersonneGroupe($idGroup, $etu) {
+    $query = "UPDATE personne SET idgroupe = :idGroup WHERE idPersonne = :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idGroup,
       'idPersonne' => $etu
     ));
   }

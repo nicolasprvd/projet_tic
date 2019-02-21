@@ -21,7 +21,7 @@ if (!empty($idgroupe)) {
     <table>
         <tr>
         <th>idGroupe</th>
-        <th> Membre du groupe </th>
+        <th> Membres du groupe </th>
         <th>Choix</th>
         </tr>
     <?php
