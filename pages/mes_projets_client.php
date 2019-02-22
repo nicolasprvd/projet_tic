@@ -8,13 +8,20 @@
 <?php
 //Si la personne souhaite se positionner sur un projet
   if(isset($_POST['btn_choix'])) {
-    //selectionner le chef de p
+    //selectionner le chef de projet
     $idChefG = getIdChefByIdGroup($_POST['id']);
  
     insertNewGroupe($_POST['id'], $_GET['id'], $idChefG['idpersonneChef']);
     deleteChoixTempFROMGroupeId($_POST['id']);
     deleteChoixTempFromProjectId($_GET['id']);
     deleteGroupTempFromGroupId($_POST['id']);
+
+     //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+     $etu = getPersonneByGroupTemp($_POST['id']);
+     foreach($etu as $e) {
+      updatePersonneGroupe($_POST['id'], $e['idPersonne']);
+    }
+
   }
  ?>
 

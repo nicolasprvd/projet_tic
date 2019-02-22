@@ -478,6 +478,7 @@
   }
 
 
+ 
   /*******************************
   * FONCTIONS UPDATE
   *******************************/
@@ -502,7 +503,7 @@
   * @param $etu identidiant de l'etudiant
   **/
   function updatePersonneGroupe($idGroup, $etu) {
-    $query = "UPDATE personne SET idgroupe = :idGroup WHERE idPersonne = :idPersonne";
+    $query = "UPDATE personne SET idgroupe = :idGroup WHERE idpersonne = :idPersonne";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroup' => $idGroup,
