@@ -92,8 +92,30 @@ if (empty($attribuate))  {
       ?>
       <br>
       Chef de projet : <?php echo $chef['prenompersonne'] . ' ' .  $chef['nompersonne'];?> <br>
-      Membres du projet : <?php echo $membre ;?>
+      Membres du projet : <?php echo $membre ;?><br>
+
+      <br><br>
+
+      <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
+      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembre_annee. L'extension doit être du doc, docs ou pdf.) </BR>
+      <input type="file" name="CDC" />
+      <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
+      </form>
 
       <?php 
     }
+?>
+
+
+<?php
+
+if(isset($_POST['btn_depot_CDC'])) {
+  if ($_FILES['CDC']['size'] <> 0){
+    echo 'Je vais deposer mon CDC';
+  }else {
+    ajouterErreur('Vous devez inserer votre pièce jointe!');
+    include_once('./include/erreurs.php');
+  }
+}
+
 ?>
