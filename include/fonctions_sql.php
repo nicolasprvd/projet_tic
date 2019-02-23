@@ -111,7 +111,7 @@
   }
 
     /**
-   * Récupère la liste des projets en attribution manuellement pour le cient en question
+   * Récupère la liste des projets en attribution manuellement pour le client en question
    * @return array $result tableau de projets en atrtibution manuelle du client
    */
   function getAutomaticProjects($persResp) {
@@ -340,6 +340,21 @@
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroup' => $idG
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+         /**
+  * Verifie si le projet a été attribuer
+  * @param $idG identifiant du groupe
+  * @return $result identifiant du chef de projet
+  **/
+  function getProjectAttribuateByProjectId($idP){
+    $query = "SELECT * FROM groupe WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idP
     ));
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
