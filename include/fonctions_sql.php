@@ -72,6 +72,22 @@
     return $result;
   }
 
+     /**
+  * Récupère les information de la personne inserer en parametre
+  * @param $idP l'id de la personne
+  * @return $result les informations de la personne en question
+  **/
+  function getInformationPeopleById($idP) {
+    $query = "SELECT * FROM personne WHERE idpersonne = :idPers";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idPers' => $idP
+    ));
+    $result = $prepQuery->fetch();
+    return $result;
+  }
+
+
   /**
   * Récupère la liste des projets
   * @return array $result tableau des projets
@@ -314,6 +330,23 @@
     return $result;
   }
 
+
+    /**
+  * Récupère l'id des groupes temporaire ayant postulé sur un projet donné
+  * @param $idprojet identifiant du projet
+  * @return $result array tableau des identifiants
+  **/
+  function getIdgroupeByIdprojectFinal($idProject){
+    $query = "SELECT idgroupe FROM groupe WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
      /**
   * Récupère l'id du chef de projet du groupe temporaire
   * @param $idG identifiant du groupe
@@ -329,6 +362,22 @@
     return $result;
   }
 
+
+
+       /**
+  * Récupère l'id du chef de projet du groupe
+  * @param $idG identifiant du groupe
+  * @return $result identifiant du chef de projet
+  **/
+  function getIdChefFinalByIdGroup($idG){
+    $query = "SELECT idpersonneChef FROM groupe WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
 
        /**
   * Verifie si le groupe a un projet attribué ou non. Si oui, recupere l'id du chef de projet et l'id du projet

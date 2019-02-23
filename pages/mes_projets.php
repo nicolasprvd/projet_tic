@@ -1,13 +1,8 @@
 <?php
 /**
 * Page qui liste les projets temporaires choisis
-**/
-?>
-
-<h1>Mes projets</h1>
-
-<?php   
-
+* Une fois le projet attribué on y voit ses informations, les pieces a deposé etc
+**/  
 
  //On récupère l'identifiant de la personne connectée
  $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
@@ -16,7 +11,9 @@
 
  $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
 if (empty($attribuate))  { 
-    
+?>
+  <h1>Mes projets</h1>
+    <?php
       //On récupère la liste de ses choix
       $projects = getChoixProjets($idGroup['idGroupeTemp']);
 
@@ -49,13 +46,54 @@ if (empty($attribuate))  {
               }
             }
              ?>
-
           </tr>
         </table>
-          <?php
-
+     <?php
       }
-    } else {
-      echo "j'ai un projet attribuer";
+  } else {
+  ?>
+      <?php
+      $myProject = getProjectById($attribuate['idprojet']);
+      ?>
+      <h1>Mon projet : <?php echo $myProject['nomProjet']; ?></h1>
+
+    
+
+     <?php $myProject['nomProjet']; ?>
+      Client : <?php echo $myProject['prenomPersonne'] . ' ' . $myProject['nomPersonne']; ?> <br>
+      Mail client : <?php echo $myProject['mailPersonne']; ?> <br>
+      Nombre d'étudiants : <?php echo $myProject['nbEtudiants']; ?> <br>
+      Description : <?php echo $myProject['descriptifTexte']; ?> <br>
+      
+      <?php
+      if($myProject['descriptifPdf'] != null) {
+      ?>
+        Fichier joint : <a href="documents/sujet_client/<?php echo $myProject['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
+      <?php
+
+      
+      }
+      $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
+
+        //On recupere le nom et le prenom des personnes du groupe 
+        $etu = getPersonneByGroupTemp($idGroup['idgroupe']);
+        $membre ='';
+        $espace = " ";
+        $separateur = ", ";
+        
+        foreach($etu as $e) {
+        $membre = $membre . $e['prenompersonne'] . $espace .$e['nompersonne']  . $separateur ;
+        }
+        $membre = substr($membre, 0, -2);
+
+
+        $idChef = getIdChefFinalByIdGroup($idGroup['idgroupe']);
+        $chef = getInformationPeopleById($idChef['idpersonneChef']);
+      ?>
+      <br>
+      Chef de projet : <?php echo $chef['prenompersonne'] . ' ' .  $chef['nompersonne'];?> <br>
+      Membres du projet : <?php echo $membre ;?>
+
+      <?php 
     }
 ?>

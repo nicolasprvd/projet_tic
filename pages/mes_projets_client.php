@@ -59,7 +59,7 @@ if (!empty($manuel)) {
             }
             else {
               ?>
-              <td><p> Le projet est attribué </p></td>
+               <td><a href="<?php echo URL.'voir_mon_projet_client.php&id='.$project['idprojet']. '&titre=' .$project['nomprojet'];?>"> Voir le projet</a></td>
             <?php
             }
             ?>
