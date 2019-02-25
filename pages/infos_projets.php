@@ -45,13 +45,13 @@
 
 
     //Si la personne connectée n'est pas dans un groupe
-    //if($groupTempPers['idGroupeTemp'] == null) {
+    if($groupTempPers['idGroupeTemp'] == null) {
 
       //La personne connectée peut se positionner sur un projet
       ?>
         <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
       <?php
-    //}
+    }
   }
 }
   ?>

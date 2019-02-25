@@ -13,6 +13,7 @@
 
    $dataGroupeTemp = getGroupeTemp($idPersonne[0]);
    $data = getChefGroupeProjet($dataGroupeTemp['idPersonneChef'], $_GET['id']);
+   $nbChoixProjets = count(getChoixTempByGroupTemp($dataGroupeTemp['idGroupe']));
    $name="btn_submit_validate";
    $value="Valider";
    // Si la personne authentifiée est chef d'un groupe
@@ -30,15 +31,12 @@
 <p>Vous avez choisi le sujet : <?php echo $project['nomProjet']; ?></p>
 <p>Vous pouvez vous positionner sur plusieurs sujets, votre affectation sera faite aléatoirement. <br>Afin de vous positionner sur ce sujet, veuillez constituer votre groupe à partir des éléments ci-dessous. Ce projet nécessite <?php echo $project['nbEtudiants']; ?> étudiants.</p>
 <form method="post">
-
-Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?>" value="<?php $idPersonne[0]; ?>" />
 <?php
   //Le choix du projet a déjà eu lieu
-  if($data != null) {
-    $dataPersonnesGroupe = getPersonnesByProject($_GET['id'], $idPersonne[0]);
+  if($data != null || $nbChoixProjets >= 1) {
+    $dataPersonnesGroupe = getPersonneByGroupTemp($dataGroupeTemp['idGroupe']);
     $i = 2;
     foreach($dataPersonnesGroupe as $personne) {
-
       echo 'Etudiant ' . $i. ' : ';
       ?>
         <input type="text" disabled name="group[]" placeholder="<?php echo $personne['prenomPersonne'] . ' ' . $personne['nomPersonne']; ?>" value="<?php $personne['idPersonne'] ?>" />
@@ -46,21 +44,6 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
       $i++;
     }
   }else {
-    ?>
-    Chef de groupe :
-    <select name="chef">
-        <option selected disabled value="">Sélectionnez un étudiant</option>
-        <option value="<?php echo $idPersonne[0]; ?>"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?></option>
-        <?php
-        foreach($personnes as $p) {
-          ?>
-            <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
-          <?php
-        }
-       ?>
-    </select>
-  <br><br>
-  <?php
       for($i=1; $i < $project['nbEtudiants']; $i++) {
         echo 'Etudiant ' . ($i+1) . ' : ';
         ?>
@@ -78,11 +61,22 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
         <?php
       }
      ?>
-    <br><br>
+    Chef de groupe :
+    <select name="chef">
+        <option selected disabled value="">Sélectionnez un étudiant</option>
+        <option value="<?php echo $idPersonne[0]; ?>"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?></option>
+        <?php
+        foreach($personnes as $p) {
+          ?>
+            <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
+          <?php
+        }
+       ?>
+    </select>
     <?php
     }
  ?>
-<br>
+<br><br>
 
   <input type="button" name="btn_cancel" value="Retour" onclick="history.go(-1)" />
   <?php if(empty($_POST)) { ?>
@@ -104,38 +98,42 @@ Etudiant 1 :<input type="text" disabled name="etu_1" placeholder="<?php echo $_S
     }else {
       $etu = array();
       $etu = $_POST['etu'];
-      //Gère les doublons
-      if(count(array_unique($etu)) < count($etu)) {
-        ajouterErreur('Vous ne pouvez pas choisir plusieurs fois la même personne');
+      //On stocke dans le tableau $etu les identifiants des personnes du groupe
+      array_push($etu, $_POST['chef']);
+      if(!in_array($_POST['chef'], $etu)) {
+        ajouterErreur('Le chef de groupe doit faire partie des étudiants sélectionnés');
         include('./include/erreurs.php');
       }else {
-        //On récupère l'identifiant du chef de groupe
-        $idChef = $_POST['chef'];
-
-        //Si le chef de projet est déjà dans un groupe temporaire on ne crée pas un autre groupe
-        $idGroupChef = getGroupeTempByPersonne($idChef);
-        if($idGroupChef['idGroupeTemp'] == null) {
-          //On crée un groupe temporaire avec un chef
-          insertNewGroupeTemp($idChef);
-
-          //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
-          $idGroup = $GLOBALS['connex']->lastInsertId();
-
-          //On stocke dans le tableau $etu les identifiants des personnes du groupe
-          array_push($etu, $idChef);
-
-          //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
-          foreach($etu as $e) {
-            updatePersonneGroupeTemp($idGroup, $e);
-          }
-
-          // On insère le choix du projet pour le groupe en base
-          insertNewChoixTemp($_GET['id'], $idGroup);
+        //Gère les doublons
+        if(count(array_unique($etu)) < count($etu)) {
+          ajouterErreur('Vous ne pouvez pas choisir plusieurs fois la même personne');
+          include('./include/erreurs.php');
         }else {
-          // On insère le choix du projet pour le groupe en base
-          insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
+          //On récupère l'identifiant du chef de groupe
+          $idChef = $_POST['chef'];
+
+          //Si le chef de projet est déjà dans un groupe temporaire on ne crée pas un autre groupe
+          $idGroupChef = getGroupeTempByPersonne($idChef);
+          if($idGroupChef['idGroupeTemp'] == null) {
+            //On crée un groupe temporaire avec un chef
+            insertNewGroupeTemp($idChef);
+
+            //On récupère le dernier identifiant inséré en base, soit l'identifiant du groupe
+            $idGroup = $GLOBALS['connex']->lastInsertId();
+
+            //On affecte à chaque personne du groupe temporaire l'identifiant du groupe auquel elles appartiennent
+            foreach($etu as $e) {
+              updatePersonneGroupeTemp($idGroup, $e);
+            }
+
+            // On insère le choix du projet pour le groupe en base
+            insertNewChoixTemp($_GET['id'], $idGroup);
+          }else {
+            // On insère le choix du projet pour le groupe en base
+            insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
+          }
+          echo 'Votre choix a été enregistré avec succès.';
         }
-        echo 'Votre choix a été enregistré avec succès.';
       }
     }
   }
