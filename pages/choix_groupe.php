@@ -1,6 +1,6 @@
 <?php
 /**
-* Page qui liste les projets temporaires choisis pour le projet donner 
+* Page qui permet de choisr un groupe pour le projet du client en question
 **/
 ?>
 
@@ -21,7 +21,7 @@ if (!empty($idgroupe)) {
     <table>
         <tr>
         <th>idGroupe</th>
-        <th> Membre du groupe </th>
+        <th> Membres du groupe </th>
         <th>Choix</th>
         </tr>
     <?php
@@ -43,6 +43,7 @@ if (!empty($idgroupe)) {
             foreach($etu as $e) {
             $membre = $membre . $e['prenompersonne'] . $espace .$e['nompersonne']  . $separateur ;
             }
+            $membre = substr($membre, 0, -2);
 
             ?>
 
