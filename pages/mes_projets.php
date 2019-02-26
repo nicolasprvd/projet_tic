@@ -95,6 +95,11 @@ if (empty($attribuate))  {
       Membres du projet : <?php echo $membre ;?><br>
 
       <br><br>
+      <h4>Cahier des charges : </h4>
+      <?php 
+      $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
+      if (empty($docSubmit)) {
+      ?>
 
       <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
       Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembres_annee. L'extension doit être du doc, docs ou pdf.) </BR>
@@ -103,6 +108,10 @@ if (empty($attribuate))  {
       </form>
 
       <?php 
+      }else{
+        echo 'Le cahier des charges a été déposé :' ?> <a href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
     }
 ?>
 
@@ -127,7 +136,6 @@ if(isset($_POST['btn_depot_CDC'])) {
         include_once('./include/erreurs.php');
         exit;
     }
-
 
     //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
     if (file_exists("./documents")){
@@ -156,7 +164,7 @@ if(isset($_POST['btn_depot_CDC'])) {
   //-> Faire l'nsertion dans la base
 
       // On insere le document dans la base
-        insertNewDoc($idGroup['idgroupe'], $fichier, 'CDC');
+        insertNewDoc($myProject['idProjet'], $fichier, 'CDC');
         echo "Le cahier des charges a bien été créé";
 
   //Si le fichier n'a pas été inseré

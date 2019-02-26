@@ -43,4 +43,14 @@ $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
     ?>
     <br>
     Chef de projet : <?php echo $chef['prenompersonne'] . ' ' .  $chef['nompersonne'];?> <br>
-    Membres du projet : <?php echo $membre ;?>
+    Membres du projet : <?php echo $membre ;?> <br><br>
+
+    <h4>Cahier des charges : </h4>
+    <?php
+    $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
+      if (empty($docSubmit)) {
+        echo "Le cahier des charges n'a pas encore été déposé"; 
+      }else{
+        echo 'Le cahier des charges a été déposé :' ?> <a href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
