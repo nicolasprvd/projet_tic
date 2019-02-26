@@ -34,7 +34,7 @@ function connecter($idStatus, $name, $firstname) {
 * @return true ou false
 **/
 function estConnecte() {
-    
+
   return isset($_SESSION['name']);
 }
 
@@ -66,6 +66,17 @@ function ajouterErreur($msg) {
     $_REQUEST['erreurs'] = array();
   }
   $_REQUEST['erreurs'][] = $msg;
+}
+
+/**
+* Ajoute le libellé du message au tableau des messages
+* @param $msg le libellé du message
+**/
+function ajouterMessage($msg) {
+  if(!isset($_REQUEST['messages'])) {
+    $_REQUEST['messages'] = array();
+  }
+  $_REQUEST['messages'][] = $msg;
 }
 
 /**
