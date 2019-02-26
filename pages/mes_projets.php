@@ -97,7 +97,7 @@ if (empty($attribuate))  {
       <br><br>
 
       <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
-      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembre_annee. L'extension doit être du doc, docs ou pdf.) </BR>
+      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembres_annee. L'extension doit être du doc, docs ou pdf.) </BR>
       <input type="file" name="CDC" />
       <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
       </form>
@@ -110,8 +110,56 @@ if (empty($attribuate))  {
 <?php
 
 if(isset($_POST['btn_depot_CDC'])) {
+
+  $target_path = "";
+  $fichier = "";
+
+  //Si le fichier a été inseré
   if ($_FILES['CDC']['size'] <> 0){
-    echo 'Je vais deposer mon CDC';
+
+
+    $extensions = array('.doc', '.docs', '.pdf');
+    $extension = strrchr($_FILES['CDC']['name'], '.'); 
+    //Début des vérifications de sécurité... (extension du fichier)
+    if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+    {
+        ajouterErreur('Vous devez uploader un fichier de type doc, docs ou pdf, réessayez!');
+        include_once('./include/erreurs.php');
+        exit;
+    }
+
+
+    //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
+    if (file_exists("./documents")){
+      if (!file_exists("./documents/cahier_des_charges")){
+           mkdir("./documents/cahier_des_charges");
+     }
+    }
+    else {
+      mkdir("./documents");
+     mkdir("./documents/cahier_des_charges");
+    }
+
+    // Permet l'insertion du fichier joint dans le dossier concerner
+    $target_path = "./documents/cahier_des_charges/";
+    $target_path = $target_path . basename( $_FILES['CDC']['name']);
+    $fichier = $_FILES['CDC']['name'];
+    if(move_uploaded_file($_FILES['CDC']['tmp_name'], $target_path)) {
+      echo "Fichier ajouté avec succès";
+      echo "<br>" ;
+    } else{
+        ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
+        include_once('./include/erreurs.php');
+        exit();
+    }
+
+  //-> Faire l'nsertion dans la base
+
+      // On insere le document dans la base
+        insertNewDoc($idGroup['idgroupe'], $fichier, 'CDC');
+        echo "Le cahier des charges a bien été créé";
+
+  //Si le fichier n'a pas été inseré
   }else {
     ajouterErreur('Vous devez inserer votre pièce jointe!');
     include_once('./include/erreurs.php');

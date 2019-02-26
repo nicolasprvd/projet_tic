@@ -541,6 +541,22 @@
     ));
   }
 
+  /**
+  * Insère le chemin et le type de document lors qu'un document veut être deposer
+  * @param $idP identifiant du projet
+  * @param $chemin la ou se trouve le document
+  * @param $type le type de document (CDC/rendi final etc)
+  **/
+  function insertNewDoc($idP, $chemin, $type){
+    $query="INSERT INTO document (idprojet, chemindoc, typedoc) VALUES (:idProjet, :chemin, :type)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProjet' => $idP,
+      'chemin' => $chemin,
+      'type' => $type
+    ));
+  }
+
 
  
   /*******************************
