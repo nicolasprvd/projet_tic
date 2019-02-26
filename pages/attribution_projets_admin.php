@@ -44,7 +44,7 @@ if (!empty($projetNoAttribuate)){
 }
 else {
   ?>
-  <input disabled type = "submit" value = "Attribution Automatique"/>
+  <input type = "submit" value = "Attribution Automatique"/>
   <?php
 }
 

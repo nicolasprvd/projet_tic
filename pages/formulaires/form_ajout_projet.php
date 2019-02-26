@@ -9,10 +9,10 @@
 
         <h1>Saisir un projet</h1>
 
-		</BR></BR>
+		<br><br>
 
-		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?></BR></BR>
-		Titre  : <input type = "texte" name = "title"/></BR></BR>
+		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?><br><br>
+		Titre  : <input type = "texte" name = "title"/><br><br>
 
         Nombre d'étudiant :
         <select name="nbStudent">
@@ -24,13 +24,13 @@
             ?>
         </select><br><br>
 
-        Description :</BR>
-        <TEXTAREA name="description" rows=4 cols=40></TEXTAREA></BR></BR>
+        Description :<br>
+        <TEXTAREA name="description" rows=4 cols=40></TEXTAREA><br><br>
 
-        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee. L'extension doit être du doc, docs ou pdf.) </BR>
-        <input type="file" name="descriptionJoint" /></BR>
+        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee. L'extension doit être du doc, docs ou pdf.) <br>
+        <input type="file" name="descriptionJoint" /><br>
 
-        <p>Attribution automatique : (L'attribution automatique est conseillée sauf pour les projets "GALA" et "journée entreprise") </p>
+        <p>Attribution automatique : </p>
 
         <div>
             <input type="radio" id="oui" name="automatique" value="oui" checked>
@@ -42,13 +42,13 @@
             <label for="non">Non</label>
         </div>
 
-        </BR></BR>
+        <br><br>
 
 		<input type="button" value="Annuler" onclick="location.href='index.php?page=form_ajout_projet.php'" />
 
 		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
 
-        </BR>
+        <br>
 
 </form>
 
@@ -93,7 +93,7 @@ if(isset($_POST['btn_submit'])) {
             $fichier = $_FILES['descriptionJoint']['name'];
             if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
                 echo "Fichier ajouté avec succès";
-                echo "</BR>" ;
+                echo "<br>" ;
             } else{
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');

@@ -4,6 +4,27 @@
 **/
 ?>
 
+
+<?php
+//Si la personne souhaite se positionner sur un projet
+  if(isset($_POST['btn_choix'])) {
+    //selectionner le chef de projet
+    $idChefG = getIdChefByIdGroup($_POST['id']);
+ 
+    insertNewGroupe($_POST['id'], $_GET['id'], $idChefG['idpersonneChef']);
+    deleteChoixTempFROMGroupeId($_POST['id']);
+    deleteChoixTempFromProjectId($_GET['id']);
+    deleteGroupTempFromGroupId($_POST['id']);
+
+     //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+     $etu = getPersonneByGroupTemp($_POST['id']);
+     foreach($etu as $e) {
+      updatePersonneGroupe($_POST['id'], $e['idPersonne']);
+    }
+
+  }
+ ?>
+
 <h1>Mes projets</h1>
 
 <?php
@@ -26,20 +47,19 @@ if (!empty($manuel)) {
           ?>
           <tr>
             <td><?php echo $project['nomprojet']; ?></td>
-            <td><?php echo $project['idpersonneresp']; ?></td>
-
+            <td><?php echo $project['descriptiftexte']; ?></td>
             <?php
             // Si le projet n'est pas attribué
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)){
             ?>
-              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet'];?>"> Vous devez attribuer ce projet</a></td>
+              <td><a href="<?php echo URL.'choix_groupe.php&id='.$project['idprojet']. '&titre=' .$project['nomprojet'];?>"> Vous devez attribuer ce projet</a></td>
             <?php
             // Si le projet est attribué
             }
             else {
               ?>
-              <td><p> Le projet est attribué </p></td>
+               <td><a href="<?php echo URL.'voir_mon_projet_client.php&id='.$project['idprojet']. '&titre=' .$project['nomprojet'];?>"> Voir le projet</a></td>
             <?php
             }
             ?>
@@ -71,7 +91,7 @@ if (!empty($automatic)) {
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)){
             ?>
-              <td><p> Le projet n'a pas encore été attribué </p></td>
+              <td><p> En attente d'attribution </p></td>
             <?php
             // Si le projet est attribué
             }

@@ -21,9 +21,18 @@
       foreach($projects as $project) {
         ?>
         <tr>
-          <td><?php echo $project['nomprojet']; ?></td>
-          <td><?php echo $project['descriptiftexte']; ?></td>
-          <td><a href="<?php echo URL.'infos_projets.php&id='.$project['idprojet'];?>">Voir</a></td>
+
+        <?php
+        $attribuate = getProjectAttribuateByProjectId($project['idprojet']);
+        if (empty($attribuate)){
+        ?>
+
+            <td><?php echo $project['nomprojet']; ?></td>
+            <td><?php echo $project['descriptiftexte']; ?></td>
+            <td><a href="<?php echo URL.'infos_projets.php&id='.$project['idprojet'];?>">Voir</a></td>
+          <?php
+        }
+        ?>
         </tr>
         <?php
       }
