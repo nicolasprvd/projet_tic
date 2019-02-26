@@ -409,7 +409,7 @@
     return $result;
   }
 
-         /**
+  /**
   * Verifie si le projet a été attribuer
   * @param $idG identifiant du groupe
   * @return $result identifiant du chef de projet
@@ -419,6 +419,23 @@
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idProject' => $idP
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Verifie si un fichier a deja été déposé
+  * @param $idP
+  * @param $type
+  * @return $result identifiant du chef de projet
+  **/
+  function getDocSubmit($idP, $type){
+    $query = "SELECT * FROM document WHERE idprojet = :idProject AND typedoc = :type";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idP,
+      'type' => $type
     ));
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
@@ -553,6 +570,22 @@
       'idGroup' => $idG,
       'idProject' => $idP,
       'idPersonneChef' => $idChefP
+    ));
+  }
+
+  /**
+  * Insère le chemin et le type de document lors qu'un document veut être deposer
+  * @param $idP identifiant du projet
+  * @param $chemin la ou se trouve le document
+  * @param $type le type de document (CDC/rendi final etc)
+  **/
+  function insertNewDoc($idP, $chemin, $type){
+    $query="INSERT INTO document (idprojet, chemindoc, typedoc) VALUES (:idProjet, :chemin, :type)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProjet' => $idP,
+      'chemin' => $chemin,
+      'type' => $type
     ));
   }
 

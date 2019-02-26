@@ -96,27 +96,169 @@ if (empty($attribuate))  {
       Membres du projet : <?php echo $membre ;?><br>
 
       <br><br>
+      <!--Depot/visualisation du cdc-->
+      <h4>Cahier des charges : </h4>
+      <?php 
+      $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
+      if (empty($docSubmit)) {
+      ?>
 
       <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
-      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembre_annee. L'extension doit être du doc, docs ou pdf.) </BR>
+      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembres_annee. L'extension doit être du doc, docs ou pdf.) </BR>
       <input type="file" name="CDC" />
       <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
       </form>
 
+<<<<<<< HEAD
       <?php
+=======
+      <?php 
+      }else{
+        echo 'Le cahier des charges a été déposé :' ?> <a href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
+      ?>
+
+      <!--Depot/visualisation du rendu-->
+      <h4>Rendu final : </h4>
+      <?php 
+      $docSubmit = getDocSubmit($myProject['idProjet'], 'RF');
+      if (empty($docSubmit)) {
+      ?>
+
+      <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
+      Dépôt du rendu final: (Le fichier doit être nommé : RF_nomDesMembres_annee. L'extension doit être du zip, 7zip ou rar.) </BR>
+      <input type="file" name="RF" />
+      <input type = "submit" value = "Déposer" name = "btn_depot_RF"/>
+      </form>
+
+      <?php 
+      }else{
+        echo 'Le rendu final a été déposé :' ?> <a href="documents/rendu_final/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
+>>>>>>> 92932d021a9991b0369e2097479339cefa6b2c7e
     }
 ?>
 
 
 <?php
 
+//traitement CDC
 if(isset($_POST['btn_depot_CDC'])) {
+
+  $target_path = "";
+  $fichier = "";
+
+  //Si le fichier a été inseré
   if ($_FILES['CDC']['size'] <> 0){
-    echo 'Je vais deposer mon CDC';
+
+
+    $extensions = array('.doc', '.docs', '.pdf');
+    $extension = strrchr($_FILES['CDC']['name'], '.'); 
+    //Début des vérifications de sécurité... (extension du fichier)
+    if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+    {
+        ajouterErreur('Vous devez uploader un fichier de type doc, docs ou pdf, réessayez!');
+        include_once('./include/erreurs.php');
+        exit;
+    }
+
+    //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
+    if (file_exists("./documents")){
+      if (!file_exists("./documents/cahier_des_charges")){
+           mkdir("./documents/cahier_des_charges");
+     }
+    }
+    else {
+      mkdir("./documents");
+     mkdir("./documents/cahier_des_charges");
+    }
+
+    // Permet l'insertion du fichier joint dans le dossier concerner
+    $target_path = "./documents/cahier_des_charges/";
+    $target_path = $target_path . basename( $_FILES['CDC']['name']);
+    $fichier = $_FILES['CDC']['name'];
+    if(move_uploaded_file($_FILES['CDC']['tmp_name'], $target_path)) {
+      echo "Fichier ajouté avec succès";
+      echo "<br>" ;
+    } else{
+        ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
+        include_once('./include/erreurs.php');
+        exit();
+    }
+
+  //-> Faire l'nsertion dans la base
+
+      // On insere le document dans la base
+        insertNewDoc($myProject['idProjet'], $fichier, 'CDC');
+        echo "Le cahier des charges a bien été déposé";
+
+  //Si le fichier n'a pas été inseré
   }else {
     ajouterErreur('Vous devez inserer votre pièce jointe!');
     include_once('./include/erreurs.php');
   }
 }
 
+<<<<<<< HEAD
 ?>
+=======
+
+//traitement rendu final
+if(isset($_POST['btn_depot_RF'])) {
+
+  $target_path = "";
+  $fichier = "";
+
+  //Si le fichier a été inseré
+  if ($_FILES['RF']['size'] <> 0){
+
+    $extensions = array('.zip', '.7z', '.rar');
+    $extension = strrchr($_FILES['RF']['name'], '.'); 
+    //Début des vérifications de sécurité... (extension du fichier)
+    if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+    {
+        ajouterErreur('Vous devez uploader un fichier de type zip, 7z ou rar, réessayez!');
+        include_once('./include/erreurs.php');
+        exit;
+    }
+
+    //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
+    if (file_exists("./documents")){
+      if (!file_exists("./documents/rendu_final")){
+           mkdir("./documents/rendu_final");
+     }
+    }
+    else {
+      mkdir("./documents");
+     mkdir("./documents/rendu_final");
+    }
+
+    // Permet l'insertion du fichier joint dans le dossier concerner
+    $target_path = "./documents/rendu_final/";
+    $target_path = $target_path . basename( $_FILES['RF']['name']);
+    $fichier = $_FILES['RF']['name'];
+    if(move_uploaded_file($_FILES['RF']['tmp_name'], $target_path)) {
+      echo "Fichier ajouté avec succès";
+      echo "<br>" ;
+    } else{
+        ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
+        include_once('./include/erreurs.php');
+        exit();
+    }
+
+  //-> Faire l'nsertion dans la base
+
+      // On insere le document dans la base
+        insertNewDoc($myProject['idProjet'], $fichier, 'RF');
+        echo "Le rendu final a bien été déposé";
+
+  //Si le fichier n'a pas été inseré
+  }else {
+    ajouterErreur('Vous devez inserer votre pièce jointe!');
+    include_once('./include/erreurs.php');
+  }
+}
+?>
+>>>>>>> 92932d021a9991b0369e2097479339cefa6b2c7e
