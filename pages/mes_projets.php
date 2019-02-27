@@ -109,9 +109,6 @@ if (empty($attribuate))  {
       <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
       </form>
 
-<<<<<<< HEAD
-      <?php
-=======
       <?php 
       }else{
         echo 'Le cahier des charges a été déposé :' ?> <a href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
@@ -137,7 +134,6 @@ if (empty($attribuate))  {
         echo 'Le rendu final a été déposé :' ?> <a href="documents/rendu_final/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
         <?php 
       }
->>>>>>> 92932d021a9991b0369e2097479339cefa6b2c7e
     }
 ?>
 
@@ -201,10 +197,6 @@ if(isset($_POST['btn_depot_CDC'])) {
   }
 }
 
-<<<<<<< HEAD
-?>
-=======
-
 //traitement rendu final
 if(isset($_POST['btn_depot_RF'])) {
 
@@ -261,4 +253,3 @@ if(isset($_POST['btn_depot_RF'])) {
   }
 }
 ?>
->>>>>>> 92932d021a9991b0369e2097479339cefa6b2c7e
