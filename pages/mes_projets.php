@@ -116,6 +116,28 @@ if (empty($attribuate))  {
       }
       ?>
 
+      <!--Depot/visualisation du gantt-->
+      <h4>Gantt : </h4>
+      <?php 
+      $docSubmit = getDocSubmit($myProject['idProjet'], 'GANTT');
+      if (empty($docSubmit)) {
+      ?>
+
+      <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
+      Dépôt du gantt: (Le fichier doit être nommé : Gant_nomDesMembres_annee. L'extension doit être du gan, jpg, png ou pdf.) </BR>
+      <input type="file" name="GANTT" />
+      <input type = "submit" value = "Déposer" name = "btn_depot_GANTT"/>
+      </form>
+
+      <?php 
+      }else{
+        echo 'Le gantt a été déposé :' ?> <a href="documents/gantt/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
+      ?>
+
+
+
       <!--Depot/visualisation du rendu-->
       <h4>Rendu final : </h4>
       <?php 
@@ -150,7 +172,7 @@ if(isset($_POST['btn_depot_CDC'])) {
   if ($_FILES['CDC']['size'] <> 0){
 
 
-    $extensions = array('.doc', '.docs', '.pdf');
+    $extensions = array('.doc', '.docs', '.pdf', '.DOC', '.DOCS', '.PDF');
     $extension = strrchr($_FILES['CDC']['name'], '.'); 
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
@@ -184,11 +206,10 @@ if(isset($_POST['btn_depot_CDC'])) {
         exit();
     }
 
-  //-> Faire l'nsertion dans la base
 
-      // On insere le document dans la base
-        insertNewDoc($myProject['idProjet'], $fichier, 'CDC');
-        echo "Le cahier des charges a bien été déposé";
+    // On insere le document dans la base
+    insertNewDoc($myProject['idProjet'], $fichier, 'CDC');
+    echo "Le cahier des charges a bien été déposé";
 
   //Si le fichier n'a pas été inseré
   }else {
@@ -196,6 +217,64 @@ if(isset($_POST['btn_depot_CDC'])) {
     include_once('./include/erreurs.php');
   }
 }
+
+
+//traitement GANTT
+if(isset($_POST['btn_depot_GANTT'])) {
+
+  $target_path = "";
+  $fichier = "";
+
+  //Si le fichier a été inseré
+  if ($_FILES['GANTT']['size'] <> 0){
+
+
+    $extensions = array('.gan', '.jpg', '.pnj', '.pdf', '.GAN', '.JPG', '.PNG', '.PDF');
+    $extension = strrchr($_FILES['GANTT']['name'], '.'); 
+    //Début des vérifications de sécurité... (extension du fichier)
+    if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+    {
+        ajouterErreur('Vous devez uploader un fichier de type gan, jpg, png ou pdf, réessayez!');
+        include_once('./include/erreurs.php');
+        exit;
+    }
+
+    //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
+    if (file_exists("./documents")){
+      if (!file_exists("./documents/gantt")){
+           mkdir("./documents/gantt");
+     }
+    }
+    else {
+      mkdir("./documents");
+     mkdir("./documents/gantt");
+    }
+
+    // Permet l'insertion du fichier joint dans le dossier concerner
+    $target_path = "./documents/gantt/";
+    $target_path = $target_path . basename( $_FILES['GANTT']['name']);
+    $fichier = $_FILES['GANTT']['name'];
+    if(move_uploaded_file($_FILES['GANTT']['tmp_name'], $target_path)) {
+      echo "Fichier ajouté avec succès";
+      echo "<br>" ;
+    } else{
+        ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
+        include_once('./include/erreurs.php');
+        exit();
+    }
+
+
+    // On insere le document dans la base
+    insertNewDoc($myProject['idProjet'], $fichier, 'GANTT');
+    echo "Le gantt a bien été déposé";
+
+  //Si le fichier n'a pas été inseré
+  }else {
+    ajouterErreur('Vous devez inserer votre pièce jointe!');
+    include_once('./include/erreurs.php');
+  }
+}
+
 
 //traitement rendu final
 if(isset($_POST['btn_depot_RF'])) {
@@ -206,7 +285,7 @@ if(isset($_POST['btn_depot_RF'])) {
   //Si le fichier a été inseré
   if ($_FILES['RF']['size'] <> 0){
 
-    $extensions = array('.zip', '.7z', '.rar');
+    $extensions = array('.zip', '.7z', '.rar', '.ZIP', '.7Z', '.RAR');
     $extension = strrchr($_FILES['RF']['name'], '.'); 
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
@@ -240,11 +319,9 @@ if(isset($_POST['btn_depot_RF'])) {
         exit();
     }
 
-  //-> Faire l'nsertion dans la base
-
-      // On insere le document dans la base
-        insertNewDoc($myProject['idProjet'], $fichier, 'RF');
-        echo "Le rendu final a bien été déposé";
+    // On insere le document dans la base
+    insertNewDoc($myProject['idProjet'], $fichier, 'RF');
+    echo "Le rendu final a bien été déposé";
 
   //Si le fichier n'a pas été inseré
   }else {
