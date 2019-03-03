@@ -21,10 +21,12 @@
     Fichier joint : <a href="documents/sujet_client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
   <?php
   }
+
   $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
   $data = getChefGroupeProjet($idPersonne[0], $_GET['id']);
   $groupTempPers = getGroupeTempByPersonne($idPersonne[0]);
   $groupTempChef = getGroupeTemp($idPersonne[0]);
+
   if($_SESSION['status'] == 2) {
   //Si la personne connectée est chef d'un groupe
   if($groupTempChef != null) {
@@ -45,13 +47,13 @@
 
 
     //Si la personne connectée n'est pas dans un groupe
-    //if($groupTempPers['idGroupeTemp'] == null) {
+    if(empty($groupTempPers['idGroupeTemp'])) {
 
       //La personne connectée peut se positionner sur un projet
       ?>
         <a href="<?php echo URL.'choix_projet.php&id='.$_GET['id']; ?>">Se positionner</a>
       <?php
-    //}
+    }
   }
 }
   ?>

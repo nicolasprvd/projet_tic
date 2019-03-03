@@ -115,7 +115,7 @@
   }
 
     /**
-   * Récupère la liste des projets manuel qui n'ont pas encore été attribués 
+   * Récupère la liste des projets manuel qui n'ont pas encore été attribués
    * @return array $result tableau de projets en attribution automatique du client
    */
   function getManualProjectsNoAttribuate() {
@@ -181,7 +181,7 @@
   * @return array $result tableau des étudiants
   **/
   function getPersonnes($status, $loggedPersonne) {
-    $query = "SELECT idPersonne, nomPersonne, prenomPersonne FROM personne WHERE idStatut = :status AND idPersonne != :idPersonne";
+    $query = "SELECT idPersonne, nomPersonne, prenomPersonne FROM personne WHERE idStatut = :status AND idPersonne != :idPersonne ORDER BY prenomPersonne ASC";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'status' => $status,
@@ -269,6 +269,21 @@
   }
 
   /**
+  * Récupère les lignes pour un groupe
+  * @param $idGroup identifiant du groupe
+  * @return $result array tableau des infos
+  **/
+  function getChoixTempByGroupTemp($idGroup) {
+    $query = "SELECT idProjet, idGroupe FROM choix_temp WHERE idGroupe = :idGroupe";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroupe' => $idGroup
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
   * Récupère la liste des personnes d'un projet pour un groupe temporaire
   * @param $idProject identifiant du projet
   * @param $idPersonne identifiant du chef de groupe
@@ -306,7 +321,7 @@
   * @return $result array tableau des identifiants noms et prenoms
   **/
   function getPersonneByGroupTemp($idGroup) {
-    $query = "SELECT idPersonne, prenompersonne, nompersonne FROM personne WHERE idGroupeTemp = :idGroup";
+    $query = "SELECT idPersonne, prenomPersonne, nomPersonne FROM personne WHERE idGroupeTemp = :idGroup";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idGroup' => $idGroup
@@ -642,7 +657,7 @@
   }
 
     /**
-  * Supprime dans la table choix_temp tous les choix donc le groupe est celui passé en paramètre 
+  * Supprime dans la table choix_temp tous les choix donc le groupe est celui passé en paramètre
   * @param $idG identifiant du groupe
   **/
   function deleteChoixTempFROMGroupeId($idG){
@@ -654,7 +669,7 @@
   }
 
     /**
-  * Supprime dans la table groupe_temp le groupe passé en paramètre 
+  * Supprime dans la table groupe_temp le groupe passé en paramètre
   * @param $idG identifiant du groupe
   **/
   function deleteGroupTempFromGroupId($idG){
@@ -666,7 +681,7 @@
   }
 
     /**
-  * Supprime dans la table groupe_temp le projet qui a été attribuer 
+  * Supprime dans la table groupe_temp le projet qui a été attribuer
   * @param $idP identifiant du projet
   **/
   function deleteChoixTempFromProjectId($idP){
@@ -677,6 +692,6 @@
     ));
   }
 
-  
+
 
  ?>

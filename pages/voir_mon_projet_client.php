@@ -33,7 +33,7 @@ $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
   $separateur = ", ";
   
   foreach($etu as $e) {
-  $membre = $membre . $e['prenompersonne'] . $espace .$e['nompersonne']  . $separateur ;
+    $membre = $membre . $e['prenomPersonne'] . $espace .$e['nomPersonne']  . $separateur ;
   }
   $membre = substr($membre, 0, -2);
 
@@ -45,7 +45,7 @@ $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
     Chef de projet : <?php echo $chef['prenompersonne'] . ' ' .  $chef['nompersonne'];?> <br>
     Membres du projet : <?php echo $membre ;?> <br><br>
 
-    <!--Depot/visualisation du cdc-->
+    <!--Visualisation du cdc-->
     <h4>Cahier des charges : </h4>
     <?php
     $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
@@ -56,7 +56,21 @@ $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
         <?php 
       }
       ?>
-      <!--Depot/visualisation du rendu-->
+
+    <!--Visualisation du gantt-->
+    <h4>Cahier des charges : </h4>
+    <?php
+    $docSubmit = getDocSubmit($myProject['idProjet'], 'GANTT');
+      if (empty($docSubmit)) {
+        echo "Le gantt n'a pas encore été déposé"; 
+      }else{
+        echo 'Le gantt a été déposé :' ?> <a href="documents/gantt/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
+        <?php 
+      }
+      ?>
+
+
+      <!--Visualisation du rendu-->
       <h4>Rendu final : </h4>
       <?php
       $docSubmit = getDocSubmit($myProject['idProjet'], 'RF');
