@@ -10,14 +10,13 @@ a.link_auth {
   cursor:pointer;
 }
 
-
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   box-sizing: border-box;
 }
 
@@ -27,24 +26,17 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #acacac;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 10px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  font-size: 13px;
+  width: 25%;
 }
 
 button:hover {
   opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.btn_cancel {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
 }
 
 .container {
@@ -73,16 +65,36 @@ span.psw {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 430px;
+  height: 380px;
+  display: grid;
+}
+
+.modal-content-inscription {
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width: 430px;
+  height: 380px;
+  display: grid;
+}
+
+.modal-content-image {
+  background-image: url(../images/background.PNG);
+  background-position: center;
 }
 
 /* Add Zoom Animation */
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
+}
+
+.connection-input {
+  text-align: left;
+  padding-right: 10%;
+  padding-left: 10%;
 }
 
 @-webkit-keyframes animatezoom {
