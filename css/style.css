@@ -253,6 +253,14 @@ html, body {
     height: 100%;
 }
 
+.txtright {
+    text-align: right;
+}
+
+.txtleft {
+    text-align: left;
+}
+
 /** ____________________________________________ **/
 /** Global **/
 .theGlobal {
@@ -325,3 +333,4 @@ html, body {
 .theFooter .footer_liens a:hover {
     text-decoration: underline;
 }
+
