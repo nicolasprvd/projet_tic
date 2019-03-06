@@ -100,6 +100,18 @@
     return $result;
   }
 
+    /**
+  * Récupère la liste des projets attribués avec le nom et le prénom du tuteur
+  * @return array $result tableau des projets
+  **/
+  function getProjectsAttribuate(){
+    $query = "SELECT idprojet, nomprojet, prenompersonne, nompersonne FROM projet pro, personne pers WHERE pro.idpersonneresp = pers.idpersonne AND idprojet IN (SELECT idprojet FROM groupe)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
   /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
    * @return array $result tableau de projets en attribution automatique du client
@@ -345,6 +357,21 @@
     return $result;
   }
 
+      /**
+  * Récupère l'id du groupe temporaire ayant postulé sur un projet donné
+  * @param $idprojet identifiant du projet
+  * @return $result array tableau des identifiants
+  **/
+  function getIdgByIdproject($idProject){
+    $query = "SELECT idgroupe FROM choix_temp WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
     /**
   * Récupère l'id des groupes temporaire ayant postulé sur un projet donné
@@ -440,6 +467,46 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
+
+    /**
+   * Récupère la liste des projets en attributionautomatique
+   * @return array $result tableau de projets en attribution automatique du client
+   */
+  function getAutomaticalProjects() {
+    $query = "SELECT * FROM projet WHERE automatique = 1";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Verifie combien de groupe ont demandé le projet passer en paramètre
+  * @param $idP identifiant du projet
+  * @return $result le nombre de demande 
+  **/
+  function getNbDemande($idP){
+    $query = "SELECT COUNT(idgroupe) AS nbFoisDemande FROM choix_temp WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idP
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+    /**
+  * Verifie si tous la table choix_temp est vide
+  * @return $result le nombre de demande 
+  **/
+  function getchoixTempIsEmpty(){
+    $query = "SELECT * FROM choix_temp";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
 
   /*******************************
