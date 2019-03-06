@@ -22,14 +22,15 @@ if (isset($_POST['btn_signin'])) {
 <div id="signin" class="modal">
     <form method="post" class="modal-content modal-content-image animate">
 
-        <div class="titre">
-            <h1>Se connecter</h1>
+        <div class="font-x-large bold upper">
+            <p>Se connecter</p>
         </div>
 
         <div class="connection-input container">
-            <input type="text" placeholder="Identifiant" name="input_login" class="border-black"/>
-            <input type="password" placeholder="Mot de passe" name="input_password" class="border-black"/>
-            <span class="mts"><a href="#"> > Mot de passe oublié ?</a></span>
+            <input type="text" class="mbm pas border-black" placeholder="Identifiant" onchange="" onblur="Identifiant"
+                   name="input_login"/>
+            <input type="password" class="mbm pas border-black" placeholder="Mot de passe" name="input_password"/>
+            <span><a href="#"> > Mot de passe oublié ?</a></span>
 
             <?php
             if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
@@ -41,7 +42,6 @@ if (isset($_POST['btn_signin'])) {
             ?>
 
         </div>
-
 
         <div class="container mrs txtright">
             <button type="submit" onclick="document.getElementById('signin').style.display='none'" class="mrs"
