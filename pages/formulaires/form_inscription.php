@@ -47,19 +47,18 @@ if (isset($_POST['btn_signup'])) {
 }
 ?>
 
-<div id="signup" class="modal">
-
+<div id="signup" class="modal-inscription">
     <form method="post" class="modal-content-inscription animate">
 
-        <div class="titre">
-            <h1>S'inscrire</h1>
+        <div class="font-x-large bold upper">
+            <p>S'inscrire</p>
         </div>
 
-        <div class="container">
-            <input type="text" name="input_name" value="" placeholder="Votre nom"/> <br><br>
-            <input type="text" name="input_firstname" value="" placeholder="Votre prénom"/> <br><br>
+        <div class="inscription-input container">
+            <input type="text" class="mbm pas border-black" name="input_name" value="" placeholder="Votre nom"/>
+            <input type="text" class="mbm pas border-black" name="input_firstname" value="" placeholder="Votre prénom"/>
 
-            <select name="select_status">
+            <select name="select_status" class="mbm pats border-black">
                 <option selected disabled value="">Votre statut</option>
                 <?php
                 foreach ($status as $stat) {
@@ -68,21 +67,11 @@ if (isset($_POST['btn_signup'])) {
                     <?php
                 }
                 ?>
-            </select><br><br>
-            <input type="text" name="input_email" value="" placeholder="Votre email"/> <br><br>
-            <input type="password" name="input_password" value="" placeholder="Votre mot de passe"/> <br><br>
-            <input type="password" name="input_password_confirm" value="" placeholder="Confirmez votre mot de passe"/>
-            <br><br>
-            <button type="submit" name="btn_signup">S'inscire</button>
-
-            <?php
-            if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
-                echo "<script>document.getElementById('signup').style.display='block';</script>";
-                include('./include/erreurs.php');
-                unset($_SESSION['formSubmittedErrors']);
-                unset($_REQUEST['erreurs']);
-            }
-            ?>
+            </select>
+            <input type="text" class="mbm pas border-black" name="input_email" value="" placeholder="Votre email"/>
+            <input type="password" class="mbm pas border-black" name="input_password" value="" placeholder="Votre mot de passe"/>
+            <input type="password" class="pas border-black" name="input_password_confirm" value=""
+                   placeholder="Confirmez votre mot de passe"/>
         </div>
 
         <div class="container mrs txtright">
@@ -91,5 +80,14 @@ if (isset($_POST['btn_signup'])) {
             </button>
             <button type="submit" name="btn_signin">Se connecter</button>
         </div>
+
+        <?php
+        if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
+            echo "<script>document.getElementById('signup').style.display='block';</script>";
+            include('./include/erreurs.php');
+            unset($_SESSION['formSubmittedErrors']);
+            unset($_REQUEST['erreurs']);
+        }
+        ?>
     </form>
 </div>
