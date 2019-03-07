@@ -469,16 +469,29 @@
   }
 
     /**
-   * Récupère la liste des projets en attributionautomatique
+   * Récupère la liste des projets en attributionautomatique (car les projets en attribution manuelle ont tous été attribué) dans la table choix_temp
    * @return array $result tableau de projets en attribution automatique du client
    */
   function getAutomaticalProjects() {
-    $query = "SELECT * FROM projet WHERE automatique = 1";
+    $query = "SELECT * FROM choix_temp";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute();
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
+
+      /**
+   * Récupère la liste des projets en attributionautomatique (car les projets en attribution manuelle ont tous été attribué) dans la table choix_temp
+   * @return array $result tableau de projets en attribution automatique du client
+   */
+  function getAutomaticalProject() {
+    $query = "SELECT * FROM choix_temp LIMIT 1";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+  
 
   /**
   * Verifie combien de groupe ont demandé le projet passer en paramètre
@@ -490,6 +503,21 @@
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idProject' => $idP
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+    /**
+  * Verifie si un groupe n'a demandé qu'un seul projet
+  * @param $idG identifiant du projet
+  * @return $result le nombre de demande 
+  **/
+  function getNbDemandeStudent($idG){
+    $query = "SELECT COUNT(idprojet) AS nbFoisDemande FROM choix_temp WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idG
     ));
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
