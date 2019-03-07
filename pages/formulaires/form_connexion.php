@@ -20,15 +20,14 @@ if (isset($_POST['btn_signin'])) {
 ?>
 
 <div id="signin" class="modal">
-    <form method="post" class="modal-content modal-content-image animate">
+    <form method="post" class="modal-content animate">
 
         <div class="font-x-large bold upper">
             <p>Se connecter</p>
         </div>
 
         <div class="connection-input container">
-            <input type="text" class="mbm pas border-black" placeholder="Identifiant" onchange="" onblur="Identifiant"
-                   name="input_login"/>
+            <input type="text" class="mbm pas border-black" placeholder="Identifiant" name="input_login"/>
             <input type="password" class="mbm pas border-black" placeholder="Mot de passe" name="input_password"/>
             <span><a href="#"> > Mot de passe oublié ?</a></span>
 
@@ -40,7 +39,6 @@ if (isset($_POST['btn_signin'])) {
                 unset($_REQUEST['erreurs']);
             }
             ?>
-
         </div>
 
         <div class="container mrs txtright">
