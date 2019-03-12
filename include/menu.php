@@ -27,8 +27,6 @@
             <li><a href=<?php echo URL.'attribution_projets_admin.php'?>>Attributions des projets</a></li>
             <li><a href=<?php echo URL.'liste_groupes.php' ?>>Les groupes</a></li>
             <li><a href=<?php echo URL.'historique.php'?>>Historique</a></li>
->>>>>>> 580e2b127d224cb5f845d033004fb145050dbe72
-
           <?php
           }
           ?>

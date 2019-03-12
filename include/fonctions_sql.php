@@ -491,7 +491,7 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-  
+
 
   /**
   * Verifie combien de groupe ont demandé le projet passer en paramètre
@@ -511,7 +511,7 @@
     /**
   * Verifie si un groupe n'a demandé qu'un seul projet
   * @param $idG identifiant du projet
-  * @return $result le nombre de demande 
+  * @return $result le nombre de demande
   **/
   function getNbDemandeStudent($idG){
     $query = "SELECT COUNT(idprojet) AS nbFoisDemande FROM choix_temp WHERE idgroupe = :idGroup";
