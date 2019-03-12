@@ -89,4 +89,43 @@ function debug($var) {
   echo '</pre>';
 }
 
+/**
+* Détaille une liste de notes pour l'évaluation des étudiants
+* @param $name nom de la liste
+**/
+function define_list_note($name) {
+  echo "<select name='$name'>";
+  echo "<option value='' disabled selected>Sélectionnez une note</option>";
+  for($i=0; $i <= 20; $i+=0.5) {
+    echo "<option value='$i'>$i</option>";
+  }
+  echo "</select>";
+}
+
+/**
+* Détaille une liste de coefficients pour l'évaluation des étudiants
+* @param $name nom de la liste
+**/
+function define_list_coeff($name) {
+  echo "<select name='$name'>";
+  echo "<option value='1' selected>1</option>";
+  for($i=2; $i <= 6; $i++) {
+    echo "<option value='$i'>$i</option>";
+  }
+  echo "</select>";
+}
+
+
+function export_csv($data) {
+  $fichier = fopen("./documents/export_notes_groupe_".$data['idGroupe'].".csv", 'w+');
+  fprintf($fichier, chr(0xEF).chr(0xBB).chr(0xBF));
+  $entete = array($data['lib_groupe'], $data['lib_noteCDC'], $data['lib_noteSoutenance'], $data['lib_noteRendu'], $data['lib_noteFinale']);
+  $delimiteur = ';';
+  fputcsv($fichier, $entete, $delimiteur);
+  $lignes[] = array($data['idGroupe'], $data['noteCDC'], $data['noteSoutenance'], $data['noteRendu'], $data['noteFinale']);
+  foreach($lignes as $ligneaexporter){
+    fputcsv($fichier, $ligneaexporter, $delimiteur);
+  }
+   fclose($fichier);
+}
  ?>

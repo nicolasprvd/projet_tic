@@ -4,6 +4,11 @@
 * Une fois le projet attribué on y voit ses informations, les pieces a deposé etc
 **/
 
+  //Gestion d'erreur : soumission multiple du formulaire de constitution du groupe
+  if(isset($_SESSION['btn_clicked'])) {
+    unset($_SESSION['btn_clicked']);
+  }
+
  //On récupère l'identifiant de la personne connectée
  $idPersonne = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
  //On récupère le groupe auquel elle appartient
@@ -98,7 +103,7 @@ if (empty($attribuate))  {
       <br><br>
       <!--Depot/visualisation du cdc-->
       <h4>Cahier des charges : </h4>
-      <?php 
+      <?php
       $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
       if (empty($docSubmit)) {
       ?>
@@ -109,16 +114,16 @@ if (empty($attribuate))  {
       <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
       </form>
 
-      <?php 
+      <?php
       }else{
         echo 'Le cahier des charges a été déposé :' ?> <a href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
-        <?php 
+        <?php
       }
       ?>
 
       <!--Depot/visualisation du gantt-->
       <h4>Gantt : </h4>
-      <?php 
+      <?php
       $docSubmit = getDocSubmit($myProject['idProjet'], 'GANTT');
       if (empty($docSubmit)) {
       ?>
@@ -129,10 +134,10 @@ if (empty($attribuate))  {
       <input type = "submit" value = "Déposer" name = "btn_depot_GANTT"/>
       </form>
 
-      <?php 
+      <?php
       }else{
         echo 'Le gantt a été déposé :' ?> <a href="documents/gantt/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
-        <?php 
+        <?php
       }
       ?>
 
@@ -140,7 +145,7 @@ if (empty($attribuate))  {
 
       <!--Depot/visualisation du rendu-->
       <h4>Rendu final : </h4>
-      <?php 
+      <?php
       $docSubmit = getDocSubmit($myProject['idProjet'], 'RF');
       if (empty($docSubmit)) {
       ?>
@@ -151,10 +156,10 @@ if (empty($attribuate))  {
       <input type = "submit" value = "Déposer" name = "btn_depot_RF"/>
       </form>
 
-      <?php 
+      <?php
       }else{
         echo 'Le rendu final a été déposé :' ?> <a href="documents/rendu_final/<?php echo $docSubmit['chemindoc']; ?>" target=\"_BLANK\">Télécharger</a>
-        <?php 
+        <?php
       }
     }
 ?>
@@ -173,7 +178,7 @@ if(isset($_POST['btn_depot_CDC'])) {
 
 
     $extensions = array('.doc', '.docs', '.pdf', '.DOC', '.DOCS', '.PDF');
-    $extension = strrchr($_FILES['CDC']['name'], '.'); 
+    $extension = strrchr($_FILES['CDC']['name'], '.');
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {
@@ -230,7 +235,7 @@ if(isset($_POST['btn_depot_GANTT'])) {
 
 
     $extensions = array('.gan', '.jpg', '.pnj', '.pdf', '.GAN', '.JPG', '.PNG', '.PDF');
-    $extension = strrchr($_FILES['GANTT']['name'], '.'); 
+    $extension = strrchr($_FILES['GANTT']['name'], '.');
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {
@@ -286,7 +291,7 @@ if(isset($_POST['btn_depot_RF'])) {
   if ($_FILES['RF']['size'] <> 0){
 
     $extensions = array('.zip', '.7z', '.rar', '.ZIP', '.7Z', '.RAR');
-    $extension = strrchr($_FILES['RF']['name'], '.'); 
+    $extension = strrchr($_FILES['RF']['name'], '.');
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {

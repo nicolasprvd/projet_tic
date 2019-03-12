@@ -483,7 +483,7 @@
   /**
   * Verifie combien de groupe ont demandé le projet passer en paramètre
   * @param $idP identifiant du projet
-  * @return $result le nombre de demande 
+  * @return $result le nombre de demande
   **/
   function getNbDemande($idP){
     $query = "SELECT COUNT(idgroupe) AS nbFoisDemande FROM choix_temp WHERE idprojet = :idProject";
@@ -497,12 +497,101 @@
 
     /**
   * Verifie si tous la table choix_temp est vide
-  * @return $result le nombre de demande 
+  * @return $result le nombre de demande
   **/
   function getchoixTempIsEmpty(){
     $query = "SELECT * FROM choix_temp";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère les informations des documents pour un projet
+  * @param $idProject identifiant du projet
+  * @return $result array tableau des informations
+  **/
+  function getDocuments($idProject) {
+    $query = "SELECT idprojet, iddoc, chemindoc, typedoc FROM document WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère l'identifiant de l'évaluation pour un groupe
+  * @param $idGroup identifiant du groupe
+  * @return $result identifiant de l'évaluation
+  **/
+  function getEvaluationPersonne($idGroup) {
+    $query = "SELECT idevaluation FROM personne WHERE idgroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idGroup
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère une évaluation par son identifiant
+  * @param $idEvaluation identifiant de l'évaluation
+  * @return $result informations de l'évaluation
+  **/
+  function getEvaluationById($idEvaluation) {
+    $query = "SELECT * FROM evaluation WHERE idevaluation = :idEvaluation";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idEvaluation' => $idEvaluation
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère la liste des groupes
+  * @return $result array identifiants des groupes
+  **/
+  function getGroupeId() {
+    $query = "SELECT idGroupe FROM groupe";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
+
+  /**
+  * Récupère la liste des personnes pour un groupe
+  * @param $idGroup identifiant du groupe
+  * @return $result array tableau des identifiants noms et prenoms
+  **/
+  function getPersonnesByGroup($idGroup) {
+    $query = "SELECT p.idPersonne, prenomPersonne, nomPersonne, g.idGroupe FROM personne p INNER JOIN groupe g ON g.idGroupe = p.idGroupe WHERE p.idGroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idGroup' => $idGroup
+    ));
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+  /**
+  * Récupère les données des personnes pour une évaluation
+  * @param $idEvaluation identifiant de l'évaluation
+  * @return $result array tableau des informations
+  **/
+  function getPersonneByEvaluation($idEvaluation) {
+    $query = "SELECT * FROM personne p INNER JOIN evaluation e ON e.idevaluation = p.idevaluation WHERE e.idevaluation = :idEvaluation";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idEvaluation' => $idEvaluation
+    ));
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
@@ -656,8 +745,24 @@
     ));
   }
 
+  /**
+  * Insère une évaluation dans la base de données
+  * @param $notes array tableau des notes
+  **/
+  function insertNewEvaluation($notes) {
+    $query="INSERT INTO evaluation (notecdc, notesoutenance, noterendu, notefinale) VALUES (:noteCDC, :noteSoutenance, :noteRendu, :noteFinale)";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'noteCDC' => $notes[0],
+      'noteSoutenance' => $notes[1],
+      'noteRendu' => $notes[2],
+      'noteFinale' => $notes[3]
+    ));
+  }
 
- 
+
+
+
   /*******************************
   * FONCTIONS UPDATE
   *******************************/
@@ -687,6 +792,20 @@
     $prepQuery->execute(array(
       'idGroup' => $idGroup,
       'idPersonne' => $etu
+    ));
+  }
+
+  /**
+  * Insère l'identifiant de l'évaluation pour chaque étudiant du groupe
+  * @param $idEvaluation identifiant de l'évaluation
+  * @param $idGroup identifiant du groupe
+  **/
+  function updatePersonneEvaluation($idEvaluation, $idGroup) {
+    $query = "UPDATE personne SET idEvaluation = :idEvaluation WHERE idGroupe = :idGroup";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idEvaluation' => $idEvaluation,
+      'idGroup' => $idGroup
     ));
   }
 

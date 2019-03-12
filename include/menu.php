@@ -25,6 +25,7 @@
           ?>
             <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
             <li><a href=<?php echo URL.'attribution_projets_admin.php'?>>Attributions des projets</a></li>
+            <li><a href=<?php echo URL.'liste_groupes.php' ?>>Les groupes</a></li>
           <?php
           }
           ?>
@@ -44,7 +45,7 @@
 
         $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
         //Si le groupe n'a pas sont projet attribuer
-        if (empty($attribuate))  { 
+        if (empty($attribuate))  {
         ?>
          <li><a href=<?php echo URL.'liste_projets.php' ?>>Les projets</a></li>
           <li><a href="<?php echo URL.'mes_projets.php' ?>">Mes projets</a></li>
@@ -59,7 +60,7 @@
         ?>
 
 
-         
+
         </ul>
       </nav>
       <?php
