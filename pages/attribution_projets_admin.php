@@ -65,13 +65,18 @@ else {
 
 <?php
 if(isset($_POST['btn_attribution'])) {
-  echo 'je vais commencer à faire l attribution';
-  $projet = getAutomaticalProjects();
+
+  $sortir = false;
+  while (!$sortir){
+    $sortir = true;
+
+  
    $estTraitee = false;
 
   //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
    while(!$estTraitee){
     $estTraitee = true;
+    $projet = getAutomaticalProjects();
     
     //Taitement de chaque projet
     foreach($projet as $projets){
@@ -80,27 +85,187 @@ if(isset($_POST['btn_attribution'])) {
      
       // Si le projet a été demandé qu'une seule fois
       if ( $nbDemande['nbFoisDemande'] == 1){
-
-        //On récupère l'idGroupe qui a demander ce projet
-        $idGroup = getIdgByIdproject($projets['idprojet']);
+        $sortir = false;
 
         //On récupère le chef de projet
         //selectionner le chef de projet
-        $idChefG = getIdChefByIdGroup($idGroup['idgroupe']);
+        $idChefG = getIdChefByIdGroup($projets['idgroupe']);
         
-        insertNewGroupe($idGroup['idgroupe'], $projets['idprojet'], $idChefG['idpersonneChef']);
-        deleteChoixTempFROMGroupeId($idGroup['idgroupe']);
+        insertNewGroupe($projets['idgroupe'], $projets['idprojet'], $idChefG['idpersonneChef']);
+        deleteChoixTempFROMGroupeId($projets['idgroupe']);
         deleteChoixTempFromProjectId($projets['idprojet']);
-        deleteGroupTempFromGroupId($idGroup['idgroupe']);
+        deleteGroupTempFromGroupId($projets['idgroupe']);
 
         //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
-        $etu = getPersonneByGroupTemp($idGroup['idgroupe']);
+        $etu = getPersonneByGroupTemp($projets['idgroupe']);
         foreach($etu as $e) {
-          updatePersonneGroupe($idGroup['idgroupe'], $e['idPersonne']);
+          updatePersonneGroupe($projets['idgroupe'], $e['idPersonne']);
         }
         $estTraitee = false;
       }      
     }
+   }
+
+   
+
+   $estTraitee = false;
+
+   //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+    while(!$estTraitee){
+     $estTraitee = true;
+     $projet = getAutomaticalProjects();
+     
+     //Taitement de chaque projet
+     foreach($projet as $projets){
+ 
+       $nbDemande = getNbDemandeStudent($projets['idgroupe']);       
+      //echo ' fois demande' . $nbDemande['nbFoisDemande']. 'idGroupe' . $projets['idgroupe'];
+       // Si le projet a été demandé qu'une seule fois
+       if ( $nbDemande['nbFoisDemande'] == 1){
+         $sortir = false;
+        // echo ' Dans la bouclefois demande' . $nbDemande['nbFoisDemande']. 'idGroupe' . $projets['idgroupe'];
+ 
+         //On récupère l'idGroupe qui a demander ce projet
+        // $idGroup = getIdgByIdproject($projets['idprojet']);
+         
+ 
+         //On récupère le chef de projet
+         //selectionner le chef de projet
+         $idChefG = getIdChefByIdGroup($projets['idgroupe']);
+         
+         insertNewGroupe($projets['idgroupe'], $projets['idprojet'], $idChefG['idpersonneChef']);
+         deleteChoixTempFROMGroupeId($projets['idgroupe']);
+         deleteChoixTempFromProjectId($projets['idprojet']);
+         deleteGroupTempFromGroupId($projets['idgroupe']);
+ 
+         //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+         $etu = getPersonneByGroupTemp($projets['idgroupe']);
+         foreach($etu as $e) {
+           updatePersonneGroupe($projets['idgroupe'], $e['idPersonne']);
+         }
+         
+         $estTraitee = false;
+       }      
+     }
+    }
+  }
+
+   
+
+   //Tant qu'il y a toujours des projets dans choix_projet
+   $projet = getAutomaticalProjects();
+   while (!empty($projet)){
+    //On attribut la premiere ligne recuperer puis on reprend le traitement "facile"
+    $projectAAttribuates = getAutomaticalProject();
+ 
+    foreach ($projectAAttribuates as $projectAAttribuate ){
+
+    //On récupère l'idGroupe qui a demander ce projet
+    $idGroup = getIdgByIdproject($projectAAttribuate['idprojet']);
+
+    //On récupère le chef de projet
+    //selectionner le chef de projet
+    $idChefG = getIdChefByIdGroup($idGroup['idgroupe']);
+    
+    insertNewGroupe($idGroup['idgroupe'], $projectAAttribuate['idprojet'], $idChefG['idpersonneChef']);
+    deleteChoixTempFROMGroupeId($idGroup['idgroupe']);
+    deleteChoixTempFromProjectId($projectAAttribuate['idprojet']);
+    deleteGroupTempFromGroupId($idGroup['idgroupe']);
+
+    //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+    $etu = getPersonneByGroupTemp($idGroup['idgroupe']);
+    foreach($etu as $e) {
+      updatePersonneGroupe($idGroup['idgroupe'], $e['idPersonne']);
+    }
+  }
+
+    // On récupère choix_projets et on traiter avec le traitement "facile"
+    $sortir = false;
+    while (!$sortir){
+      $sortir = true;
+  
+    $projet = getAutomaticalProjects();
+     $estTraitee = false;
+  
+    //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+    while(!$estTraitee){
+      $estTraitee = true;
+      $projet = getAutomaticalProjects();
+      
+      //Taitement de chaque projet
+      foreach($projet as $projets){
+  
+        $nbDemande = getNbDemande($projets['idprojet']);
+       
+        // Si le projet a été demandé qu'une seule fois
+        if ( $nbDemande['nbFoisDemande'] == 1){
+          $sortir = false;
+  
+          //On récupère le chef de projet
+          //selectionner le chef de projet
+          $idChefG = getIdChefByIdGroup($projets['idgroupe']);
+          
+          insertNewGroupe($projets['idgroupe'], $projets['idprojet'], $idChefG['idpersonneChef']);
+          deleteChoixTempFROMGroupeId($projets['idgroupe']);
+          deleteChoixTempFromProjectId($projets['idprojet']);
+          deleteGroupTempFromGroupId($projets['idgroupe']);
+  
+          //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+          $etu = getPersonneByGroupTemp($projets['idgroupe']);
+          foreach($etu as $e) {
+            updatePersonneGroupe($projets['idgroupe'], $e['idPersonne']);
+          }
+          $estTraitee = false;
+        }      
+      }
+     }
+  
+     $projet = getAutomaticalProjects();
+  
+     $estTraitee = false;
+  
+     //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+   //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+   while(!$estTraitee){
+    $estTraitee = true;
+    $projet = getAutomaticalProjects();
+    
+    //Taitement de chaque projet
+    foreach($projet as $projets){
+
+      $nbDemande = getNbDemandeStudent($projets['idgroupe']);       
+     //echo ' fois demande' . $nbDemande['nbFoisDemande']. 'idGroupe' . $projets['idgroupe'];
+      // Si le projet a été demandé qu'une seule fois
+      if ( $nbDemande['nbFoisDemande'] == 1){
+        $sortir = false;
+       // echo ' Dans la bouclefois demande' . $nbDemande['nbFoisDemande']. 'idGroupe' . $projets['idgroupe'];
+
+        //On récupère l'idGroupe qui a demander ce projet
+       // $idGroup = getIdgByIdproject($projets['idprojet']);
+        
+
+        //On récupère le chef de projet
+        //selectionner le chef de projet
+        $idChefG = getIdChefByIdGroup($projets['idgroupe']);
+        echo 'groupe' . $projets['idgroupe'] . 'projet' . $projets['idprojet'] .'chef pro' . $idChefG['idpersonneChef'];
+        
+        insertNewGroupe($projets['idgroupe'], $projets['idprojet'], $idChefG['idpersonneChef']);
+        deleteChoixTempFROMGroupeId($projets['idgroupe']);
+        deleteChoixTempFromProjectId($projets['idprojet']);
+        deleteGroupTempFromGroupId($projets['idgroupe']);
+
+        //On affecte à chaque personne du groupe l'identifiant du groupe auquel elles appartiennent
+        $etu = getPersonneByGroupTemp($projets['idgroupe']);
+        foreach($etu as $e) {
+          updatePersonneGroupe($projets['idgroupe'], $e['idPersonne']);
+        }
+        
+        $estTraitee = false;
+      }      
+    }
+   }
+    }
+    $projet = getAutomaticalProjects();
    }
 } 
 

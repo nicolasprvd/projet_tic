@@ -14,19 +14,6 @@
    $dataGroupeTemp = getGroupeTemp($idPersonne[0]);
    $data = getChefGroupeProjet($dataGroupeTemp['idPersonneChef'], $_GET['id']);
    $nbChoixProjets = count(getChoixTempByGroupTemp($dataGroupeTemp['idGroupe']));
-   $name="btn_submit_validate";
-   $value="Valider";
-   // Si la personne authentifiée est chef d'un groupe
-   if($dataGroupeTemp != null) {
-     //Si la personne authentifiée est rattachée au projet sur lequel elle est déjà positonnée
-     if($data != null) {
-       $name="btn_submit_retract";
-       $value="Se rétracter";
-     }
-   }
- ?>
-
- <?php
 
      //Si la personne souhaite se positionner sur un projet
      if(isset($_POST['btn_submit_validate'])) {

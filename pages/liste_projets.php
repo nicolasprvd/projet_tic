@@ -11,6 +11,7 @@
       unset($_SESSION['btn_clicked']);
     }
   ?>
+  
 <h1>Liste des projets</h1>
 
 <table>
