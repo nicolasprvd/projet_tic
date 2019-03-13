@@ -54,9 +54,6 @@ define('URL', 'index.php?page=');
         ?>
     </div>
 
-    <!-- BANNIERE -->
-    <?php include "include/banner.php"; ?>
-
     <!-- PIED DE PAGE -->
     <?php include "include/footer.php"; ?>
 
