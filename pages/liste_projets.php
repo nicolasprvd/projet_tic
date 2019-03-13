@@ -5,6 +5,13 @@
 **/
 ?>
 
+  <?php
+    //Gestion d'erreur : soumission multiple du formulaire de constitution du groupe
+    if(isset($_SESSION['btn_clicked'])) {
+      unset($_SESSION['btn_clicked']);
+    }
+  ?>
+  
 <h1>Liste des projets</h1>
 
 <table>
