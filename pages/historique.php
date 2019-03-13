@@ -2,6 +2,7 @@
 /**
 * Page permettant d'historiser les données d'une année sur l'autre
 **/
+require_once("include/fonctions_sql_historique.php");
 ?>
 
 <?php
