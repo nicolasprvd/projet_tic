@@ -17,7 +17,7 @@
                     <a href=<?php echo URL . 'historique.php' ?>>Historique</a>
                     <?php
                     //Responsable de projet uniquement
-                } else if ($_SESSION['status'] == 2) {
+                } else if ($_SESSION['status'] == 3) {
                     ?>
                     <a href=<?php echo URL . 'form_ajout_projet.php' ?>>Ajouter un projet</a>
                     <a href=<?php echo URL . 'mes_projets_client.php' ?>>Mes projets</a>
