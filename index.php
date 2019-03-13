@@ -17,8 +17,8 @@ define('URL', 'index.php?page=');
     <meta name="keywords" content="TIC"/>
     <meta name="Projets TIC" content="Projets TIC"/>
     <link rel="stylesheet" href="css/style_connexion.css">
-    <link rel="stylesheet" href="css/style_projets.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_projet.css">
+    <link rel="stylesheet" href="css/style_bases.css">
     <title>Gestion des projets TIC</title>
 </head>
 
@@ -27,6 +27,7 @@ define('URL', 'index.php?page=');
 
     <!-- MENU -->
     <div class="theMenu">
+
         <?php
         include "include/menu.php";
         ?>
@@ -52,6 +53,9 @@ define('URL', 'index.php?page=');
         }
         ?>
     </div>
+
+    <!-- BANNIERE -->
+    <?php include "include/banner.php"; ?>
 
     <!-- PIED DE PAGE -->
     <?php include "include/footer.php"; ?>

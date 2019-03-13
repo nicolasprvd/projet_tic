@@ -29,7 +29,7 @@ if (isset($_POST['btn_signin'])) {
         <div class="connection-input container">
             <input type="text" class="mbm pas border-black" placeholder="Identifiant" name="input_login"/>
             <input type="password" class="mbm pas border-black" placeholder="Mot de passe" name="input_password"/>
-            <span><a href="#"> > Mot de passe oublié ?</a></span>
+            <a href="#" class="man"> > Mot de passe oublié ?</a>
 
             <?php
             if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
@@ -42,7 +42,7 @@ if (isset($_POST['btn_signin'])) {
         </div>
 
         <div class="container mrs txtright">
-            <button type="submit" onclick="document.getElementById('signin').style.display='none'" class="mrs"
+            <button onclick="document.getElementById('signin').style.display='none'" class="mrs"
                     name="btn_cancel">Annuler
             </button>
             <button type="submit" name="btn_signin">Se connecter</button>
