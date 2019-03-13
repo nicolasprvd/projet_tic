@@ -48,7 +48,7 @@
 /** ____________________________________________ **/
 /** Marges **/
 .man {
-    margin: 0;
+    margin: 0!important;
 }
 
 .mats {
@@ -260,77 +260,3 @@ html, body {
 .txtleft {
     text-align: left;
 }
-
-/** ____________________________________________ **/
-/** Global **/
-.theGlobal {
-    min-height: 100%;
-    position: relative;
-}
-
-/** Menu **/
-.theMenu {
-    background-color: #ACD9EC;
-    float: left;
-    width: 17%;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    position: absolute;
-}
-
-#logo_universite {
-    height: 10%;
-    background: no-repeat bottom center;
-    background-image: url(../images/universite.png);
-}
-
-#main-menu {
-    list-style: none;
-}
-
-/** Header **/
-.theHeader {
-    margin-left: 17%;
-    background-color: #F1F1F1;
-    text-align: center;
-}
-
-/** Contenu **/
-.theContenu {
-    margin-top: 5%;
-    margin-left: 17%;
-    text-align: -webkit-center;
-}
-
-.accueil-text {
-    position: relative;
-    width: 80%;
-}
-
-.content {
-    position: absolute;
-    text-align: justify;
-    border: 1px solid black;
-}
-/** ____________________________________________ **/
-/** Footer **/
-.theFooter {
-    background-color: #666666;
-    text-align: center;
-    color: #ffffff;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.theFooter .footer_liens a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.theFooter .footer_liens a:hover {
-    text-decoration: underline;
-}
-
