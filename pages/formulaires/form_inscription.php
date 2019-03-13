@@ -75,10 +75,10 @@ if (isset($_POST['btn_signup'])) {
         </div>
 
         <div class="container mrs txtright">
+            <button type="submit" name="btn_signup">S'inscire</button>
             <button type="submit" onclick="document.getElementById('signup').style.display='none'" class="mrs"
                     name="btn_cancel">Annuler
             </button>
-            <button type="submit" name="btn_signup">S'inscire</button>
         </div>
 
         <?php
