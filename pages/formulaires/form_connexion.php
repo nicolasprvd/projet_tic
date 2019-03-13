@@ -42,10 +42,10 @@ if (isset($_POST['btn_signin'])) {
         </div>
 
         <div class="container mrs txtright">
+            <button type="submit" name="btn_signin">Se connecter</button>
             <button onclick="document.getElementById('signin').style.display='none'" class="mrs"
                     name="btn_cancel">Annuler
             </button>
-            <button type="submit" name="btn_signin">Se connecter</button>
         </div>
     </form>
 </div>
