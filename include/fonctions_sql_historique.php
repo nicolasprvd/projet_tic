@@ -9,7 +9,13 @@
 
   **/
   function historisation() {
-    $query = "SELECT libelle FROM statut WHERE idStatut = :id";
+    $query = "RENAME  TO ; 
+    RENAME TO ;
+
+    
+    
+    
+    ";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'id' => $idStatus
@@ -18,7 +24,7 @@
     return $result;
   }
 
-RENAME TABLE group TO member;
+
 
 
 
