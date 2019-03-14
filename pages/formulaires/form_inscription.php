@@ -16,6 +16,24 @@ if (isset($_POST['btn_cancel'])) {
 //Si le formulaire a été envoyé
 if (isset($_POST['btn_signup'])) {
 
+  //Doublons
+  $personnes = getPersonnesForAuth();
+  $doublon = false;
+  foreach($personnes as $pers) {
+    echo 'passe ';
+    if($pers['nompersonne'] == $_POST['input_name'] && $pers['prenompersonne'] == $_POST['input_firstname'] && $pers['idstatut'] == $_POST['select_status'] && $pers['mailpersonne'] == $_POST['input_email']) {
+      $doublon = true;
+      echo $doublon;
+      exit;
+    }
+    break;
+  }
+  if($doublon) {
+    ajouterErreur('L\'utilisateur existe déjà');
+    $_SESSION['formSubmittedErrors'] = true;
+    echo "<script>document.getElementById('signup').style.display='block';</script>";
+  }
+  exit;
     //Si les champs sont vides
     if (empty($_POST['input_name']) || empty($_POST['input_firstname']) || empty($_POST['input_email']) || empty($_POST['select_status'])
         || empty($_POST['input_password']) || empty($_POST['input_password_confirm'])) {
@@ -62,9 +80,11 @@ if (isset($_POST['btn_signup'])) {
                 <option selected disabled value="">Votre statut</option>
                 <?php
                 foreach ($status as $stat) {
+                  if($stat['libelle'] != "Administrateur") {
                     ?>
                     <option value="<?php echo $stat['idStatut']; ?>"><?php echo $stat['libelle']; ?></option>
                     <?php
+                  }
                 }
                 ?>
             </select>
