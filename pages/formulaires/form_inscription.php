@@ -16,11 +16,10 @@ if (isset($_POST['btn_cancel'])) {
 //Si le formulaire a été envoyé
 if (isset($_POST['btn_signup'])) {
 
-  //Doublons
+  //Doublons : PAS FINI !!!
   $personnes = getPersonnesForAuth();
   $doublon = false;
   foreach($personnes as $pers) {
-    echo 'passe ';
     if($pers['nompersonne'] == $_POST['input_name'] && $pers['prenompersonne'] == $_POST['input_firstname'] && $pers['idstatut'] == $_POST['select_status'] && $pers['mailpersonne'] == $_POST['input_email']) {
       $doublon = true;
       echo $doublon;

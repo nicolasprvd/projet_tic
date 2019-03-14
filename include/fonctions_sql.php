@@ -72,7 +72,7 @@
     return $result;
   }
 
-     /**
+  /**
   * Récupère les information de la personne inserer en parametre
   * @param $idP l'id de la personne
   * @return $result les informations de la personne en question
@@ -84,6 +84,19 @@
       'idPers' => $idP
     ));
     $result = $prepQuery->fetch();
+    return $result;
+  }
+
+  /**
+  * Récupère les données utilisateurs pour l'inscription
+  * Gestion des doublons
+  * @return $result array tableau des informations
+  **/
+  function getPersonnesForAuth() {
+    $query = "SELECT * FROM personne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll();
     return $result;
   }
 
