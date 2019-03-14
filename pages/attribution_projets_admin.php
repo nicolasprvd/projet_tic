@@ -7,7 +7,7 @@
 <h2> Attribution des projets </h2>
 
 <?php
-
+$attrib = false;
 $projetNoAttribuate = getManualProjectsNoAttribuate();
 
 if (!empty($projetNoAttribuate)){
@@ -46,11 +46,7 @@ else {
 
   if (empty(getchoixTempIsEmpty())){
     echo "Il n'y a plus de projets en attente d'attribution";
-    ?>
-    <form enctype="multipart/form-data" action = "index.php?page=attribution_projets_admin.php" method = "POST">
-    <input type = "submit" value = "Generer le csv" name = "btn_csv"/>
-    </form>
-    <?php
+    $attrib = true;
   }
   else {
   ?>
@@ -270,7 +266,7 @@ if(isset($_POST['btn_attribution'])) {
 } 
 
 
-if(isset($_POST['btn_csv'])) {
+if($attrib) {
 
   //Récupère la liste des projets
   $projects = getProjectsAttribuate();
@@ -335,6 +331,11 @@ if(isset($_POST['btn_csv'])) {
      
         // fermeture du fichier csv
         fclose($fichier_csv);
+        export_csv($fichier_csv);
+        ?>
+        <br><br>
+              <a href="<?php echo "./documents/attribution.csv"?>">Exporter CSV</a>
+            <?
         echo "Le fichier a bien été enregistré dans le dossier 'documents'";
      ?>
      

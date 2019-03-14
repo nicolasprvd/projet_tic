@@ -6,3 +6,7 @@
         <br><br>
     </div>
 </div>
+
+<div id="banner">
+    <p>Banner</p>
+</div>

@@ -90,6 +90,7 @@ $idGroup = getIdgroupeByIdprojectFinal($myProject['idProjet']);
           $idEvaluation = getEvaluationPersonne($idGroup['idgroupe']);
           if(empty($idEvaluation['idevaluation'])) {
             ?>
+              </BR></BR>
               <a href="<?php echo URL.'form_evaluation.php&id='.$_GET['id'].'&titre=' .$_GET['titre']; ?>">Evaluer le projet</a>
             <?php
           }else {
