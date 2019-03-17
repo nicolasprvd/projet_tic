@@ -334,7 +334,7 @@ if($attrib) {
         export_csv($fichier_csv);
         ?>
         <br><br>
-              <a href="<?php echo "./documents/attribution.csv"?>">Exporter CSV</a>
+              <a href="<?php echo "./documents/export_notes.csv"?>">Exporter CSV</a>
             <?
         echo "Le fichier a bien été enregistré dans le dossier 'documents'";
      ?>

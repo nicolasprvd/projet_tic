@@ -637,6 +637,32 @@
     return $result;
   }
 
+    /**
+  * Récupère la liste des étudiants et l'idEvalutation par ordre alphabetique (nom)
+  * @return $result array tableau des informations
+  **/
+  function getPersonneEvaluate() {
+    $query = "SELECT DISTINCT nompersonne, prenompersonne, idevaluation FROM personne p  WHERE idstatut = 2 GROUP BY nompersonne, prenompersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute();
+    $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+      /**
+  * Récupère les notes d'une personne
+  * @return $result array tableau des informations
+  **/
+  function getnotes($idEval) {
+    $query = "SELECT * FROM evaluation  WHERE idevaluation = :idEvaluation";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idEvaluation' => $idEval
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
 
 
   /*******************************

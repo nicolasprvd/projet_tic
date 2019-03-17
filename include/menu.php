@@ -14,6 +14,7 @@
                     <a href=<?php echo URL . 'mes_projets_client.php' ?>>Mes projets</a>
                     <a href=<?php echo URL . 'attribution_projets_admin.php' ?>>Attributions des projets</a>
                     <a href=<?php echo URL . 'liste_groupes.php' ?>>Les groupes</a>
+                    <a href=<?php echo URL . 'visualisation_notes.php' ?>> Visualisation des notes </a>
                     <a href=<?php echo URL . 'historique.php' ?>>Historique</a>
                     <?php
                     //Responsable de projet uniquement
