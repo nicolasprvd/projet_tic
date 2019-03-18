@@ -32,7 +32,6 @@ if (isset($_POST['btn_signup'])) {
     $_SESSION['formSubmittedErrors'] = true;
     echo "<script>document.getElementById('signup').style.display='block';</script>";
   }
-  exit;
     //Si les champs sont vides
     if (empty($_POST['input_name']) || empty($_POST['input_firstname']) || empty($_POST['input_email']) || empty($_POST['select_status'])
         || empty($_POST['input_password']) || empty($_POST['input_password_confirm'])) {

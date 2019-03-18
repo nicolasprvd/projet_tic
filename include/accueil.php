@@ -7,6 +7,4 @@
     </div>
 </div>
 
-<div id="banner">
-    <p>Banner</p>
-</div>
+<div id="banner"></div>
