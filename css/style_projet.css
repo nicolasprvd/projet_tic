@@ -112,6 +112,10 @@
 }
 
 #banner {
-    background-image: url(../images/universite.png);
+    background-image: url(../images/test.png);
+    bottom: 0;
+    min-height: 14%;
+    min-width: 83%;
+    position: absolute;
 }
 

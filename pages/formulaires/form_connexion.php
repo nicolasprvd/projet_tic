@@ -29,7 +29,7 @@ if (isset($_POST['btn_signin'])) {
         <div class="connection-input container">
             <input type="text" class="mbm pas border-black" placeholder="Identifiant" name="input_login"/>
             <input type="password" class="mbm pas border-black" placeholder="Mot de passe" name="input_password"/>
-            <a href="#" class="man"> > Mot de passe oublié ?</a>
+            <a href="#" class="man black"> > Mot de passe oublié ?</a>
 
             <?php
             if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
