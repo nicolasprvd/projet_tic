@@ -5,7 +5,9 @@
 * permettant de
 * se connecter à la BDD
 **/
-$source = 'mysql:host=127.0.0.1;dbname=projettic';
+$host='127.0.0.1';
+$dbname='projettic';
+$source = 'mysql:host='.$host.';dbname='.$dbname;
 $user = 'root';
 $password = '';
 

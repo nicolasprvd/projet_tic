@@ -15,7 +15,7 @@
                     <a href=<?php echo URL . 'attribution_projets_admin.php' ?>>Attributions des projets</a>
                     <a href=<?php echo URL . 'liste_groupes.php' ?>>Les groupes</a>
                     <a href=<?php echo URL . 'visualisation_notes.php' ?>> Visualisation des notes </a>
-                    <a href=<?php echo URL . 'historique.php' ?>>Historique</a>
+                    <a href=<?php echo URL . 'historique.php' ?>>Sauvegarder la base</a>
                     <?php
                     //Responsable de projet uniquement
                 } else if ($_SESSION['status'] == 3) {

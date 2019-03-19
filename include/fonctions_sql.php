@@ -3,14 +3,11 @@
 * Fichier permettant de manipuler
 * les données de la BDD
 **/
-
   //Connexion à la base de données
   $GLOBALS['connex'] = connexionBD();
-
   /*******************************
   * FONCTIONS GET
   *******************************/
-
   /**
   * Récupère tous les statuts
   * @return array $result : tableau des statuts
@@ -22,7 +19,6 @@
     $result = $prepQuery->fetchAll();
     return $result;
   }
-
   /**
   * Récupère le statut correspondant à l'identifiant
   * @param $idStatus l'identifiant du statut
@@ -37,7 +33,6 @@
     $result = $prepQuery->fetch();
     return $result;
   }
-
   /**
   * Récupère les informations de l'utilisateur en fonction
   * des données d'authentification
@@ -54,7 +49,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
    /**
   * Récupère l'id de la personne inserer en parametre
   * @param $nom le nom de la personne
@@ -71,7 +65,6 @@
     $result = $prepQuery->fetch();
     return $result;
   }
-
   /**
   * Récupère les information de la personne inserer en parametre
   * @param $idP l'id de la personne
@@ -86,7 +79,6 @@
     $result = $prepQuery->fetch();
     return $result;
   }
-
   /**
   * Récupère les données utilisateurs pour l'inscription
   * Gestion des doublons
@@ -99,8 +91,6 @@
     $result = $prepQuery->fetchAll();
     return $result;
   }
-
-
   /**
   * Récupère la liste des projets
   * @return array $result tableau des projets
@@ -112,7 +102,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
   * Récupère la liste des projets attribués avec le nom et le prénom du tuteur
   * @return array $result tableau des projets
@@ -124,7 +113,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
    * @return array $result tableau de projets en attribution automatique du client
@@ -138,7 +126,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
    * Récupère la liste des projets manuel qui n'ont pas encore été attribués
    * @return array $result tableau de projets en attribution automatique du client
@@ -150,7 +137,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
    * Récupère la liste des projets en attribution manuellement pour le client en question
    * @return array $result tableau de projets en atrtibution manuelle du client
@@ -164,7 +150,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
      /**
    * Récupère la liste des projets en attribution manuellement pour le cient en question
    * @return arrayString $result a qui est attribuer le projet
@@ -178,7 +163,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les informations d'un projet
   * en fonction de son identifiant
@@ -197,7 +181,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la liste des étudiants en fonction
   * du status étudiant
@@ -215,7 +198,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les identifiants du projet, du groupe et du responsable de groupe
   * @param $idChefGroup identifiant du chef de groupe
@@ -232,7 +214,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les identifiants du projet, du groupe et du responsable de groupe
   * @return $result tableau des résultats
@@ -244,8 +225,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
   /**
   * Récupère l'idenfiant du groupe pour un chef de groupe
   * @param $idChef
@@ -260,7 +239,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère l'identifiant du groupe temporaire d'une personne
   * @param $idPersonne identifiant de la personne
@@ -275,7 +253,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la ligne pour laquelle un groupe s'est positionné
   * @param $idProject identifiant du projet
@@ -292,7 +269,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les lignes pour un groupe
   * @param $idGroup identifiant du groupe
@@ -307,7 +283,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la liste des personnes d'un projet pour un groupe temporaire
   * @param $idProject identifiant du projet
@@ -324,7 +299,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la liste des projets pour un groupe donné
   * @param $idGroup identifiant du groupe
@@ -339,7 +313,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la liste des personnes pour un groupe temporaire
   * @param $idGroup identifiant du groupe temporaire
@@ -354,7 +327,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
   * Récupère l'id des groupes temporaire ayant postulé sur un projet donné
   * @param $idprojet identifiant du projet
@@ -369,7 +341,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
       /**
   * Récupère l'id du groupe temporaire ayant postulé sur un projet donné
   * @param $idprojet identifiant du projet
@@ -384,8 +355,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
     /**
   * Récupère l'id des groupes temporaire ayant postulé sur un projet donné
   * @param $idprojet identifiant du projet
@@ -400,8 +369,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
      /**
   * Récupère l'id du chef de projet du groupe temporaire
   * @param $idG identifiant du groupe
@@ -416,9 +383,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
-
        /**
   * Récupère l'id du chef de projet du groupe
   * @param $idG identifiant du groupe
@@ -433,7 +397,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
        /**
   * Verifie si le groupe a un projet attribué ou non. Si oui, recupere l'id du chef de projet et l'id du projet
   * @param $idG identifiant du groupe
@@ -448,7 +411,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Verifie si le projet a été attribuer
   * @param $idG identifiant du groupe
@@ -463,7 +425,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Verifie si un fichier a deja été déposé
   * @param $idP
@@ -480,7 +441,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
    * Récupère la liste des projets en attributionautomatique (car les projets en attribution manuelle ont tous été attribué) dans la table choix_temp
    * @return array $result tableau de projets en attribution automatique du client
@@ -492,7 +452,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
       /**
    * Récupère la liste des projets en attributionautomatique (car les projets en attribution manuelle ont tous été attribué) dans la table choix_temp
    * @return array $result tableau de projets en attribution automatique du client
@@ -504,8 +463,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
   /**
   * Verifie combien de groupe ont demandé le projet passer en paramètre
   * @param $idP identifiant du projet
@@ -520,7 +477,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
   * Verifie si un groupe n'a demandé qu'un seul projet
   * @param $idG identifiant du projet
@@ -535,7 +491,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
   * Verifie si tous la table choix_temp est vide
   * @return $result le nombre de demande
@@ -547,7 +502,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les informations des documents pour un projet
   * @param $idProject identifiant du projet
@@ -562,7 +516,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère l'identifiant de l'évaluation pour un groupe
   * @param $idGroup identifiant du groupe
@@ -577,7 +530,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère une évaluation par son identifiant
   * @param $idEvaluation identifiant de l'évaluation
@@ -592,7 +544,6 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère la liste des groupes
   * @return $result array identifiants des groupes
@@ -604,9 +555,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
-
   /**
   * Récupère la liste des personnes pour un groupe
   * @param $idGroup identifiant du groupe
@@ -621,7 +569,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
   /**
   * Récupère les données des personnes pour une évaluation
   * @param $idEvaluation identifiant de l'évaluation
@@ -636,7 +583,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
     /**
   * Récupère la liste des étudiants et l'idEvalutation par ordre alphabetique (nom)
   * @return $result array tableau des informations
@@ -648,7 +594,6 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-
       /**
   * Récupère les notes d'une personne
   * @return $result array tableau des informations
@@ -662,13 +607,9 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
-
-
-
   /*******************************
   * FONCTIONS INSERT
   *******************************/
-
   /**
   * Effectue l'insertion dans la base de données
   * concernant l'inscription
@@ -689,8 +630,6 @@
       'password' => $password
     ));
   }
-
-
     /**
   * Effectue l'insertion dans la base de données
   * concernant l'inscription
@@ -702,7 +641,6 @@
   * @param $automatique pour savoi si le projet peut être affecté automatiquement ou non
   **/
   function insertNewProject($idcustomer, $title, $nbStudent, $description, $descriptionJoint, $automatique) {
-
     //On recupere si le projet peut être attribuer automatiquement (1) ou non (0)
     if ($automatique == "oui")
     {
@@ -710,11 +648,9 @@
     } else {
       $boolautomatique = 0;
     }
-
     //description et descriptionJoint sont tous deux remplit
     if (!empty($description) AND !empty($descriptionJoint))
     {
-
       $query = "INSERT INTO projet (idpersonneresp, nomprojet, descriptiftexte, descriptifpdf, nbEtudiants, automatique) VALUES (:idcustomer, :title, :description, :descriptionJoint, :nbStudent, :boolautomatique)";
       $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
@@ -752,7 +688,6 @@
     ));
     }
   }
-
   /**
   * Insère l'identifiant du chef de groupe dans la table groupe_temp
   * @param $id identifiant du chef de groupe
@@ -764,7 +699,6 @@
       'id' => $id
     ));
   }
-
   /**
   * Insère l'identifiant du projet et l'identifiant du groupe dans la table choix_temp
   * @param $idProject identifiant du projet
@@ -778,8 +712,6 @@
       'idGroup' => $idGroup
     ));
   }
-
-
 /**
   * Insère l'identifiant du groupe, du projet et du chef de projet dans la table groupe
   * @param $idG identifiant du groupe
@@ -795,7 +727,6 @@
       'idPersonneChef' => $idChefP
     ));
   }
-
   /**
   * Insère le chemin et le type de document lors qu'un document veut être deposer
   * @param $idP identifiant du projet
@@ -811,7 +742,6 @@
       'type' => $type
     ));
   }
-
   /**
   * Insère une évaluation dans la base de données
   * @param $notes array tableau des notes
@@ -826,14 +756,9 @@
       'noteFinale' => $notes[3]
     ));
   }
-
-
-
-
   /*******************************
   * FONCTIONS UPDATE
   *******************************/
-
   /**
   * Insère l'identifiant du groupe temporaire dans la table personne
   * @param $idGroup identifiant du groupe
@@ -847,7 +772,6 @@
       'idPersonne' => $etu
     ));
   }
-
    /**
   * Insère l'identifiant du groupe  dans la table personne
   * @param $idGroup identifiant du groupe
@@ -861,7 +785,6 @@
       'idPersonne' => $etu
     ));
   }
-
   /**
   * Insère l'identifiant de l'évaluation pour chaque étudiant du groupe
   * @param $idEvaluation identifiant de l'évaluation
@@ -875,8 +798,6 @@
       'idGroup' => $idGroup
     ));
   }
-
-
   /*******************************
   * FONCTIONS DELETE
   *******************************/
@@ -892,7 +813,6 @@
       'id' => $idPersonne
     ));
   }
-
   /**
   * Supprime dans la table choix_temp la ligne
   * correpondant au groupe auquel appartient la personne connectée
@@ -908,7 +828,6 @@
       'idProjet' => $idProject
     ));
   }
-
     /**
   * Supprime dans la table choix_temp tous les choix donc le groupe est celui passé en paramètre
   * @param $idG identifiant du groupe
@@ -920,7 +839,6 @@
       'idGroup' => $idG
     ));
   }
-
     /**
   * Supprime dans la table groupe_temp le groupe passé en paramètre
   * @param $idG identifiant du groupe
@@ -932,7 +850,6 @@
       'idGroup' => $idG
     ));
   }
-
     /**
   * Supprime dans la table groupe_temp le projet qui a été attribuer
   * @param $idP identifiant du projet
@@ -944,7 +861,4 @@
       'idProject' => $idP
     ));
   }
-
-
-
  ?>
