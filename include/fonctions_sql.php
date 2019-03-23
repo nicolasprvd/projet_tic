@@ -41,7 +41,7 @@
   * @return array $result tableau de l'identifiant et du mdp de l'utilisateur
   **/
   function getUserDataAuth($login) {
-    $query = "SELECT nomPersonne, prenomPersonne, mailPersonne, password, idStatut FROM personne WHERE mailPersonne = :email";
+    $query = "SELECT idPersonne, nomPersonne, prenomPersonne, mailPersonne, password, idStatut FROM personne WHERE mailPersonne = :email";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'email' => $login,
@@ -594,7 +594,7 @@
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
     return $result;
   }
-      /**
+  /**
   * Récupère les notes d'une personne
   * @return $result array tableau des informations
   **/
@@ -607,6 +607,23 @@
     $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
     return $result;
   }
+
+  /**
+  * Récupère les informations utilisateur pour l'espace membre
+  * @param $idPersonne identifiant de la personne
+  **/
+  function getPersonneById($idPersonne) {
+    $query = "SELECT nomPersonne, prenomPersonne, s.idStatut, libelle, mailPersonne FROM personne p INNER JOIN statut s ON s.idStatut = p.idStatut WHERE idPersonne = :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idPersonne' => $idPersonne
+    ));
+    $result = $prepQuery->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  }
+
+
+
   /*******************************
   * FONCTIONS INSERT
   *******************************/
@@ -798,6 +815,39 @@
       'idGroup' => $idGroup
     ));
   }
+
+  /**
+  * Met à jour les informations de l'utilisateur depuis son espace membre
+  * @param $name nom de l'utilisateur
+  * @param $firstName prénom de l'utilisateur
+  * @param $mail email de l'utilisateur
+  * @param $idPersonne identifiant de l'utilisateur
+  **/
+  function updateDataPersonne($name, $firstName, $mail, $idPersonne) {
+    $query = "UPDATE personne SET nomPersonne = :name, prenomPersonne = :firstName, mailPersonne = :mail WHERE idPersonne = :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'name' => $name,
+      'firstName' => $firstName,
+      'mail' => $mail,
+      'idPersonne' => $idPersonne
+    ));
+  }
+
+  /**
+  * Met à jour le mot de passe de l'utilisateur depuis son espace membre
+  * @param $password mot de passe de l'utilisateur
+  * @param $idPersonne identifiant de l'utilisateur
+  **/
+  function updatePasswordPersonne($password, $idPersonne) {
+    $query = "UPDATE personne SET password = :password WHERE idPersonne = :idPersonne";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'password' => $password,
+      'idPersonne' => $idPersonne
+    ));
+  }
+
   /*******************************
   * FONCTIONS DELETE
   *******************************/

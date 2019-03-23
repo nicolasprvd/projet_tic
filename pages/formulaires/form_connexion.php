@@ -13,7 +13,7 @@ if (isset($_POST['btn_signin'])) {
         $_SESSION['formSubmittedErrors'] = true;
         echo "<script>document.getElementById('signin').style.display='block';</script>";
     } else {
-        connecter($data['idStatut'], $data['nomPersonne'], $data['prenomPersonne']);
+        connecter($data['idStatut'], $data['nomPersonne'], $data['prenomPersonne'], $data['idPersonne']);
         header('Location: index.php');
     }
 }

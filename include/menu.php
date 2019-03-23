@@ -7,6 +7,9 @@
             //L'utilisateur est connecté
             if (estConnecte()) {
                 //Admin uniquement
+                ?>
+                <a href=<?php echo URL . 'form_mon_espace.php' ?>>Mon espace</a>
+                <?php
                 if ($_SESSION['status'] == 1) {
                     ?>
                     <a href=<?php echo URL . 'form_ajout_projet.php' ?>>Ajouter un projet</a>

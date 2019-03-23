@@ -23,10 +23,18 @@ function connexionBD() {
   }
 }
 
-function connecter($idStatus, $name, $firstname) {
+/**
+* Stocke dans des variables de sessions les informations utilisateur
+* @param $idStatus statut de l'utilisateur
+* @param $name nom de l'utilisateur
+* @param $firstname prénom de l'utilisateur
+* @param $idPersonne identifiant de l'utilisateur
+**/
+function connecter($idStatus, $name, $firstname, $idPersonne) {
   $_SESSION['status'] = $idStatus;
   $_SESSION['name'] = $name;
   $_SESSION['firstname'] = $firstname;
+  $_SESSION['utilisateur'] = $idPersonne;
 }
 
 /**
