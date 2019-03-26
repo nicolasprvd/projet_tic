@@ -65,19 +65,22 @@
     text-align: center;
 }
 
-.theHeader a {
+.theHeader a, .theContenu a {
     margin: 10px;
     text-decoration: underline;
+    cursor: pointer;
+    color: black;
 }
 
-.theHeader a:hover {
+.theHeader a:hover, .theContenu a:hover{
     color: #4eb7e0;
 }
 
 /** Contenu **/
 .theContenu {
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 17%;
+    margin-bottom: 4%;
     text-align: -webkit-center;
 }
 
@@ -117,5 +120,47 @@
     min-height: 14%;
     min-width: 83%;
     position: absolute;
+}
+
+/** ____________________________________________ **/
+/** Tableau **/
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+/** ____________________________________________ **/
+/** Ajouter un projet **/
+#form-ajout {
+    width: 70%;
+    text-align: justify;
+}
+
+#description textarea {
+    width: 100%;
+}
+
+#boutons {
+    text-align: right;
+}
+
+#boutons input {
+    background-color: #acacac;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    width: 10%;
+    cursor: pointer;
+}
+
+#boutons input:hover {
+    background-color: #666666;
+}
+
+/** ____________________________________________ **/
+/** Visualisation **/
+#visualisation {
+    width: 60%;
 }
 
