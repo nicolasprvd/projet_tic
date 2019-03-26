@@ -65,13 +65,14 @@
     text-align: center;
 }
 
-.theHeader a {
+.theHeader a, .theContenu a {
     margin: 10px;
     text-decoration: underline;
     cursor: pointer;
+    color: black;
 }
 
-.theHeader a:hover {
+.theHeader a:hover, .theContenu a:hover{
     color: #4eb7e0;
 }
 
@@ -122,6 +123,13 @@
 }
 
 /** ____________________________________________ **/
+/** Tableau **/
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+/** ____________________________________________ **/
 /** Ajouter un projet **/
 #form-ajout {
     width: 70%;
@@ -153,20 +161,6 @@
 /** ____________________________________________ **/
 /** Visualisation **/
 #visualisation {
-    width: 90%;
+    width: 60%;
 }
 
-/*#titre {
-    float:left;
-    margin-left: 5%;
-}
-
-#client {
-    float: left;
-    margin-left : 15%;
-}
-
-#nb-etudiants {
-    float: left;
-    margin-left: 25%;
-}*/

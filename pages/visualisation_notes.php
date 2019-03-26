@@ -1,11 +1,5 @@
 <!-- Pages permettant de visualiser et récupérer les notes de chaque étudiant -->
 
-
-<p class="mbxl">
-    <a href="<?php echo "./documents/export_notes.csv" ?>">Exporter CSV</a>
-</p>
-
-
 <?php
 $persEvalue = getPersonneEvaluate();
 
@@ -18,7 +12,7 @@ fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
 
 <table class="font-xx-small" id="visualisation">
-    <tr class="upper underline">
+    <tr class="upper">
         <th> Nom personne</th>
         <th> Prenom personne</th>
         <th> Note CDC</th>
@@ -34,7 +28,7 @@ fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
     foreach ($persEvalue as $eval) {
         ?>
-        <tr>
+        <tr class="font-x-small">
             <td><?php echo $eval['nompersonne']; ?></td>
             <td><?php echo $eval['prenompersonne']; ?></td>
 
@@ -76,6 +70,10 @@ fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
     ?>
 </table>
 
+<p class="mbxl">
+    <a href="<?php echo "./documents/export_notes.csv" ?>"> > Exporter CSV</a>
+</p>
+
 <?php
 foreach ($export as $ligneaexporter) {
     // chaque ligne en cours de lecture est insérée dans le fichier
@@ -88,5 +86,3 @@ foreach ($export as $ligneaexporter) {
 fclose($fichier_csv);
 export_csv($fichier_csv);
 ?>
-
-
