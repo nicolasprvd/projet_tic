@@ -11,7 +11,7 @@
       unset($_SESSION['btn_clicked']);
     }
   ?>
-  
+
 <h1>Liste des projets</h1>
 
 <table>
@@ -36,7 +36,16 @@
 
             <td><?php echo $project['nomprojet']; ?></td>
             <td><?php echo $project['descriptiftexte']; ?></td>
-            <td><a href="<?php echo URL.'infos_projets.php&id='.$project['idprojet'];?>">Voir</a></td>
+            <td>
+              <a href="<?php echo URL.'infos_projets.php&id='.$project['idprojet'];?>">Voir</a>
+              <?php
+                //Accès modification et suppression pour l'administrateur
+                if($_SESSION['status'] == 1) { ?>
+                  <a href="<?php echo URL.'infos_projets.php&id='.$project['idprojet'];?>">Supprimer</a>
+                <?php
+                }
+              ?>
+            </td>
           <?php
         }
         ?>

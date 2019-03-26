@@ -96,7 +96,7 @@
   * @return array $result tableau des projets
   **/
   function getProjects() {
-    $query = "SELECT * FROM projet";
+    $query = "SELECT idprojet, nomprojet, descriptiftexte, idpersonneresp, idstatut FROM projet pr INNER JOIN personne p ON p.idpersonne = pr.idpersonneresp";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute();
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -845,6 +845,28 @@
     $prepQuery->execute(array(
       'password' => $password,
       'idPersonne' => $idPersonne
+    ));
+  }
+
+  /**
+  * Met à jour les données d'un projet
+  * @param $name nom du projet
+  * @param $nbStudent nombre d'étudiants pour le projet
+  * @param $description description texte du projet
+  * @param $file fichier joint descriptif
+  * @param $automatique attribution automatique ou non du projet
+  * @param $idProject identifiant du projet
+  **/
+  function updateDataProject($name, $nbStudent, $description, $file, $automatique, $idProject) {
+    $query = "UPDATE projet SET nomProjet = :name, descriptifTexte = :description, descriptifPdf = :file, nbEtudiants = :nbStudent, automatique = :automatique  WHERE idProjet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'name' => $name,
+      'description' => $description,
+      'file' => $file,
+      'nbStudent' => $nbStudent,
+      'automatique' => $automatique,
+      'idProject' => $idProject
     ));
   }
 
