@@ -1,75 +1,84 @@
-<?php
-/**
-* Formulaire permettant
-* d'ajouter un nouveau projet
-**/
-?>
-<form enctype="multipart/form-data" action = "index.php?page=form_ajout_projet.php" method = "POST">
+<form enctype="multipart/form-data" class="pas font-xx-small" id="form-ajout"
+      action="index.php?page=form_ajout_projet.php" method="POST">
+    <div>
+        <!-- Client -->
+        <p class="mbxl" id="client">
+            <span class="bold"> Client : </span>
+            <span><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?> </span>
+        </p>
 
+        <!-- Titre -->
+        <p class="mbxl" id="titre">
+            <span class="bold">Titre : </span>
+            <span><input type="texte" name="title"/> </span>
+        </p>
 
-        <h1>Saisir un projet</h1>
-
-		<br><br>
-
-		Client : <?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name'] ; ?><br><br>
-		Titre  : <input type = "texte" name = "title"/><br><br>
-
-        Nombre d'étudiant :
-        <select name="nbStudent">
+        <!-- Nombre d'étudiants -->
+        <p class="mbxl" id="nb-etudiants">
+            <span class="bold">Nombre d'étudiants : </span>
+            <span><select name="nbStudent">
 
             <?php
-            for($i=2; $i<=10; $i++){
-                echo '<option value="'.$i.'">'.$i.'</option>';
+            for ($i = 2; $i <= 10; $i++) {
+                echo '<option value="' . $i . '">' . $i . '</option>';
             }
             ?>
-        </select><br><br>
+                </select></span>
+        </p>
 
-        Description :<br>
-        <TEXTAREA name="description" rows=4 cols=40></TEXTAREA><br><br>
+        <!-- Description -->
+        <p class="mbxl" id="description">
+            <span class="bold">Description : <br></span>
+            <span><TEXTAREA name="description" rows=3></TEXTAREA></span>
+        </p>
 
-        Fichier Joint : (Le fichier doit être nommé : nom du projet_nom du client_annee. L'extension doit être du doc, docs ou pdf.) <br>
-        <input type="file" name="descriptionJoint" /><br>
+        <!-- Fichier Joint -->
+        <p class="mbxl">
+            <span class="bold">Fichier Joint : </span>
+            <span class="font-x-small mbs">(Le fichier doit être nommé : nom du projet_nom du client_annee.
+                L'extension doit être au format .doc, .docs ou .pdf.) <br></span>
+            <span><input type="file" name="descriptionJoint"/> </span>
+        </p>
 
-        <p>Attribution automatique : </p>
+        <!-- Attribution automatique -->
+        <p class="mbxl">
+            <span class="bold">Attribution automatique : </span>
+            <span>
+                <input type="radio" id="oui" name="automatique" value="oui" checked>
+                <label for="oui">Oui</label>
+            </span>
 
-        <div>
-            <input type="radio" id="oui" name="automatique" value="oui" checked>
-            <label for="oui">Oui</label>
-        </div>
+            <span>
+                <input type="radio" id="non" name="automatique" value="non">
+                <label for="non">Non</label>
+            </span>
+        </p>
 
-        <div>
-            <input type="radio" id="non" name="automatique" value="non">
-            <label for="non">Non</label>
-        </div>
-
-        <br><br>
-
-		<input type="button" value="Annuler" onclick="location.href='index.php?page=form_ajout_projet.php'" />
-
-		<input type = "submit" value = "Soumettre" name = "btn_submit"/>
-
-        <br>
-
+        <!-- Boutons -->
+        <p id="boutons">
+            <input type="button" value="Annuler" class=mrm" onclick="location.href='index.php?page=form_ajout_projet.php'"/>
+            <input type="submit" value="Soumettre" name="btn_submit"/>
+        </p>
+    </div>
 </form>
 
 <?php
 
 //Si le formulaire a été envoyé
 
-if(isset($_POST['btn_submit'])) {
+if (isset($_POST['btn_submit'])) {
 
     //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if ( !empty($_POST['title'] ) AND ( !empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0) )
-    {
+    if (!empty($_POST['title']) AND (!empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0)) {
         $target_path = "";
         $fichier = "";
-        if ($_FILES['descriptionJoint']['size'] <> 0){
+        if ($_FILES['descriptionJoint']['size'] <> 0) {
 
-            
+
             $extensions = array('.doc', '.docs', '.pdf');
-            $extension = strrchr($_FILES['descriptionJoint']['name'], '.'); 
+            $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
             //Début des vérifications de sécurité...
-            if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+            if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
             {
                 ajouterErreur('Vous devez uploader un fichier de type doc, docs ou pdf, réessayez!');
                 include_once('./include/erreurs.php');
@@ -77,24 +86,23 @@ if(isset($_POST['btn_submit'])) {
             }
 
             //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
-            if (file_exists("./documents")){
-                if (!file_exists("./documents/sujet_client")){
+            if (file_exists("./documents")) {
+                if (!file_exists("./documents/sujet_client")) {
                     mkdir("./documents/sujet_client");
                 }
-            }
-            else {
+            } else {
                 mkdir("./documents");
                 mkdir("./documents/sujet_client");
             }
 
             // Permet l'insertion du fichier joint dans le dossier concerner
             $target_path = "./documents/sujet_client/";
-            $target_path = $target_path . basename( $_FILES['descriptionJoint']['name']);
+            $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
             $fichier = $_FILES['descriptionJoint']['name'];
-            if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
+            if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
                 echo "Fichier ajouté avec succès";
-                echo "<br>" ;
-            } else{
+                echo "<br>";
+            } else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
                 exit();
@@ -102,13 +110,11 @@ if(isset($_POST['btn_submit'])) {
         }
 
         //Permet de récupérer l'id du client
-        $idCustomer = getIdPeople( $_SESSION['name']  ,  $_SESSION['firstname']);
+        $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
 
         insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
         echo "Le projet a bien été créé";
-    }
-    else
-    {
+    } else {
         ajouterErreur('Vous devez renseigner tous les champs');
         include_once('./include/erreurs.php');
     }

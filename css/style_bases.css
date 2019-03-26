@@ -45,6 +45,10 @@
     text-transform: uppercase;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
 /** ____________________________________________ **/
 /** Marges **/
 .man {
@@ -105,6 +109,10 @@
 
 .mbl {
     margin-bottom: 20px;
+}
+
+.mbxl {
+    margin-bottom: 30px;
 }
 
 .mln {
@@ -263,4 +271,8 @@ html, body {
 
 .black {
     color: black;
+}
+
+.border-black {
+    border: 1px solid black;
 }

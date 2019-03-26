@@ -68,6 +68,7 @@
 .theHeader a {
     margin: 10px;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .theHeader a:hover {
@@ -76,8 +77,9 @@
 
 /** Contenu **/
 .theContenu {
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 17%;
+    margin-bottom: 4%;
     text-align: -webkit-center;
 }
 
@@ -119,3 +121,52 @@
     position: absolute;
 }
 
+/** ____________________________________________ **/
+/** Ajouter un projet **/
+#form-ajout {
+    width: 70%;
+    text-align: justify;
+}
+
+#description textarea {
+    width: 100%;
+}
+
+#boutons {
+    text-align: right;
+}
+
+#boutons input {
+    background-color: #acacac;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    width: 10%;
+    cursor: pointer;
+}
+
+#boutons input:hover {
+    background-color: #666666;
+}
+
+/** ____________________________________________ **/
+/** Visualisation **/
+#visualisation {
+    width: 90%;
+}
+
+/*#titre {
+    float:left;
+    margin-left: 5%;
+}
+
+#client {
+    float: left;
+    margin-left : 15%;
+}
+
+#nb-etudiants {
+    float: left;
+    margin-left: 25%;
+}*/
