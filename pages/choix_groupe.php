@@ -41,9 +41,10 @@ if (!empty($idgroupe)) {
             $separateur = ", ";
             
             foreach($etu as $e) {
-            $membre = $membre . $e['prenompersonne'] . $espace .$e['nompersonne']  . $separateur ;
-            }
-            $membre = substr($membre, 0, -2);
+                $membre = $membre . $e['prenomPersonne'] . $espace .$e['nomPersonne']  . $separateur ;
+                }
+                $membre = substr($membre, 0, -2);
+        
 
             ?>
 
