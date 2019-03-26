@@ -7,6 +7,12 @@
 
 <?php
   $project = getProjectById($_GET['id']);
+
+  //Si l'administrateur souhaite modifier les informations du projet
+  if(isset($_POST['btn_update_project'])) {
+    include('formulaires/form_projet_modifier.php');
+    exit;
+  }
 ?>
 
 <h1><?php echo $project['nomProjet']; ?></h1>
@@ -19,6 +25,15 @@
   if($project['descriptifPdf'] != null) {
   ?>
     Fichier joint : <a href="documents/sujet_client/<?php echo $project['descriptifPdf']; ?>" target=\"_BLANK\">Télécharger</a>
+  <?php
+  }
+
+  //Accès en modification pour l'administrateur
+  if($_SESSION['status'] == 1) {
+    ?>
+    <form method="post">
+      <input type="submit" name="btn_update_project" value="Modifier">
+    </form>
   <?php
   }
 

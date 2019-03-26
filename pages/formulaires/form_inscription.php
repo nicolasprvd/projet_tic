@@ -22,16 +22,15 @@ if (isset($_POST['btn_signup'])) {
   foreach($personnes as $pers) {
     if($pers['nompersonne'] == $_POST['input_name'] && $pers['prenompersonne'] == $_POST['input_firstname'] && $pers['idstatut'] == $_POST['select_status'] && $pers['mailpersonne'] == $_POST['input_email']) {
       $doublon = true;
-      echo $doublon;
-      exit;
     }
-    break;
   }
+
   if($doublon) {
     ajouterErreur('L\'utilisateur existe déjà');
     $_SESSION['formSubmittedErrors'] = true;
     echo "<script>document.getElementById('signup').style.display='block';</script>";
   }
+
     //Si les champs sont vides
     if (empty($_POST['input_name']) || empty($_POST['input_firstname']) || empty($_POST['input_email']) || empty($_POST['select_status'])
         || empty($_POST['input_password']) || empty($_POST['input_password_confirm'])) {
@@ -52,7 +51,7 @@ if (isset($_POST['btn_signup'])) {
         $password = password_hash($_POST['input_password'], PASSWORD_DEFAULT);
         if (!isset($_SESSION['formSubmittedErrors'])) {
             insertNewUser($_POST['select_status'], $_POST['input_name'], $_POST['input_firstname'], $_POST['input_email'], $password);
-            connecter($_POST['select_status'], $_POST['input_name'], $_POST['input_firstname']);
+            connecter($_POST['select_status'], $_POST['input_name'], $_POST['input_firstname'], $GLOBALS['connex']->lastInsertId());
             header("Location: index.php");
         }
     } else {

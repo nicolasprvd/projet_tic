@@ -7,6 +7,9 @@
             //L'utilisateur est connecté
             if (estConnecte()) {
                 //Admin uniquement
+                ?>
+                <a href=<?php echo URL . 'form_mon_espace.php' ?>>Mon espace</a>
+                <?php
                 if ($_SESSION['status'] == 1) {
                     ?>
                     <a href=<?php echo URL . 'form_ajout_projet.php' ?>>Ajouter un projet</a>
@@ -15,7 +18,7 @@
                     <a href=<?php echo URL . 'attribution_projets_admin.php' ?>>Attributions des projets</a>
                     <a href=<?php echo URL . 'liste_groupes.php' ?>>Les groupes</a>
                     <a href=<?php echo URL . 'visualisation_notes.php' ?>> Visualisation des notes </a>
-                    <a href=<?php echo URL . 'historique.php' ?>>Historique</a>
+                    <a href=<?php echo URL . 'historique.php' ?>>Sauvegarder la base</a>
                     <?php
                     //Responsable de projet uniquement
                 } else if ($_SESSION['status'] == 3) {
