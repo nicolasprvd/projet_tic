@@ -325,11 +325,8 @@ if ($attrib) {
     export_csv($fichier_csv);
     ?>
     <p class="mbxl">
-        <a href="<?php echo "./documents/export_notes.csv" ?>">> Exporter CSV</a>
+        <a href="<?php echo "./documents/attribution.csv" ?>">> Exporter CSV</a>
     </p>
-    <?
-    echo "Le fichier a bien été enregistré dans le dossier 'documents'";
-    ?>
 
     <?php
 }

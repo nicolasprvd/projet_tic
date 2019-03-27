@@ -20,6 +20,7 @@ if (isset($_POST['btn_choix'])) {
 }
 
 $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
+$boucle = false ;
 
 // On récupère les projets a affecter manuellement
 $manuel = getManualProjects($idCustomer[0]);
@@ -27,6 +28,7 @@ $manuel = getManualProjects($idCustomer[0]);
 
 <?php
 if (!empty($manuel)) {
+    $boucle = true;
 ?>
 <table class="font-xx-small" id="mes_projets">
     <tr class="upper">
@@ -62,15 +64,24 @@ if (!empty($manuel)) {
         </tr>
         <?php
     }
-    } else {
-        echo "Vous n'avez pas de projet en cours.";
-    }
-
+}
 
     // On récupère les projets a affecter automatiquement
     $automatic = getAutomaticProjects($idCustomer[0]);
 
     if (!empty($automatic)) {
+
+        if (!$boucle) {
+            $boucle = true;
+            ?>
+            <table class="font-xx-small" id="mes_projets">
+                <tr class="upper">
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            <?php
+        }
 
     //On récupère la liste des projets
     //$projects = getProjects();
@@ -108,7 +119,8 @@ if (!empty($manuel)) {
 <?php
 }
 
+if (!$boucle) {
+    echo "Vous n'avez pas de projet en cours.";
+}
+
 ?>
-
-
-
