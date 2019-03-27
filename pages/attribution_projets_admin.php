@@ -1,58 +1,6 @@
 <!-- Pages permettant lancer l'attribution automatique des projets et de recuperer le csv des projets attribuer aux groupes -->
 
 <?php
-$attrib = false;
-$projetNoAttribuate = getManualProjectsNoAttribuate();
-
-if (!empty($projetNoAttribuate)) {
-    ?>
-    <p> Liste des projets qui n'ont pas encore été attribués manuellement par le client : </p>
-    <table>
-        <tr>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-
-        <?php
-
-        foreach ($projetNoAttribuate as $project) {
-            ?>
-            <tr>
-                <td><?php echo $project['nomprojet']; ?></td>
-                <td><?php echo $project['descriptiftexte']; ?></td>
-                <td><a href="<?php echo URL . 'infos_projets.php&id=' . $project['idprojet']; ?>">Voir</a></td>
-            </tr>
-            <?php
-        }
-        ?>
-    </table>
-
-    </BR></BR>
-
-
-    <input disabled type="submit" value="Attribution Automatique"/>
-    <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs
-        clients </p>
-
-    <?php
-} else {
-
-    if (empty(getchoixTempIsEmpty())) {
-        echo "Il n'y a plus de projets en attente d'attribution";
-        $attrib = true;
-    } else {
-        ?>
-        <form enctype="multipart/form-data" action="index.php?page=attribution_projets_admin.php" method="POST">
-            <input type="submit" value="Attribution Automatique" name="btn_attribution"/>
-        </form>
-        <?php
-    }
-}
-
-?>
-
-<?php
 if (isset($_POST['btn_attribution'])) {
 
     $sortir = false;
@@ -255,8 +203,62 @@ if (isset($_POST['btn_attribution'])) {
         $projet = getAutomaticalProjects();
     }
 }
+?>
+
+<?php
+$attrib = false;
+$projetNoAttribuate = getManualProjectsNoAttribuate();
+
+if (!empty($projetNoAttribuate)) {
+    ?>
+    <p> Liste des projets qui n'ont pas encore été attribués manuellement par le client : </p>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+
+        <?php
+
+        foreach ($projetNoAttribuate as $project) {
+            ?>
+            <tr>
+                <td><?php echo $project['nomprojet']; ?></td>
+                <td><?php echo $project['descriptiftexte']; ?></td>
+                <td><a href="<?php echo URL . 'infos_projets.php&id=' . $project['idprojet']; ?>">Voir</a></td>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+
+    </BR></BR>
 
 
+    <input disabled type="submit" value="Attribution Automatique"/>
+    <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs
+        clients </p>
+
+    <?php
+} else {
+
+    if (empty(getchoixTempIsEmpty())) {
+        echo "Il n'y a plus de projets en attente d'attribution";
+        $attrib = true;
+    } else {
+        ?>
+        <form enctype="multipart/form-data" action="index.php?page=attribution_projets_admin.php" method="POST">
+            <input type="submit" value="Attribution Automatique" name="btn_attribution"/>
+        </form>
+        <?php
+    }
+}
+
+?>
+
+
+<?php
 if ($attrib) {
 
     //Récupère la liste des projets
