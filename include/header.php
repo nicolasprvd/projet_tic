@@ -4,10 +4,7 @@
 require_once('./pages/formulaires/form_inscription.php');
 require_once('./pages/formulaires/form_connexion.php');
 
-//Si une personne souhaite se déconnecter
-if (!empty($_GET['deconnexion'])) {
-    deconnecter();
-}
+
 //Si une personne est authentifiée
 if (estConnecte()) {
     $status = getStatusById($_SESSION['status']);

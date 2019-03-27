@@ -269,6 +269,10 @@ html, body {
     text-align: left;
 }
 
+.txtcenter {
+    text-align: center;
+}
+
 .black {
     color: black;
 }

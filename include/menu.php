@@ -50,6 +50,10 @@
                 ?>
                 <a href="index.php?deconnexion=true">Se déconnecter</a>
                 <?php
+                //Si une personne souhaite se déconnecter
+                if (!empty($_GET['deconnexion'])) {
+                    deconnecter();
+                }
             }
             ?>
         </li>
