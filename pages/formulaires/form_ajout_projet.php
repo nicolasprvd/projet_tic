@@ -1,4 +1,4 @@
-<form enctype="multipart/form-data" class="pas font-xx-small" id="form-ajout"
+<form enctype="multipart/form-data" class="pas" id="form_ajout"
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
         <!-- Client -->

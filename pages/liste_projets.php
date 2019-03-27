@@ -7,8 +7,8 @@ if (isset($_SESSION['btn_clicked'])) {
 }
 ?>
 
-<table class="font-xx-small" id="liste_projets">
-    <tr class="upper">
+<table id="liste_projets">
+    <tr class="upper txtcenter">
         <th>Nom</th>
         <th>Description</th>
         <th>Actions</th>
