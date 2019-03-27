@@ -1,0 +1,6 @@
+#On interdit le listage des répertoires
+Options -Indexes
+
+<Files "README.md">
+deny from all
+</Files>
