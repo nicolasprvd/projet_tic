@@ -508,7 +508,7 @@
   * @return $result array tableau des informations
   **/
   function getDocuments($idProject) {
-    $query = "SELECT idprojet, iddocument, chemindoc, typedoc FROM document WHERE idprojet = :idProject";
+    $query = "SELECT idprojet, iddoc, chemindoc, typedoc FROM document WHERE idprojet = :idProject";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idProject' => $idProject
