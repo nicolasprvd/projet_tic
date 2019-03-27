@@ -588,7 +588,7 @@
   * @return $result array tableau des informations
   **/
   function getPersonneEvaluate() {
-    $query = "SELECT DISTINCT nompersonne, prenompersonne, idevaluation FROM personne p  WHERE idstatut = 2 GROUP BY nompersonne, prenompersonne";
+    $query = "SELECT DISTINCT nompersonne, prenompersonne, idevaluation FROM personne  WHERE idstatut = 2 GROUP BY nompersonne, prenompersonne, idevaluation";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute();
     $result = $prepQuery->fetchAll(PDO::FETCH_ASSOC);
