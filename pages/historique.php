@@ -2,9 +2,7 @@
 /**
 * Page permettant d'historiser les données d'une année sur l'autre
 **/
-?>
 
-<?php
 require('./include/config.php');
 $verif = false;
 if(isset($_POST['btn_submit'])){
@@ -13,8 +11,6 @@ if(isset($_POST['btn_submit'])){
 }
 ?>
 
-<h1> Historique </h1>
-
-<form enctype="multipart/form-data" action="index.php?page=historique.php" method="POST">
+<form enctype="multipart/form-data" action="index.php?page=historique.php" method="POST" id="historique">
     <input type="submit" value="Effectuer une sauvegarde" name="btn_submit"/>
 </form>

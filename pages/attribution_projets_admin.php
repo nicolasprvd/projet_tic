@@ -212,8 +212,8 @@ $projetNoAttribuate = getManualProjectsNoAttribuate();
 if (!empty($projetNoAttribuate)) {
     ?>
     <p> Liste des projets qui n'ont pas encore été attribués manuellement par le client : </p>
-    <table>
-        <tr>
+    <table id="attribution_projet_admin">
+        <tr class="upper txtcenter">
             <th>Nom</th>
             <th>Description</th>
             <th>Actions</th>
@@ -223,20 +223,20 @@ if (!empty($projetNoAttribuate)) {
 
         foreach ($projetNoAttribuate as $project) {
             ?>
-            <tr>
+            <tr class="font-x-small">
                 <td><?php echo $project['nomprojet']; ?></td>
                 <td><?php echo $project['descriptiftexte']; ?></td>
-                <td><a href="<?php echo URL . 'infos_projets.php&id=' . $project['idprojet']; ?>">Voir</a></td>
+                <td><a href="<?php echo URL . 'infos_projets.php&id=' . $project['idprojet']; ?>">> Voir</a></td>
             </tr>
             <?php
         }
         ?>
     </table>
 
-    </BR></BR>
+    <p class="mtm mbxl" id="attribution_projet_admin_form">
+        <input disabled type="submit" value="Attribution Automatique"/>
+    </p>
 
-
-    <input disabled type="submit" value="Attribution Automatique"/>
     <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs
         clients </p>
 
@@ -244,11 +244,11 @@ if (!empty($projetNoAttribuate)) {
 } else {
 
     if (empty(getchoixTempIsEmpty())) {
-        echo "Il n'y a plus de projets en attente d'attribution";
+        echo "Il n'y a plus de projets en attente d'attribution.";
         $attrib = true;
     } else {
         ?>
-        <form enctype="multipart/form-data" action="index.php?page=attribution_projets_admin.php" method="POST">
+        <form enctype="multipart/form-data" action="index.php?page=attribution_projets_admin.php" method="POST" id="attribution_projet_admin_form">
             <input type="submit" value="Attribution Automatique" name="btn_attribution"/>
         </form>
         <?php
@@ -260,7 +260,6 @@ if (!empty($projetNoAttribuate)) {
 
 <?php
 if ($attrib) {
-
     //Récupère la liste des projets
     $projects = getProjectsAttribuate();
 

@@ -11,8 +11,8 @@ fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
 ?>
 
 
-<table class="font-xx-small" id="visualisation">
-    <tr class="upper">
+<table id="visualisation">
+    <tr class="upper txtcenter">
         <th> Nom personne</th>
         <th> Prenom personne</th>
         <th> Note CDC</th>

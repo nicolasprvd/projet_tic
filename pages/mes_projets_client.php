@@ -30,8 +30,8 @@ $manuel = getManualProjects($idCustomer[0]);
 if (!empty($manuel)) {
     $boucle = true;
 ?>
-<table class="font-xx-small" id="mes_projets">
-    <tr class="upper">
+<table id="mes_projets_client">
+    <tr class="upper txtcenter">
         <th>Nom</th>
         <th>Description</th>
         <th>Actions</th>
@@ -56,7 +56,7 @@ if (!empty($manuel)) {
                 ?>
                 <td>
                     <a href="<?php echo URL . 'voir_mon_projet_client.php&id=' . $project['idprojet'] . '&titre=' . $project['nomprojet']; ?>">
-                        Voir le projet</a></td>
+                        > Voir le projet</a></td>
                 <?php
             }
             ?>
@@ -74,8 +74,8 @@ if (!empty($manuel)) {
         if (!$boucle) {
             $boucle = true;
             ?>
-            <table class="font-xx-small" id="mes_projets">
-                <tr class="upper">
+            <table id="mes_projets_client">
+                <tr class="upper txtcenter">
                     <th>Nom</th>
                     <th>Description</th>
                     <th>Actions</th>
@@ -88,24 +88,23 @@ if (!empty($manuel)) {
 
     foreach ($automatic as $project) {
         ?>
-        <tr>
+        <tr class="font-x-small">
             <td><?php echo $project['nomprojet']; ?></td>
             <td><?php echo $project['descriptiftexte']; ?></td>
-
 
             <?php
             // Si le projet n'est pas attribué 
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)) {
                 ?>
-                <td><p> En attente d'attribution </p></td>
+                <td>En attente d'attribution</td>
                 <?php
                 // Si le projet est attribué
             } else {
                 ?>
                 <td>
                     <a href="<?php echo URL . 'voir_mon_projet_client.php&id=' . $project['idprojet'] . '&titre=' . $project['nomprojet']; ?>">
-                        Voir le projet</a></td>
+                        > Voir le projet</a></td>
                 <?php
             }
             ?>

@@ -75,7 +75,7 @@
     text-decoration: underline;
 }
 
-.theHeader a:hover, .theContenu a:hover{
+.theHeader a:hover, .theContenu a:hover {
     color: #4eb7e0;
 }
 
@@ -131,6 +131,7 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
 th {
     padding: 20px;
 }
@@ -140,8 +141,37 @@ td {
 }
 
 /** ____________________________________________ **/
+/** Input **/
+#form_mon_espace input[type="submit"], #boutons input, #historique input[type="submit"], #attribution_projet_admin_form input,
+#infos_projet input {
+    background-color: #acacac;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+#form_mon_espace input[type="submit"] {
+    width: 21%;
+}
+
+#boutons input {
+    width: 10%
+}
+
+#historique {
+    width: 15%;
+}
+
+#form_mon_espace input[type="submit"]:hover, #form_ajout input[type="submit"]:hover, #historique input[type="submit"]:hover,
+#attribution_projet_admin_form input:hover, #infos_projet input:hover {
+    background-color: #666666;
+}
+
+/** ____________________________________________ **/
 /** Ajouter un projet **/
-#form-ajout {
+#form_ajout, #form_mon_espace, #visualisation, #liste_projets, #mes_projets_client, #attribution_projet_admin, #infos_projet {
     width: 70%;
     text-align: justify;
 }
@@ -154,22 +184,6 @@ td {
     text-align: right;
 }
 
-#boutons input {
-    background-color: #acacac;
-    color: white;
-    padding: 10px;
-    border: none;
-    font-size: 13px;
-    width: 10%;
-    cursor: pointer;
-}
-
-#boutons input:hover {
-    background-color: #666666;
-}
-
-/** ____________________________________________ **/
-/** Visualisation **/
-#visualisation, #liste_projets {
-    width: 70%;
+#infos_projet_form {
+    text-align: center;
 }

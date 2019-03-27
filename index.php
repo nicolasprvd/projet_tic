@@ -39,7 +39,7 @@ define('URL', 'index.php?page=');
     </div>
 
     <!-- CONTENU -->
-    <div class="theContenu">
+    <div class="theContenu font-xx-small">
         <?php
         //Si $_GET['page'] n'est pas définie alors on affiche la page d'accueil
         if (!isset($_GET['page'])) {
