@@ -109,7 +109,7 @@ if (empty($attribuate))  {
       ?>
 
       <form enctype="multipart/form-data" action = "index.php?page=mes_projets.php" method = "POST">
-      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembres_annee. L'extension doit être du doc, docs ou pdf.) </BR>
+      Dépôt du cahier des charges: (Le fichier doit être nommé : CDC_nomDesMembres_annee. L'extension doit être du doc, docx ou pdf.) </BR>
       <input type="file" name="CDC" />
       <input type = "submit" value = "Déposer" name = "btn_depot_CDC"/>
       </form>
@@ -177,12 +177,12 @@ if(isset($_POST['btn_depot_CDC'])) {
   if ($_FILES['CDC']['size'] <> 0){
 
 
-    $extensions = array('.doc', '.docs', '.pdf', '.DOC', '.DOCS', '.PDF');
+    $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
     $extension = strrchr($_FILES['CDC']['name'], '.');
     //Début des vérifications de sécurité... (extension du fichier)
     if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
     {
-        ajouterErreur('Vous devez uploader un fichier de type doc, docs ou pdf, réessayez!');
+        ajouterErreur('Vous devez uploader un fichier de type doc, docx ou pdf, réessayez!');
         include_once('./include/erreurs.php');
         exit;
     }

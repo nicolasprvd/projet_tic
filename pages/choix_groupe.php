@@ -62,6 +62,6 @@ if (!empty($idgroupe)) {
  <?php
 }
 else {
-    echo "Personne n'a choisis votre sujet pour le moment.. Revenez plus tard!";
+    echo "Personne n'a choisi votre sujet pour le moment.. Revenez plus tard!";
 }  
 ?>  

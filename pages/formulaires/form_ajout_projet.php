@@ -36,7 +36,7 @@
         <p class="mbxl">
             <span class="bold">Fichier Joint : </span>
             <span class="font-x-small mbs">(Le fichier doit être nommé : nom du projet_nom du client_annee.
-                L'extension doit être au format .doc, .docs ou .pdf.) <br></span>
+                L'extension doit être au format .doc, .docx ou .pdf.) <br></span>
             <span><input type="file" name="descriptionJoint"/> </span>
         </p>
 
@@ -75,12 +75,12 @@ if (isset($_POST['btn_submit'])) {
         if ($_FILES['descriptionJoint']['size'] <> 0) {
 
 
-            $extensions = array('.doc', '.docs', '.pdf');
+            $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
             $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
             //Début des vérifications de sécurité...
             if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
             {
-                ajouterErreur('Vous devez uploader un fichier de type doc, docs ou pdf, réessayez!');
+                ajouterErreur('Vous devez uploader un fichier de type doc, docx ou pdf, réessayez!');
                 include_once('./include/erreurs.php');
                 exit;
             }
