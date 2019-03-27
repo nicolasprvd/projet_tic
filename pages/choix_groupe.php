@@ -21,6 +21,7 @@ if (!empty($idgroupe)) {
     <table>
         <tr>
         <th>idGroupe</th>
+        <th> Chef de projet </th>
         <th> Membres du groupe </th>
         <th>Choix</th>
         </tr>
@@ -32,12 +33,21 @@ if (!empty($idgroupe)) {
           <tr>
             <td><?php echo $groupe['idgroupe']; ?></td>
 
+        
+            <?php
+            // On recupere le chef de projet du groupe
+            $idChefP =  getIdChefByIdGroup($groupe['idgroupe']);
+            $chef = getPersonneById($idChefP['idpersonneChef']);
+            $espace = " ";
+            ?>
+            <td><?php echo $chef['prenomPersonne'] . $espace . $chef['nomPersonne']; ?></td>
+
             <?php
 
             //On recupere le nom et le prenom des personnes du groupe 
             $etu = getPersonneByGroupTemp($groupe['idgroupe']);
             $membre ='';
-            $espace = " ";
+            
             $separateur = ", ";
             
             foreach($etu as $e) {
