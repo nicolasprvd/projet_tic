@@ -2,19 +2,19 @@
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
         <!-- Client -->
-        <p class="mbxl" id="client">
+        <p class="mbxl">
             <span class="bold"> Client : </span>
             <span><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?> </span>
         </p>
 
         <!-- Titre -->
-        <p class="mbxl" id="titre">
+        <p class="mbxl">
             <span class="bold">Titre : </span>
             <span><input type="texte" name="title"/> </span>
         </p>
 
         <!-- Nombre d'étudiants -->
-        <p class="mbxl" id="nb-etudiants">
+        <p class="mbxl">
             <span class="bold">Nombre d'étudiants : </span>
             <span><select name="nbStudent">
 

@@ -66,10 +66,13 @@
 }
 
 .theHeader a, .theContenu a {
-    margin: 10px;
-    text-decoration: underline;
     cursor: pointer;
     color: black;
+}
+
+.theHeader a {
+    margin: 10px;
+    text-decoration: underline;
 }
 
 .theHeader a:hover, .theContenu a:hover{
@@ -128,6 +131,13 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
+th {
+    padding: 20px;
+}
+
+td {
+    padding: 7px;
+}
 
 /** ____________________________________________ **/
 /** Ajouter un projet **/
@@ -160,7 +170,6 @@ table, th, td {
 
 /** ____________________________________________ **/
 /** Visualisation **/
-#visualisation {
-    width: 60%;
+#visualisation, #liste_projets {
+    width: 70%;
 }
-
