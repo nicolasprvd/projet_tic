@@ -11,7 +11,7 @@
 function connexionBD() {
   require('config.php'); //inclut les sources
   try {
-    $connex = new PDO($source, $user, $password, array(
+    $connex = new PDO(SOURCE, USER, PASSWORD, array(
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
     ));
@@ -172,9 +172,9 @@ function dumpBase($host, $user, $password, $base, $date) {
     }
 
     if(empty($password)) {
-      system("C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe --user={$user} --host={$host} {$base} > {$filename}", $worked);
+      system(CONF_MYSQLDUMP." --user={$user} --host={$host} {$base} > {$filename}", $worked);
     }else {
-      system("C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe --user={$user} --password={$password} --host={$host} {$base} > {$filename}", $worked);
+      system(CONF_MYSQLDUMP." --user={$user} --password={$password} --host={$host} {$base} > {$filename}", $worked);
     }
     switch($worked) {
       case 0:
