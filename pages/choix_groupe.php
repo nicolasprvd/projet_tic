@@ -4,7 +4,7 @@
  **/
 ?>
 
-    <h2> Choix d'un groupe pour votre projet :"<?php echo $_GET['titre'] ?>"</h2>
+    <h1> Choix d'un groupe pour votre projet :"<?php echo $_GET['titre'] ?>"</h1>
 
     <p> Vous devez choisir un groupe pour votre projet </p>
 

@@ -4,6 +4,8 @@
  **/
 ?>
 
+<h1> Historique </h1>
+
 <?php
 if (isset($_POST['btn_submit'])) {
     $date = date('Ymd');

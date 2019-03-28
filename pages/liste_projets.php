@@ -1,5 +1,7 @@
 <!-- Page qui affiche la liste des projets -->
 
+<h1> Visualisation des projets </h1>
+
 <?php
 //Gestion d'erreur : soumission multiple du formulaire de constitution du groupe
 if (isset($_SESSION['btn_clicked'])) {

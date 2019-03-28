@@ -201,6 +201,8 @@ if (isset($_POST['btn_attribution'])) {
 }
 ?>
 
+<h1> Attribution des projets </h1>
+
 <?php
 $attrib = false;
 $projetNoAttribuate = getManualProjectsNoAttribuate();

@@ -1,5 +1,7 @@
 <!-- Pages permettant de visualiser et récupérer les notes de chaque étudiant -->
 
+<h1> Visualisation des notes </h1>
+
 <?php
 $persEvalue = getPersonneEvaluate();
 

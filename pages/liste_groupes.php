@@ -1,5 +1,7 @@
 <!-- Pages listant les groupes enregistrés -->
 
+    <h1> Visualisation des groupes associés à un projet </h1>
+
     <?php
     $groupsId = getGroupeId();
     if(!empty($groupsId)) {
