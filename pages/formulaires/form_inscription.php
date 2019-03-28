@@ -16,20 +16,20 @@ if (isset($_POST['btn_cancel'])) {
 //Si le formulaire a été envoyé
 if (isset($_POST['btn_signup'])) {
 
-  //Doublons : PAS FINI !!!
-  $personnes = getPersonnesForAuth();
-  $doublon = false;
-  foreach($personnes as $pers) {
-    if($pers['nompersonne'] == $_POST['input_name'] && $pers['prenompersonne'] == $_POST['input_firstname'] && $pers['idstatut'] == $_POST['select_status'] && $pers['mailpersonne'] == $_POST['input_email']) {
-      $doublon = true;
+    //Doublons : PAS FINI !!!
+    $personnes = getPersonnesForAuth();
+    $doublon = false;
+    foreach ($personnes as $pers) {
+        if ($pers['nompersonne'] == $_POST['input_name'] && $pers['prenompersonne'] == $_POST['input_firstname'] && $pers['idstatut'] == $_POST['select_status'] && $pers['mailpersonne'] == $_POST['input_email']) {
+            $doublon = true;
+        }
     }
-  }
 
-  if($doublon) {
-    ajouterErreur('L\'utilisateur existe déjà');
-    $_SESSION['formSubmittedErrors'] = true;
-    echo "<script>document.getElementById('signup').style.display='block';</script>";
-  }
+    if ($doublon) {
+        ajouterErreur('L\'utilisateur existe déjà');
+        $_SESSION['formSubmittedErrors'] = true;
+        echo "<script>document.getElementById('signup').style.display='block';</script>";
+    }
 
     //Si les champs sont vides
     if (empty($_POST['input_name']) || empty($_POST['input_firstname']) || empty($_POST['input_email']) || empty($_POST['select_status'])
@@ -63,10 +63,21 @@ if (isset($_POST['btn_signup'])) {
 ?>
 
 <div id="signup" class="modal-inscription">
-    <form method="post" class="modal-content-inscription animate">
+    <form method="post" class="modal-content-inscription animate font-xx-small">
 
         <div class="font-x-large bold upper">
             <p>S'inscrire</p>
+        </div>
+
+        <div class="erreur_center">
+            <?php
+            if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
+                echo "<script>document.getElementById('signup').style.display='block';</script>";
+                include('./include/erreurs.php');
+                unset($_SESSION['formSubmittedErrors']);
+                unset($_REQUEST['erreurs']);
+            }
+            ?>
         </div>
 
         <div class="inscription-input container">
@@ -77,16 +88,17 @@ if (isset($_POST['btn_signup'])) {
                 <option selected disabled value="">Votre statut</option>
                 <?php
                 foreach ($status as $stat) {
-                  if($stat['libelle'] != "Administrateur") {
-                    ?>
-                    <option value="<?php echo $stat['idStatut']; ?>"><?php echo $stat['libelle']; ?></option>
-                    <?php
-                  }
+                    if ($stat['libelle'] != "Administrateur") {
+                        ?>
+                        <option value="<?php echo $stat['idStatut']; ?>"><?php echo $stat['libelle']; ?></option>
+                        <?php
+                    }
                 }
                 ?>
             </select>
             <input type="text" class="mbm pas border-black" name="input_email" value="" placeholder="Votre email"/>
-            <input type="password" class="mbm pas border-black" name="input_password" value="" placeholder="Votre mot de passe"/>
+            <input type="password" class="mbm pas border-black" name="input_password" value=""
+                   placeholder="Votre mot de passe"/>
             <input type="password" class="pas border-black" name="input_password_confirm" value=""
                    placeholder="Confirmez votre mot de passe"/>
         </div>
@@ -97,14 +109,5 @@ if (isset($_POST['btn_signup'])) {
                     name="btn_cancel">Annuler
             </button>
         </div>
-
-        <?php
-        if (isset($_SESSION['formSubmittedErrors']) && $_SESSION['formSubmittedErrors'] == true) {
-            echo "<script>document.getElementById('signup').style.display='block';</script>";
-            include('./include/erreurs.php');
-            unset($_SESSION['formSubmittedErrors']);
-            unset($_REQUEST['erreurs']);
-        }
-        ?>
     </form>
 </div>

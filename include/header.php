@@ -1,4 +1,4 @@
-<p class="font-x-large bold upper mam">Accueil</p>
+<p class="font-x-large bold upper mam">Application de gestion des Projets TIC</p>
 
 <?php
 require_once('./pages/formulaires/form_inscription.php');

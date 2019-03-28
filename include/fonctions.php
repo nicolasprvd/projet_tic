@@ -182,7 +182,7 @@ function dumpBase($host, $user, $password, $base, $date) {
         break;
 
       case 1:
-        echo 'Une erreur s\'est produite lors de la exportation de la base de données';
+        echo 'Une erreur s\'est produite lors de la exportation de la base de données.';
         break;
 
       case 2:

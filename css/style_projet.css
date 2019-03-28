@@ -106,16 +106,6 @@
     padding: 5px;
 }
 
-.accueil-text {
-    position: relative;
-    width: 80%;
-}
-
-.content {
-    text-align: justify;
-    border: 1px solid black;
-}
-
 /** ____________________________________________ **/
 /** Footer **/
 .theFooter {
@@ -136,14 +126,6 @@
     text-decoration: underline;
 }
 
-#banner {
-    background-image: url(../images/banner.png);
-    bottom: 0;
-    min-height: 14%;
-    min-width: 83%;
-    position: absolute;
-}
-
 /** ____________________________________________ **/
 /** Tableau **/
 table, th, td {
@@ -157,6 +139,26 @@ th {
 
 td {
     padding: 7px;
+}
+
+/** ____________________________________________ **/
+/** Accueil **/
+.accueil_texte {
+    position: relative;
+    width: 80%;
+}
+
+.accueil_texte ul {
+    list-style-type: disc;
+}
+
+.accueil_texte li {
+    margin-left: 5%;
+}
+
+.content {
+    text-align: justify;
+    border: 1px solid black;
 }
 
 /** ____________________________________________ **/
@@ -187,10 +189,6 @@ td {
     background-color: #e0e0e0;
 }
 
-#form_mon_espace input[type="submit"] {
-    width: 21%;
-}
-
 #form_ajout_projet input[type="submit"], #form_ajout_projet input[type="button"],
 #form_projet_modifier input[type="submit"], #form_projet_modifier input[type="button"] {
     width: 10%
@@ -202,4 +200,39 @@ td {
 #voir_mon_projet_client, .div_custom {
     width: 70%;
     text-align: left;
+}
+
+#gauche {
+    float: left;
+    width: 45%;
+}
+
+#droite {
+    margin-left: 55%;
+    width: 45%;
+}
+
+
+/** ____________________________________________ **/
+/** Alertes **/
+.succes {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    width: 85%;
+}
+.erreur {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    width: 85%;
+}
+
+.erreur ul, .succes ul {
+    padding: 5px;
+    list-style: none;
+}
+
+.erreur_center {
+    text-align: -webkit-center;
 }
