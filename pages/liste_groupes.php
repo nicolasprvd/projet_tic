@@ -1,6 +1,6 @@
 <!-- Pages listant les groupes enregistrés -->
 
-    <h1> Visualisation des groupes associés à un projet </h1>
+    <h1> Visualisation des groupes </h1>
 
     <?php
     $groupsId = getGroupeId();
@@ -32,6 +32,9 @@
 </table>
 <?php
   }
+
+    //Récupère la liste des projets
+    $projects = getProjectsAttribuate();
     if(empty($projects)) {
       echo '<strong>Aucun groupe n\'a été constitué pour le moment.</strong>';
     }else {

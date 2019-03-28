@@ -22,7 +22,7 @@
                     <a href=<?php echo URL . 'form_ajout_projet.php' ?>>Ajouter un projet</a>
                     <a href=<?php echo URL . 'liste_projets.php' ?>>Les projets disponibles</a>
                     <a href=<?php echo URL . 'mes_projets_client.php' ?>>Mes projets</a>
-                    <a href=<?php echo URL . 'attribution_projets_admin.php' ?>>Attributions des projets</a>
+                    <a href=<?php echo URL . 'attribution_projets_admin.php' ?>>Attribution des projets</a>
                     <a href=<?php echo URL . 'liste_groupes.php' ?>>Les groupes</a>
                     <a href=<?php echo URL . 'visualisation_notes.php' ?>> Visualisation des notes </a>
                     <a href=<?php echo URL . 'historique.php' ?>>Sauvegarder la base</a>

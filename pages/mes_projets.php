@@ -19,11 +19,13 @@ $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
 if(isset($_REQUEST['messages'])) {
   include('./include/messages.php');
 }
-?>
-<h1>Mes projets</h1>
-<?php
+
+
 if (empty($attribuate)) {
     //On récupère la liste de ses choix
+    ?>
+        <h1>Mes projets</h1>
+    <?php
     $projects = getChoixProjets($idGroup['idGroupeTemp']);
 
     if ($projects == null) {
