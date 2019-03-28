@@ -97,8 +97,12 @@
     padding: 5px;
 }
 
+.theContenu select {
+    padding: 2px;
+}
+
 .theContenu textarea {
-    width:100%;
+    width: 100%;
     padding: 5px;
 }
 
@@ -158,7 +162,6 @@ td {
 /** ____________________________________________ **/
 /** Input **/
 .input_custom {
-/*#form_evaluation input[type="submit"] {*/
     background-color: #acacac;
     color: white;
     padding: 10px;
@@ -167,8 +170,21 @@ td {
     cursor: pointer;
 }
 
+.input_custom[disabled] {
+    background-color: #e0e0e0;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: auto;
+}
+
 .input_custom:hover {
     background-color: #666666;
+}
+
+.input_custom[disabled]:hover {
+    background-color: #e0e0e0;
 }
 
 #form_mon_espace input[type="submit"] {
@@ -176,7 +192,7 @@ td {
 }
 
 #form_ajout_projet input[type="submit"], #form_ajout_projet input[type="button"],
-#form_projet_modifier input[type="submit"], #form_projet_modifier input[type="button"]{
+#form_projet_modifier input[type="submit"], #form_projet_modifier input[type="button"] {
     width: 10%
 }
 

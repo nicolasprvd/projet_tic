@@ -49,7 +49,7 @@ if (!empty($manuel)) {
                 ?>
                 <td>
                     <a href="<?php echo URL . 'choix_groupe.php&id=' . $project['idprojet'] . '&titre=' . $project['nomprojet']; ?>">
-                        Vous devez attribuer ce projet</a></td>
+                        > Vous devez attribuer ce projet</a></td>
                 <?php
                 // Si le projet est attribué
             } else {
