@@ -137,7 +137,7 @@ if (empty($docSubmit)) {
     $documents = getDocuments($myProject['idProjet']);
 
     //Si tous les documents ont été transmis
-    if (count($documents) == 3) {
+    if (count($documents) >= 3) {
         //Si l'évaluation n'a pas été faite
         $idEvaluation = getEvaluationPersonne($idGroup['idgroupe']);
         if (empty($idEvaluation['idevaluation'])) {
