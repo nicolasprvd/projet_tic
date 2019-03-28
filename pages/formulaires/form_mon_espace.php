@@ -45,6 +45,9 @@ unset($_REQUEST['messages']);
 //Données du formulaire
 $dataUser = getPersonneById($_SESSION['utilisateur']);
 ?>
+
+<h1> Mon espace </h1>
+
 <div class="pas" id="form_mon_espace">
     <div id="gauche">
         <form method="post" action="<?php echo URL . 'form_mon_espace.php'; ?>">

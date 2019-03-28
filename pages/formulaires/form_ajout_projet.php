@@ -63,6 +63,9 @@ if(isset($_REQUEST['messages'])) {
 <form enctype="multipart/form-data" class="pas" id="form_ajout_projet"
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
+
+        <h1> Ajouter un projet </h1> 
+        
         <!-- Client -->
         <p class="mbxl">
             <span class="bold">Client : </span>
