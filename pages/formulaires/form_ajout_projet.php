@@ -1,16 +1,16 @@
-<form enctype="multipart/form-data" class="pas" id="form_ajout"
+<form enctype="multipart/form-data" class="pas" id="form_ajout_projet"
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
         <!-- Client -->
         <p class="mbxl">
-            <span class="bold"> Client : </span>
+            <span class="bold">Client : </span>
             <span><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?> </span>
         </p>
 
         <!-- Titre -->
-        <p class="mbxl">
+        <p class="mbxl txtleft">
             <span class="bold">Titre : </span>
-            <span><input type="texte" name="title"/> </span>
+            <span><input type="text" name="title"/> </span>
         </p>
 
         <!-- Nombre d'étudiants -->
@@ -29,7 +29,7 @@
         <!-- Description -->
         <p class="mbxl" id="description">
             <span class="bold">Description : <br></span>
-            <span><TEXTAREA name="description" rows=3></TEXTAREA></span>
+            <span><textarea name="description" rows=3></textarea></span>
         </p>
 
         <!-- Fichier Joint -->
@@ -55,9 +55,9 @@
         </p>
 
         <!-- Boutons -->
-        <p id="boutons">
-            <input type="button" value="Annuler" class=mrm" onclick="location.href='index.php?page=form_ajout_projet.php'"/>
-            <input type="submit" value="Soumettre" name="btn_submit"/>
+        <p class="txtright">
+            <input type="button" class="input_custom" value="Annuler" class=mrm" onclick="location.href='index.php?page=form_ajout_projet.php'"/>
+            <input type="submit" class="input_custom" value="Soumettre" name="btn_submit"/>
         </p>
     </div>
 </form>

@@ -12,7 +12,7 @@ if (isset($_POST['btn_submit'])) {
 ?>
 
 <form enctype="multipart/form-data" action="<?php echo URL . 'historique.php'; ?>" method="POST" id="historique">
-    <input type="submit" value="Effectuer une sauvegarde" name="btn_submit"/>
+    <input type="submit" class="input_custom" value="Effectuer une sauvegarde" name="btn_submit"/>
 </form>
 
 <?php

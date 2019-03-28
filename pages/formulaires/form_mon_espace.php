@@ -65,7 +65,7 @@ $dataUser = getPersonneById($_SESSION['utilisateur']);
         </p>
         <!-- Modifier mes informations -->
         <p class="mbxl txtcenter">
-            <input type="submit" name="btn_update" value="Modifier mes informations"/>
+            <input type="submit" class="input_custom" name="btn_update" value="Modifier mes informations"/>
         </p>
     </form>
 
@@ -74,7 +74,7 @@ $dataUser = getPersonneById($_SESSION['utilisateur']);
     <form method="post">
         <!-- Nouveau mot de passe -->
         <p class="mbl">
-            <input type="password" placeholder="Nouveau mot de passe" name="input_password"/>
+            <input type="password"  placeholder="Nouveau mot de passe" name="input_password"/>
         </p>
         <!-- Confirmer mot de passe -->
         <p class="mbl">
@@ -82,7 +82,7 @@ $dataUser = getPersonneById($_SESSION['utilisateur']);
         </p>
         <!-- Modifier mot de passe -->
         <p class="mbxl txtcenter">
-            <input type="submit" name="btn_update_password" value="Modifier mon mot de passe"/>
+            <input type="submit" class="input_custom" name="btn_update_password" value="Modifier mon mot de passe"/>
         </p>
     </form>
 </div>
