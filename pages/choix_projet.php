@@ -15,6 +15,7 @@ $dataGroupeTemp = getGroupeTemp($idPersonne[0]);
 $data = getChefGroupeProjet($dataGroupeTemp['idPersonneChef'], $_GET['id']);
 $nbChoixProjets = count(getChoixTempByGroupTemp($dataGroupeTemp['idGroupe']));
 $choixTemp = getChoixTemp($_GET['id'], $dataGroupeTemp['idGroupe']);
+
 //Si la personne souhaite se positionner sur un projet
 if (isset($_POST['btn_submit_validate'])) {
 
@@ -22,7 +23,7 @@ if (isset($_POST['btn_submit_validate'])) {
     if ($dataGroupeTemp != null) {
         $_SESSION['btn_clicked'] = "disabled";
         insertNewChoixTemp($_GET['id'], $dataGroupeTemp['idGroupe']);
-        echo 'Votre choix a été enregistré';
+        ajouterMessage('Votre choix a été enregistré');
     } else {
         //Si le chef de groupe n'a pas été sélectionné ou si tous les étudiants n'ont pas été sélectionnés
         if (empty($_POST['chef']) || empty($_POST['etu']) || (count($_POST['etu']) < $project['nbEtudiants'] - 1)) {
@@ -66,7 +67,7 @@ if (isset($_POST['btn_submit_validate'])) {
                         // On insère le choix du projet pour le groupe en base
                         insertNewChoixTemp($_GET['id'], $idGroupChef['idGroupeTemp']);
                     }
-                    echo 'Votre choix a été enregistré';
+                    ajouterMessage('Votre choix a été enregistré');
                 }
             }
         }
@@ -94,7 +95,11 @@ if (isset($_POST['btn_submit_retract'])) {
         }
         unset($_SESSION['group_temp']);
     }
-    echo 'Votre choix a été enregistré avec succès.';
+    ajouterMessage('Votre choix a été enregistré avec succès.');
+}
+
+if(isset($_REQUEST['messages'])) {
+  include('./include/messages.php');
 }
 ?>
 
@@ -157,11 +162,9 @@ if (isset($_POST['btn_submit_retract'])) {
                         <option <?php echo !isset($_SESSION['btn_clicked']) ? 'selected' : ''; ?> disabled value="">Sélectionnez un étudiant</option>
                         <?php
                         foreach ($personnes as $p) {
-                            $i = 0;
                             ?>
-                            <option <?php if(isset($_SESSION['btn_clicked'])) { if($_POST['etu'][$i] == $p['idPersonne']) { echo 'selected'; }} ?> value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
+                            <option <?php if(isset($_SESSION['btn_clicked'])) { if($_POST['etu'][$i-1] == $p['idPersonne']) { echo 'selected'; }} ?> value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
                             <?php
-                            $i++;
                         }
                         ?>
                     </select>
