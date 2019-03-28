@@ -4,7 +4,7 @@
 * les erreurs de saisies 
 **/
 ?>
-<div>
+<div class="erreur bold">
   <ul>
     <?php
       foreach ($_REQUEST['erreurs'] as $error) {

@@ -46,43 +46,45 @@ unset($_REQUEST['messages']);
 $dataUser = getPersonneById($_SESSION['utilisateur']);
 ?>
 <div class="pas" id="form_mon_espace">
-    <form method="post" action="<?php echo URL . 'form_mon_espace.php'; ?>">
-        <!-- Nom -->
-        <p class="mbl">
-            <input type="text" name="input_name" value="<?php echo $dataUser['nomPersonne']; ?>"/>
-        </p>
-        <!-- Prénom -->
-        <p class="mbl">
-            <input type="text" name="input_firstname" value="<?php echo $dataUser['prenomPersonne']; ?>"/>
-        </p>
-        <!-- Libellé -->
-        <p class="mbl">
-            <input type="text" disabled name="input_status" value="<?php echo $dataUser['libelle']; ?>"/>
-        </p>
-        <!-- Mail -->
-        <p class="mbl">
-            <input type="text" name="input_email" value="<?php echo $dataUser['mailPersonne']; ?>"/>
-        </p>
-        <!-- Modifier mes informations -->
-        <p class="mbxl txtcenter">
-            <input type="submit" class="input_custom" name="btn_update" value="Modifier mes informations"/>
-        </p>
-    </form>
+    <div id="gauche">
+        <form method="post" action="<?php echo URL . 'form_mon_espace.php'; ?>">
+            <!-- Nom -->
+            <p class="mbl">
+                <input type="text" name="input_name" value="<?php echo $dataUser['nomPersonne']; ?>"/>
+            </p>
+            <!-- Prénom -->
+            <p class="mbl">
+                <input type="text" name="input_firstname" value="<?php echo $dataUser['prenomPersonne']; ?>"/>
+            </p>
+            <!-- Libellé -->
+            <p class="mbl">
+                <input type="text" disabled name="input_status" value="<?php echo $dataUser['libelle']; ?>"/>
+            </p>
+            <!-- Mail -->
+            <p class="mbl">
+                <input type="text" name="input_email" value="<?php echo $dataUser['mailPersonne']; ?>"/>
+            </p>
+            <!-- Modifier mes informations -->
+            <p class="mbxl txtcenter">
+                <input type="submit" class="input_custom" name="btn_update" value="Modifier mes informations"/>
+            </p>
+        </form>
+    </div>
 
-    <br>
-
-    <form method="post">
-        <!-- Nouveau mot de passe -->
-        <p class="mbl">
-            <input type="password"  placeholder="Nouveau mot de passe" name="input_password"/>
-        </p>
-        <!-- Confirmer mot de passe -->
-        <p class="mbl">
-            <input type="password" name="input_password_confirm" placeholder="Confimer mot de passe"/>
-        </p>
-        <!-- Modifier mot de passe -->
-        <p class="mbxl txtcenter">
-            <input type="submit" class="input_custom" name="btn_update_password" value="Modifier mon mot de passe"/>
-        </p>
-    </form>
+    <div id="droite">
+        <form method="post">
+            <!-- Nouveau mot de passe -->
+            <p class="mbl">
+                <input type="password" placeholder="Nouveau mot de passe" name="input_password"/>
+            </p>
+            <!-- Confirmer mot de passe -->
+            <p class="mbl">
+                <input type="password" name="input_password_confirm" placeholder="Confimer mot de passe"/>
+            </p>
+            <!-- Modifier mot de passe -->
+            <p class="mbxl txtcenter">
+                <input type="submit" class="input_custom" name="btn_update_password" value="Modifier mon mot de passe"/>
+            </p>
+        </form>
+    </div>
 </div>

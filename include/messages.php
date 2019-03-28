@@ -4,7 +4,7 @@
 * les messages d'info
 **/
 ?>
-<div>
+<div class="succes bold">
   <ul>
     <?php
       foreach ($_REQUEST['messages'] as $msg) {

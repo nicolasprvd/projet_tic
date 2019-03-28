@@ -1,3 +1,62 @@
+<?php
+
+//Si le formulaire a été envoyé
+
+if (isset($_POST['btn_submit'])) {
+
+    //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
+    if (!empty($_POST['title']) AND (!empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0)) {
+        $target_path = "";
+        $fichier = "";
+        if ($_FILES['descriptionJoint']['size'] <> 0) {
+
+
+            $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
+            $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
+            //Début des vérifications de sécurité...
+            if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+            {
+                ajouterErreur('Vous devez uploader un fichier de type doc, docx ou pdf, réessayez!');
+                include_once('./include/erreurs.php');
+                exit;
+            }
+
+            //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
+            if (file_exists("./documents")) {
+                if (!file_exists("./documents/sujet_client")) {
+                    mkdir("./documents/sujet_client");
+                }
+            } else {
+                mkdir("./documents");
+                mkdir("./documents/sujet_client");
+            }
+
+            // Permet l'insertion du fichier joint dans le dossier concerner
+            $target_path = "./documents/sujet_client/";
+            $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
+            $fichier = $_FILES['descriptionJoint']['name'];
+            if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
+                echo "Fichier ajouté avec succès";
+                echo "<br>";
+            } else {
+                ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
+                include_once('./include/erreurs.php');
+                exit();
+            }
+        }
+
+        //Permet de récupérer l'id du client
+        $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
+
+        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
+        echo "Le projet a bien été créé";
+    } else {
+        ajouterErreur('Vous devez renseigner tous les champs');
+        include_once('./include/erreurs.php');
+    }
+}
+?>
+
 <form enctype="multipart/form-data" class="pas" id="form_ajout_projet"
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
@@ -56,68 +115,11 @@
 
         <!-- Boutons -->
         <p class="txtright">
-            <input type="button" class="input_custom" value="Annuler" class=mrm" onclick="location.href='index.php?page=form_ajout_projet.php'"/>
+            <input type="button" class="input_custom" value="Annuler" class=mrm"
+                   onclick="location.href='index.php?page=form_ajout_projet.php'"/>
             <input type="submit" class="input_custom" value="Soumettre" name="btn_submit"/>
         </p>
     </div>
 </form>
 
-<?php
 
-//Si le formulaire a été envoyé
-
-if (isset($_POST['btn_submit'])) {
-
-    //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if (!empty($_POST['title']) AND (!empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0)) {
-        $target_path = "";
-        $fichier = "";
-        if ($_FILES['descriptionJoint']['size'] <> 0) {
-
-
-            $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
-            $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
-            //Début des vérifications de sécurité...
-            if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-            {
-                ajouterErreur('Vous devez uploader un fichier de type doc, docx ou pdf, réessayez!');
-                include_once('./include/erreurs.php');
-                exit;
-            }
-
-            //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
-            if (file_exists("./documents")) {
-                if (!file_exists("./documents/sujet_client")) {
-                    mkdir("./documents/sujet_client");
-                }
-            } else {
-                mkdir("./documents");
-                mkdir("./documents/sujet_client");
-            }
-
-            // Permet l'insertion du fichier joint dans le dossier concerner
-            $target_path = "./documents/sujet_client/";
-            $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
-            $fichier = $_FILES['descriptionJoint']['name'];
-            if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
-                echo "Fichier ajouté avec succès";
-                echo "<br>";
-            } else {
-                ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
-                include_once('./include/erreurs.php');
-                exit();
-            }
-        }
-
-        //Permet de récupérer l'id du client
-        $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
-
-        insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
-        echo "Le projet a bien été créé";
-    } else {
-        ajouterErreur('Vous devez renseigner tous les champs');
-        include_once('./include/erreurs.php');
-    }
-}
-
-?>
