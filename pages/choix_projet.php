@@ -14,7 +14,7 @@ $personnes = getPersonnes($status, $idPersonne[0]);
 $dataGroupeTemp = getGroupeTemp($idPersonne[0]);
 $data = getChefGroupeProjet($dataGroupeTemp['idPersonneChef'], $_GET['id']);
 $nbChoixProjets = count(getChoixTempByGroupTemp($dataGroupeTemp['idGroupe']));
-
+$choixTemp = getChoixTemp($_GET['id'], $dataGroupeTemp['idGroupe']);
 //Si la personne souhaite se positionner sur un projet
 if (isset($_POST['btn_submit_validate'])) {
 
@@ -100,10 +100,22 @@ if (isset($_POST['btn_submit_retract'])) {
 
 <h1><?php echo $project['nomProjet']; ?></h1>
 <div class="div_custom" id="choix_projet">
-    <p>Vous avez choisi le sujet : <?php echo $project['nomProjet']; ?></p>
-    <p class="mbl">Vous pouvez vous positionner sur plusieurs sujets, votre affectation sera faite aléatoirement. <br>Afin de vous
-        positionner sur ce sujet, veuillez constituer votre groupe à partir des éléments ci-dessous. Ce projet
-        nécessite <?php echo $project['nbEtudiants']; ?> étudiants.</p>
+  <?php
+    if(!empty($choixTemp)) {
+      ?>
+        <p>Vous avez choisi le sujet : <?php echo $project['nomProjet']; ?></p>
+      <?php
+    }
+
+    $automaticProject = getProjectById($_GET['id']);
+    if($automaticProject['automatique'] == 1) {
+      $attribution = "aléatoirement";
+    }else {
+      $attribution = "manuellement";
+    }
+  ?>
+
+    <p class="mbl">Vous pouvez vous positionner sur plusieurs sujets, votre affectation sera faite <?php echo $attribution; ?> sur ce projet. <br>Afin de vous positionner sur ce sujet, veuillez constituer votre groupe à partir des éléments ci-dessous. Ce projet nécessite <?php echo $project['nbEtudiants']; ?> étudiants.</p>
 
     <form method="post" action="">
         <?php
@@ -125,43 +137,37 @@ if (isset($_POST['btn_submit_retract'])) {
                 $i++;
             }
         } else {
-            for ($i = 1;
-                 $i < $project['nbEtudiants'];
-                 $i++) {
+            ?>
+            <p class="mbxl">
+                Chef de groupe :
+                <select name="chef">
+                    <option <?php echo !isset($_SESSION['btn_clicked']) ? 'selected' : ''; ?> disabled value="">Sélectionnez un étudiant</option>
+                    <option <?php echo isset($_SESSION['btn_clicked']) ? 'selected' : ''; ?> value="<?php echo $idPersonne[0]; ?>"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?></option>
+                </select>
+            </p>
+            <?php
+
+            for($i = 1; $i < $project['nbEtudiants']; $i++) {
                 ?>
                 <p class="mbxl">
                     <?php
                     echo 'Etudiant ' . $i . ' : ';
                     ?>
                     <select name="etu[]">
-                        <option selected disabled value="">Sélectionnez un étudiant</option>
+                        <option <?php echo !isset($_SESSION['btn_clicked']) ? 'selected' : ''; ?> disabled value="">Sélectionnez un étudiant</option>
                         <?php
                         foreach ($personnes as $p) {
+                            $i = 0;
                             ?>
-                            <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
+                            <option <?php if(isset($_SESSION['btn_clicked'])) { if($_POST['etu'][$i] == $p['idPersonne']) { echo 'selected'; }} ?> value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
                             <?php
+                            $i++;
                         }
                         ?>
                     </select>
                 </p>
                 <?php
             }
-            ?>
-            <p class="mbxl">
-                Chef de groupe :
-                <select name="chef">
-                    <option selected disabled value="">Sélectionnez un étudiant</option>
-                    <option value="<?php echo $idPersonne[0]; ?>"><?php echo $_SESSION['firstname'] . ' ' . $_SESSION['name']; ?></option>
-                    <?php
-                    foreach ($personnes as $p) {
-                        ?>
-                        <option value="<?php echo $p['idPersonne']; ?>"><?php echo $p['prenomPersonne'] . ' ' . $p['nomPersonne']; ?></option>
-                        <?php
-                    }
-                    ?>
-                </select>
-            </p>
-            <?php
         }
         ?>
 
