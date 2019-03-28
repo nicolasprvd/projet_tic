@@ -189,7 +189,7 @@
   * @return array $result tableau des étudiants
   **/
   function getPersonnes($status, $loggedPersonne) {
-    $query = "SELECT idPersonne, nomPersonne, prenomPersonne FROM personne WHERE idStatut = :status AND idPersonne != :idPersonne ORDER BY prenomPersonne ASC";
+    $query = "SELECT idPersonne, nomPersonne, prenomPersonne FROM personne WHERE idStatut = :status AND idPersonne != :idPersonne AND idgroupetemp is null ORDER BY prenomPersonne ASC";
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'status' => $status,
@@ -931,6 +931,18 @@
     $prepQuery = $GLOBALS['connex']->prepare($query);
     $prepQuery->execute(array(
       'idProject' => $idP
+    ));
+  }
+
+  /**
+  * Supprimer un projet depuis son identifiant
+  * @param $idProject identifiant du projet
+  **/
+  function deleteProject($idProject) {
+    $query = "DELETE FROM projet WHERE idprojet = :idProject";
+    $prepQuery = $GLOBALS['connex']->prepare($query);
+    $prepQuery->execute(array(
+      'idProject' => $idProject
     ));
   }
  ?>

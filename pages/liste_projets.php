@@ -5,6 +5,17 @@
 if (isset($_SESSION['btn_clicked'])) {
     unset($_SESSION['btn_clicked']);
 }
+
+if(isset($_GET['supprimer'])) {
+  deleteProject($_GET['id']);
+  if(!empty(getIdgroupeByIdproject($_GET['id']))) {
+    deleteChoixTempFromProjectId($_GET['id']);
+  }else {
+    ajouterErreur('Suppression impossible : ce projet est affecté à un groupe');
+    include('./include/erreurs.php');
+  }
+
+}
 ?>
 
 <table id="liste_projets">
@@ -34,7 +45,7 @@ if (isset($_SESSION['btn_clicked'])) {
                     <?php
                     //Accès modification et suppression pour l'administrateur
                     if ($_SESSION['status'] == 1) { ?>
-                        <a href="<?php echo URL . 'infos_projets.php&id=' . $project['idprojet']; ?>">> Supprimer</a>
+                        <a href="<?php echo URL . 'liste_projets.php&id=' . $project['idprojet']; ?>&supprimer=true" onclick="return confirm('Voulez-vous supprimer ce projet ?');">> Supprimer</a>
                         <?php
                     }
                     ?>
