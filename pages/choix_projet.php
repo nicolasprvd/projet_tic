@@ -179,14 +179,12 @@ if(isset($_REQUEST['messages'])) {
             //Si la personne n'est pas rattachée au projet
             if ($data == null) {
                 ?>
-                <input type="submit" class="input_custom" name="btn_submit_validate"
-                       value="Valider" <?php echo isset($_SESSION['btn_clicked']) ? $_SESSION['btn_clicked'] : ''; ?>/>
+                <input type="submit" class="input_custom" name="btn_submit_validate" value="Valider" <?php echo isset($_SESSION['btn_clicked']) ? $_SESSION['btn_clicked'] : ''; ?>/>
                 <?php
             } else {
                 //Si la personne est rattachée au projet correspondant
                 ?>
-                <input type="submit" class="input_custom" name="btn_submit_retract"
-                       value="Se rétracter" <?php echo isset($_SESSION['btn_clicked']) ? $_SESSION['btn_clicked'] : ''; ?> />
+                <input type="submit" class="input_custom" name="btn_submit_retract" value="Se rétracter" <?php echo isset($_SESSION['btn_clicked']) ? $_SESSION['btn_clicked'] : ''; ?> />
                 <?php
             } ?>
         </div>

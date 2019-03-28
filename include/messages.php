@@ -1,7 +1,7 @@
 <?php
 /**
 * Vue permettant d'afficher
-* les messages d'info
+* les messages d'information
 **/
 ?>
 <div class="succes bold">

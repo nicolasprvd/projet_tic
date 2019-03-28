@@ -1,7 +1,7 @@
 <?php
 /**
  * Formulaire d'inscription
- * pour une personne
+ * à l'application
  **/
 ?>
 <?php

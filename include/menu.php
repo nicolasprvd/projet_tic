@@ -1,3 +1,10 @@
+<?php
+/**
+* Page décrivant le menu
+* de l'application
+**/
+?>
+
 <div id="logo_universite"></div>
 <nav>
     <ul class="navigation">

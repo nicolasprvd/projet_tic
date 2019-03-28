@@ -1,60 +1,60 @@
 <?php
+/**
+* Page permettant d'ajouter un projet
+**/
 
 //Si le formulaire a été envoyé
+if(isset($_POST['btn_submit'])) {
 
-if (isset($_POST['btn_submit'])) {
-
-    //Si les champs Client, Titre, et (description et/ou fichier joint) sont présent alors je peux inserer le nouveau projet dans la base
-    if (!empty($_POST['title']) AND (!empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0)) {
+    //Si les champs Client, Titre, et (description et/ou fichier joint) sont présents alors insère le nouveau projet dans la base
+    if(!empty($_POST['title']) AND (!empty($_POST['description']) OR $_FILES['descriptionJoint']['size'] <> 0)) {
         $target_path = "";
         $fichier = "";
-        if ($_FILES['descriptionJoint']['size'] <> 0) {
-
-
+        if($_FILES['descriptionJoint']['size'] <> 0) {
             $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
             $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
-            //Début des vérifications de sécurité...
-            if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-            {
+            // Si l'extension n'est pas dans le tableau
+            if (!in_array($extension, $extensions)) {
                 ajouterErreur('Vous devez uploader un fichier de type doc, docx ou pdf, réessayez!');
                 include_once('./include/erreurs.php');
                 exit;
             }
 
             //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
-            if (file_exists("./documents")) {
-                if (!file_exists("./documents/sujet_client")) {
+            if(file_exists("./documents")) {
+                if(!file_exists("./documents/sujet_client")) {
                     mkdir("./documents/sujet_client");
                 }
-            } else {
+            }else {
                 mkdir("./documents");
                 mkdir("./documents/sujet_client");
             }
 
-            // Permet l'insertion du fichier joint dans le dossier concerner
+            // Permet l'insertion du fichier joint dans le dossier concerné
             $target_path = "./documents/sujet_client/";
             $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
             $fichier = $_FILES['descriptionJoint']['name'];
-            if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
+            if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
                 ajouterMessage('Fichier ajouté avec succès');
-            } else {
+            }else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
                 exit();
             }
         }
 
-        //Permet de récupérer l'id du client
+        //On récupère l'identifiant du client
         $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
-
+        //Insertion du projet en base
         insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
         ajouterMessage('Le projet a bien été créé');
-    } else {
+    }else {
         ajouterErreur('Vous devez renseigner tous les champs');
         include_once('./include/erreurs.php');
     }
 }
 
+//Affichage du message d'information
 if(isset($_REQUEST['messages'])) {
   include('./include/messages.php');
 }
@@ -64,8 +64,8 @@ if(isset($_REQUEST['messages'])) {
       action="index.php?page=form_ajout_projet.php" method="POST">
     <div>
 
-        <h1> Ajouter un projet </h1> 
-        
+        <h1> Ajouter un projet </h1>
+
         <!-- Client -->
         <p class="mbxl">
             <span class="bold">Client : </span>
@@ -122,7 +122,7 @@ if(isset($_REQUEST['messages'])) {
         <!-- Boutons -->
         <p class="txtright">
             <input type="button" class="input_custom" value="Annuler" class=mrm"
-                   onclick="location.href='index.php?page=form_ajout_projet.php'"/>
+                   onclick="location.href='<?php echo URL.'form_ajout_projet.php'; ?>'"/>
             <input type="submit" class="input_custom" value="Soumettre" name="btn_submit"/>
         </p>
     </div>

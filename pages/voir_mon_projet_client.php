@@ -1,6 +1,6 @@
 <?php
 /**
- * Page qui permet de voir un de mes projets ainsi que les pieces deposé par les étudiant
+ * Page qui permet de voir un de mes projets ainsi que les pieces deposés par les étudiant
  **/
 
 

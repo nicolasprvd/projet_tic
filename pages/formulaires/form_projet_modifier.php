@@ -7,15 +7,15 @@
 $project = getProjectById($_GET['id']);
 
 if (isset($_POST['btn_submit'])) {
-    if (empty($_POST['input_project_name'] || empty($_POST['textarea_description']))) {
+    if(empty($_POST['input_project_name'] || empty($_POST['textarea_description']))) {
         ajouterErreur('Veuillez renseigner le nom et la description du projet');
         include_once('./include/erreurs.php');
-    } else {
+    }else {
         if (!empty($_POST['descriptionJoint']) || $_FILES['descriptionJoint']['size'] != 0) {
             $target_path = "";
             $fichier = "";
-            if ($_FILES['descriptionJoint']['size'] <> 0) {
-                $extensions = array('.doc', '.docs', '.pdf');
+            if($_FILES['descriptionJoint']['size'] <> 0) {
+                $extensions = array('.doc', '.docx', '.pdf', '.DOC', '.DOCX', '.PDF');
                 $extension = strrchr($_FILES['descriptionJoint']['name'], '.');
                 //Début des vérifications de sécurité...
                 if (!in_array($extension, $extensions)) {
@@ -25,11 +25,11 @@ if (isset($_POST['btn_submit'])) {
                 }
 
                 //Nous vérifions que le dossier d'enregistrement du fichier est bien présent
-                if (file_exists("./documents")) {
-                    if (!file_exists("./documents/sujet_client")) {
+                if(file_exists("./documents")) {
+                    if(!file_exists("./documents/sujet_client")) {
                         mkdir("./documents/sujet_client");
                     }
-                } else {
+                }else {
                     mkdir("./documents");
                     mkdir("./documents/sujet_client");
                 }
@@ -38,15 +38,15 @@ if (isset($_POST['btn_submit'])) {
                 $target_path = "./documents/sujet_client/";
                 $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
                 $fichier = $_FILES['descriptionJoint']['name'];
-                if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
+                if(move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
                     ajouterMessage('Fichier ajouté avec succès');
-                } else {
+                }else {
                     ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                     include_once('./include/erreurs.php');
                     exit();
                 }
             }
-        } else {
+        }else {
             $fichier = $project['descriptifPdf'];
         }
 
@@ -54,7 +54,7 @@ if (isset($_POST['btn_submit'])) {
         ajouterMessage('Le projet a bien été modifié');
     }
 }
-
+// Affichage des messages d'information
 if(isset($_REQUEST['messages'])) {
   include('./include/messages.php');
 }

@@ -1,4 +1,8 @@
-<!-- Pages permettant de visualiser les attributions de projet -->
+<?php
+/**
+* Page permettant de visualiser les attributions de projets
+**/
+?>
 
 <?php
 //Si la personne souhaite se positionner sur un projet
@@ -22,7 +26,7 @@ if (isset($_POST['btn_choix'])) {
 $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
 $boucle = false ;
 
-// On récupère les projets a affecter manuellement
+// On récupère les projets à affecter manuellement
 $manuel = getManualProjects($idCustomer[0]);
 ?>
 
@@ -84,9 +88,6 @@ if (!empty($manuel)) {
                 </tr>
             <?php
         }
-
-    //On récupère la liste des projets
-    //$projects = getProjects();
 
     foreach ($automatic as $project) {
         ?>

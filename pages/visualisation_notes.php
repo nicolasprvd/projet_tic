@@ -1,4 +1,8 @@
-<!-- Pages permettant de visualiser et récupérer les notes de chaque étudiant -->
+<?php
+/**
+* Page permettant de visualiser et récupérer les notes de chaque étudiant
+**/
+?>
 
 <h1> Visualisation des notes </h1>
 

@@ -19,8 +19,7 @@
                 <td>Cahier des charges</td>
                 <td><?php define_list_note('note_cdc'); ?></td>
                 <td><?php define_list_coeff('coeff_cdc'); ?></td>
-            </
-            >
+            </tr>
             <tr class="font-x-small">
                 <td>Soutenance</td>
                 <td><?php define_list_note('note_soutenance'); ?></td>
@@ -34,17 +33,18 @@
         </table>
 
         <p class="mbxl">
-            <input type="submit" class="input_custom" name="btn_calcul" value="Calculer la note finale">
+            <input type="submit" class="input_custom" name="btn_calcul" value="Calculer la note finale" />
         </p>
     </form>
     <?php
-    if (isset($_POST['btn_calcul'])) {
-        //Teste sur les champs
+    //Calcul de la moyenne et insertion en base
+    if(isset($_POST['btn_calcul'])) {
+        //Test sur les champs
         //Champs vides
-        if (empty($_POST['note_cdc']) || empty($_POST['note_soutenance']) || empty($_POST['note_rendu'])) {
+        if(empty($_POST['note_cdc']) || empty($_POST['note_soutenance']) || empty($_POST['note_rendu'])) {
             ajouterErreur('Vous devez renseigner toutes les notes');
             include('./include/erreurs.php');
-        } else {
+        }else {
             $somme_coeff = $_POST['coeff_cdc'] + $_POST['coeff_soutenance'] + $_POST['coeff_rendu'];
             $moyenne = ((($_POST['note_cdc'] * $_POST['coeff_cdc']) + ($_POST['note_soutenance'] * $_POST['coeff_soutenance']) + ($_POST['note_rendu'] * $_POST['coeff_rendu'])) / $somme_coeff);
             echo '<strong>Note finale = ' . round($moyenne) . '</strong>';
@@ -63,7 +63,7 @@
             include('./include/messages.php');
             ?>
             <p class="mbxl">
-                <input type="button" class="input_custom" name="btn_retour" value="Retour" onclick="history.go(-2)">
+                <input type="button" class="input_custom" name="btn_retour" value="Retour" onclick="history.go(-2)" />
             </p>
             <?php
         }

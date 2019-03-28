@@ -9,13 +9,10 @@
     <p> Vous devez choisir un groupe pour votre projet </p>
 
 <?php
-//Afficher le  titre du projet
 
 $idgroupe = getIdgroupeByIdproject($_GET['id']);
 
 if (!empty($idgroupe)) {
-    ?>
-    <?php
     ?>
 
     <table id="choix_groupe">
@@ -27,12 +24,10 @@ if (!empty($idgroupe)) {
         </tr>
         <?php
 
-
         foreach ($idgroupe as $groupe) {
             ?>
             <tr class="font-x-small">
                 <td><?php echo $groupe['idgroupe']; ?></td>
-
 
                 <?php
                 // On recupere le chef de projet du groupe

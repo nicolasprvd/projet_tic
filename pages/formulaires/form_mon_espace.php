@@ -4,7 +4,7 @@
  **/
 
 //Si l'utilisateur a modifié ses informations
-if (isset($_POST['btn_update'])) {
+if(isset($_POST['btn_update'])) {
     //Si un des champs est vide
     if (in_array('', $_POST)) {
         ajouterErreur('Vous devez renseigner votre nom, votre prénom et votre email');
@@ -15,33 +15,35 @@ if (isset($_POST['btn_update'])) {
         $_SESSION['name'] = $_POST['input_name'];
         $_SESSION['firstname'] = $_POST['input_firstname'];
     }
-    //ici
 }
 
-if (isset($_POST['btn_update_password'])) {
+if(isset($_POST['btn_update_password'])) {
 
     //Si un des champs est vide
-    if (in_array('', $_POST)) {
+    if(in_array('', $_POST)) {
         ajouterErreur('Vous devez renseigner votre mot de passe');
         include('./include/erreurs.php');
-    } else {
+    }else {
 
         //Si le mot de passe est similaire à celui de confirmation
         if ($_POST['input_password'] == $_POST['input_password_confirm']) {
             $password = password_hash($_POST['input_password'], PASSWORD_DEFAULT);
             updatePasswordPersonne($password, $_SESSION['utilisateur']);
             ajouterMessage('Votre mot de passe a été modifié');
-        } else {
+        }else {
             ajouterErreur('Mots de passe incorrects');
             include('./include/erreurs.php');
         }
     }
 }
 
-if (isset($_REQUEST['messages'])) {
+// Affichage des messages d'information
+if(isset($_REQUEST['messages'])) {
     include('./include/messages.php');
 }
+
 unset($_REQUEST['messages']);
+
 //Données du formulaire
 $dataUser = getPersonneById($_SESSION['utilisateur']);
 ?>

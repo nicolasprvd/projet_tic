@@ -1,7 +1,7 @@
 <?php
 /**
  * Page qui liste les projets temporaires choisis
- * Une fois le projet attribué on y voit ses informations, les pieces a deposé etc
+ * Une fois le projet attribué on y voit ses informations, les pieces a deposer etc
  **/
 
 //Gestion d'erreur : soumission multiple du formulaire de constitution du groupe
@@ -37,9 +37,7 @@ if (empty($attribuate)) {
                 <th>Actions</th>
             </tr>
             <?php
-            foreach ($projects
-
-            as $project) {
+            foreach ($projects as $project) {
             ?>
             <tr class="font-x-small">
                 <td><?php echo $project['nomProjet']; ?></td>
@@ -56,7 +54,7 @@ if (empty($attribuate)) {
                     <td><a href="<?php echo URL . 'infos_projets.php&id=' . $project['idProjet']; ?>">> Voir</a></td>
                     <?php
                 }
-                }
+              }
                 ?>
             </tr>
         </table>

@@ -32,7 +32,6 @@
 </table>
 <?php
   }
-
     if(empty($projects)) {
       echo '<strong>Aucun groupe n\'a été constitué pour le moment.</strong>';
     }else {

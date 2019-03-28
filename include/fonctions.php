@@ -1,5 +1,4 @@
 <?php
-
 /**
 * Fichier répertoriant des fonctions
 * utiles pour la gestion de l'application
@@ -52,17 +51,6 @@ function estConnecte() {
 function deconnecter() {
   session_destroy();
   header('Location: index.php');
-}
-
-/**
-* Transforme une date au format anglais
-* @param $myDate date au format aaaa-mm-jj
-* @return $date date au format jj/mm/aaa
-**/
-function dateAnglaisVersFrancais($myDate) {
-  @list($annee, $mois, $jour) = explode('-', $myDate);
-  $date = "$jour" . "/" . $mois . "/" . $annee;
-  return $date;
 }
 
 /**

@@ -1,3 +1,9 @@
+<?php
+/**
+* Page du header
+**/
+?>
+
 <p class="font-x-large bold upper mam">Application de gestion des Projets TIC</p>
 
 <?php

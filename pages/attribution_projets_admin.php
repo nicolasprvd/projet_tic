@@ -1,23 +1,23 @@
-<!-- Pages permettant lancer l'attribution automatique des projets et de recuperer le csv des projets attribuer aux groupes -->
-
 <?php
-if (isset($_POST['btn_attribution'])) {
+/**
+*Pages permettant de lancer l'attribution automatique des projets7
+* et de recuperer le csv des projets attribuer aux groupes -->
+**/
+
+if(isset($_POST['btn_attribution'])) {
 
     $sortir = false;
     while (!$sortir) {
         $sortir = true;
-
-
         $estTraitee = false;
 
-        //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+        //Tant que l'on peut attribuer les projets facilement (1 seule demande sur un projet)
         while (!$estTraitee) {
             $estTraitee = true;
             $projet = getAutomaticalProjects();
 
             //Taitement de chaque projet
             foreach ($projet as $projets) {
-
                 $nbDemande = getNbDemande($projets['idprojet']);
 
                 // Si le projet a été demandé qu'une seule fois
@@ -43,10 +43,9 @@ if (isset($_POST['btn_attribution'])) {
             }
         }
 
-
         $estTraitee = false;
 
-        //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+        //Tant que l'on peut attribuer les projets facilement (1 seule demande sur un projet)
         while (!$estTraitee) {
             $estTraitee = true;
             $projet = getAutomaticalProjects();
@@ -58,10 +57,6 @@ if (isset($_POST['btn_attribution'])) {
                 // Si le projet a été demandé qu'une seule fois
                 if ($nbDemande['nbFoisDemande'] == 1) {
                     $sortir = false;
-
-                    //On récupère l'idGroupe qui a demander ce projet
-                    // $idGroup = getIdgByIdproject($projets['idprojet']);
-
 
                     //On récupère le chef de projet
                     //selectionner le chef de projet
@@ -88,7 +83,7 @@ if (isset($_POST['btn_attribution'])) {
     //Tant qu'il y a toujours des projets dans choix_projet
     $projet = getAutomaticalProjects();
     while (!empty($projet)) {
-        //On attribut la premiere ligne recuperer puis on reprend le traitement "facile"
+        //On attribue la premiere ligne recuperée puis on reprend le traitement "facile"
         $projectAAttribuates = getAutomaticalProject();
 
         foreach ($projectAAttribuates as $projectAAttribuate) {
@@ -112,7 +107,7 @@ if (isset($_POST['btn_attribution'])) {
             }
         }
 
-        // On récupère choix_projets et on traiter avec le traitement "facile"
+        // On récupère choix_projet et on traite avec le traitement "facile"
         $sortir = false;
         while (!$sortir) {
             $sortir = true;
@@ -120,7 +115,7 @@ if (isset($_POST['btn_attribution'])) {
             $projet = getAutomaticalProjects();
             $estTraitee = false;
 
-            //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+            //Tant que l'on peut attribuer les projets facilement (1 seule demande sur un projet)
             while (!$estTraitee) {
                 $estTraitee = true;
                 $projet = getAutomaticalProjects();
@@ -157,8 +152,7 @@ if (isset($_POST['btn_attribution'])) {
 
             $estTraitee = false;
 
-            //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
-            //Tant que l'on peut attribué les projets facilement (1 seule demande sur un projet)
+            //Tant que l'on peut attribuer les projets facilement (1 seule demande sur un projet)
             while (!$estTraitee) {
                 $estTraitee = true;
                 $projet = getAutomaticalProjects();
@@ -170,10 +164,6 @@ if (isset($_POST['btn_attribution'])) {
                     // Si le projet a été demandé qu'une seule fois
                     if ($nbDemande['nbFoisDemande'] == 1) {
                         $sortir = false;
-
-                        //On récupère l'idGroupe qui a demander ce projet
-                        // $idGroup = getIdgByIdproject($projets['idprojet']);
-
 
                         //On récupère le chef de projet
                         //selectionner le chef de projet
@@ -190,7 +180,6 @@ if (isset($_POST['btn_attribution'])) {
                         foreach ($etu as $e) {
                             updatePersonneGroupe($projets['idgroupe'], $e['idPersonne']);
                         }
-
                         $estTraitee = false;
                     }
                 }
@@ -235,8 +224,7 @@ if (!empty($projetNoAttribuate)) {
         <input disabled type="submit" class="input_custom" value="Attribution Automatique"/>
     </p>
 
-    <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs
-        clients </p>
+    <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs clients </p>
 
     <?php
 } else {
@@ -253,10 +241,6 @@ if (!empty($projetNoAttribuate)) {
     }
 }
 
-?>
-
-
-<?php
 if ($attrib) {
     //Récupère la liste des projets
     $projects = getProjectsAttribuate();
@@ -328,8 +312,8 @@ if ($attrib) {
           <a href="<?php echo "./documents/attribution.csv" ?>">> Exporter CSV</a>
       </p>
       <?php
+    }else {
+      echo '<strong>Aucune attribution n\'a été effectuée pour le moment.</strong>';
     }
-}else {
-  echo '<strong>Aucune attribution n\'a été effectuée pour le moment.</strong>';
 }
 ?>

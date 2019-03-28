@@ -1,6 +1,9 @@
 <?php
+/**
+* Formulaire de connexion à l'application
+**/
 
-if (isset($_POST['btn_cancel'])) {
+if(isset($_POST['btn_cancel'])) {
     unset($_REQUEST['erreurs']);
 }
 
@@ -11,7 +14,7 @@ if (isset($_POST['btn_signin'])) {
         ajouterErreur('Identifiant ou mot de passe incorrect');
         $_SESSION['formSubmittedErrors'] = true;
         echo "<script>document.getElementById('signin').style.display='block';</script>";
-    } else {
+    }else {
         connecter($data['idStatut'], $data['nomPersonne'], $data['prenomPersonne'], $data['idPersonne']);
         header('Location: index.php');
     }
@@ -43,8 +46,7 @@ if (isset($_POST['btn_signin'])) {
 
         <div class="container mrs txtright">
             <button type="submit" name="btn_signin">Se connecter</button>
-            <button onclick="document.getElementById('signin').style.display='none'" class="mrs"
-                    name="btn_cancel">Annuler
+            <button onclick="document.getElementById('signin').style.display='none'" class="mrs" name="btn_cancel">Annuler
             </button>
         </div>
     </form>

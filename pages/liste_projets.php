@@ -1,4 +1,8 @@
-<!-- Page qui affiche la liste des projets -->
+<?php
+/**
+* Page qui affiche la liste des projets
+**/
+?>
 
 <h1> Visualisation des projets </h1>
 
@@ -18,7 +22,7 @@ if(isset($_GET['supprimer'])) {
     include('./include/erreurs.php');
   }
 }
-
+// Affiche les messages d'erreur
 if(isset($_REQUEST['messages'])) {
   include('./include/messages.php');
 }

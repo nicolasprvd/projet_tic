@@ -12,6 +12,7 @@ if (isset($_POST['btn_submit'])) {
     dumpBase(HOST, USER, PASSWORD, DBNAME, $date);
 }
 
+// Affiche les messages d'information
 if(isset($_REQUEST['messages'])) {
   include('../include/messages.php');
 }
