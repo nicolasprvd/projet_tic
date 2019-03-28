@@ -65,7 +65,9 @@ if (!empty($manuel)) {
         <?php
     }
 }
-
+?>
+    <h1> Mes projets </h1>
+    <?php
     // On récupère les projets a affecter automatiquement
     $automatic = getAutomaticProjects($idCustomer[0]);
 
