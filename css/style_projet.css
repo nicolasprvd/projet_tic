@@ -87,6 +87,25 @@
     text-align: -webkit-center;
 }
 
+.theContenu ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+.theContenu input[type="text"], .theContenu input[type="password"] {
+    padding: 5px;
+}
+
+.theContenu select {
+    padding: 2px;
+}
+
+.theContenu textarea {
+    width: 100%;
+    padding: 5px;
+}
+
 .accueil-text {
     position: relative;
     width: 80%;
@@ -142,8 +161,7 @@ td {
 
 /** ____________________________________________ **/
 /** Input **/
-#form_mon_espace input[type="submit"], #boutons input, #historique input[type="submit"], #attribution_projet_admin_form input,
-#infos_projet input {
+.input_custom {
     background-color: #acacac;
     color: white;
     padding: 10px;
@@ -152,38 +170,36 @@ td {
     cursor: pointer;
 }
 
+.input_custom[disabled] {
+    background-color: #e0e0e0;
+    color: white;
+    padding: 10px;
+    border: none;
+    font-size: 13px;
+    cursor: auto;
+}
+
+.input_custom:hover {
+    background-color: #666666;
+}
+
+.input_custom[disabled]:hover {
+    background-color: #e0e0e0;
+}
+
 #form_mon_espace input[type="submit"] {
     width: 21%;
 }
 
-#boutons input {
+#form_ajout_projet input[type="submit"], #form_ajout_projet input[type="button"],
+#form_projet_modifier input[type="submit"], #form_projet_modifier input[type="button"] {
     width: 10%
 }
 
-#historique {
-    width: 15%;
-}
-
-#form_mon_espace input[type="submit"]:hover, #form_ajout input[type="submit"]:hover, #historique input[type="submit"]:hover,
-#attribution_projet_admin_form input:hover, #infos_projet input:hover {
-    background-color: #666666;
-}
-
 /** ____________________________________________ **/
-/** Ajouter un projet **/
-#form_ajout, #form_mon_espace, #visualisation, #liste_projets, #mes_projets_client, #attribution_projet_admin, #infos_projet {
+/** Div **/
+#form_ajout_projet, #form_mon_espace, #visualisation, #liste_projets, #mes_projets, #mes_projets_client, #attribution_projet_admin, #infos_projet,
+#voir_mon_projet_client, .div_custom {
     width: 70%;
-    text-align: justify;
-}
-
-#description textarea {
-    width: 100%;
-}
-
-#boutons {
-    text-align: right;
-}
-
-#infos_projet_form {
-    text-align: center;
+    text-align: left;
 }

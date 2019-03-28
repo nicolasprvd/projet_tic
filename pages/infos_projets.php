@@ -3,9 +3,7 @@
  * Page permettant d'avoir le
  * détail du projet sélectionné
  **/
-?>
 
-<?php
 $project = getProjectById($_GET['id']);
 
 //Si l'administrateur souhaite modifier les informations du projet
@@ -46,7 +44,7 @@ if (isset($_POST['btn_update_project'])) {
     if ($_SESSION['status'] == 1) {
         ?>
         <form method="post" class="txtcenter">
-            <input type="submit" name="btn_update_project" value="Modifier">
+            <input type="submit" class="input_custom" name="btn_update_project" value="Modifier">
         </form>
         <?php
     }

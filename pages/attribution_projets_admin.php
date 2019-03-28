@@ -212,7 +212,7 @@ $projetNoAttribuate = getManualProjectsNoAttribuate();
 if (!empty($projetNoAttribuate)) {
     ?>
     <p> Liste des projets qui n'ont pas encore été attribués manuellement par le client : </p>
-    <table id="attribution_projet_admin">
+    <table>
         <tr class="upper txtcenter">
             <th>Nom</th>
             <th>Description</th>
@@ -234,7 +234,7 @@ if (!empty($projetNoAttribuate)) {
     </table>
 
     <p class="mtm mbxl" id="attribution_projet_admin_form">
-        <input disabled type="submit" value="Attribution Automatique"/>
+        <input disabled type="submit" class="input_custom" value="Attribution Automatique"/>
     </p>
 
     <p> Pour pouvoir lancer l'attribution automatique il faut que les projets ci-dessus soient attribués par leurs
@@ -249,7 +249,7 @@ if (!empty($projetNoAttribuate)) {
     } else {
         ?>
         <form enctype="multipart/form-data" action="index.php?page=attribution_projets_admin.php" method="POST" id="attribution_projet_admin_form">
-            <input type="submit" value="Attribution Automatique" name="btn_attribution"/>
+            <input type="submit" class="input_custom" value="Attribution Automatique" name="btn_attribution"/>
         </form>
         <?php
     }
