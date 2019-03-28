@@ -95,7 +95,7 @@ if (!empty($manuel)) {
             <td><?php echo $project['descriptiftexte']; ?></td>
 
             <?php
-            // Si le projet n'est pas attribué 
+            // Si le projet n'est pas attribué
             $projetAttribuer = getprojetAttribuer($project['idprojet']);
             if (empty($projetAttribuer)) {
                 ?>
@@ -121,7 +121,7 @@ if (!empty($manuel)) {
 }
 
 if (!$boucle) {
-    echo "Vous n'avez pas de projet en cours.";
+    echo "<strong>Vous n'avez pas de projet en cours.</strong>";
 }
 
 ?>

@@ -16,12 +16,18 @@ $idGroup = getGroupeTempByPersonne($idPersonne[0]);
 
 $attribuate = getProjectAttribuate($idGroup['idGroupeTemp']);
 
+if(isset($_REQUEST['messages'])) {
+  include('./include/messages.php');
+}
+?>
+<h1>Mes projets</h1>
+<?php
 if (empty($attribuate)) {
     //On récupère la liste de ses choix
     $projects = getChoixProjets($idGroup['idGroupeTemp']);
 
     if ($projects == null) {
-        echo '<p>Vous n\'avez choisi aucun projet pour le moment.</p>';
+        echo '<p><strong>Vous n\'avez choisi aucun projet pour le moment.</p></strong>';
     } else {
         ?>
         <table id="mes_projets_client">
@@ -256,8 +262,7 @@ $myProject = getProjectById($attribuate['idprojet']);
             $target_path = $target_path . basename($_FILES['CDC']['name']);
             $fichier = $_FILES['CDC']['name'];
             if (move_uploaded_file($_FILES['CDC']['tmp_name'], $target_path)) {
-                echo "Fichier ajouté avec succès";
-                echo "<br>";
+                ajouterMessage('Fichier ajouté avec succès');
             } else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
@@ -267,7 +272,7 @@ $myProject = getProjectById($attribuate['idprojet']);
 
             // On insere le document dans la base
             insertNewDoc($myProject['idProjet'], $fichier, 'CDC');
-            echo "Le cahier des charges a bien été déposé";
+            ajouterMessage('Le cahier des charges a bien été déposé');
 
             //Si le fichier n'a pas été inseré
         } else {
@@ -312,8 +317,7 @@ $myProject = getProjectById($attribuate['idprojet']);
             $target_path = $target_path . basename($_FILES['GANTT']['name']);
             $fichier = $_FILES['GANTT']['name'];
             if (move_uploaded_file($_FILES['GANTT']['tmp_name'], $target_path)) {
-                echo "Fichier ajouté avec succès";
-                echo "<br>";
+                ajouterMessage('Fichier ajouté avec succès');
             } else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
@@ -323,7 +327,7 @@ $myProject = getProjectById($attribuate['idprojet']);
 
             // On insere le document dans la base
             insertNewDoc($myProject['idProjet'], $fichier, 'GANTT');
-            echo "Le gantt a bien été déposé";
+            ajouterMessage('Le gantt a bien été déposé');
 
             //Si le fichier n'a pas été inseré
         } else {
@@ -367,8 +371,7 @@ $myProject = getProjectById($attribuate['idprojet']);
             $target_path = $target_path . basename($_FILES['RF']['name']);
             $fichier = $_FILES['RF']['name'];
             if (move_uploaded_file($_FILES['RF']['tmp_name'], $target_path)) {
-                echo "Fichier ajouté avec succès";
-                echo "<br>";
+                ajouterMessage('Fichier ajouté avec succès');
             } else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
@@ -377,7 +380,7 @@ $myProject = getProjectById($attribuate['idprojet']);
 
             // On insere le document dans la base
             insertNewDoc($myProject['idProjet'], $fichier, 'RF');
-            echo "Le rendu final a bien été déposé";
+            ajouterMessage('Le rendu final a bien été déposé');
 
             //Si le fichier n'a pas été inseré
         } else {

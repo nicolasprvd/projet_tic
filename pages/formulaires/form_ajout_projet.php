@@ -36,8 +36,7 @@ if (isset($_POST['btn_submit'])) {
             $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
             $fichier = $_FILES['descriptionJoint']['name'];
             if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
-                echo "Fichier ajouté avec succès";
-                echo "<br>";
+                ajouterMessage('Fichier ajouté avec succès');
             } else {
                 ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                 include_once('./include/erreurs.php');
@@ -49,11 +48,15 @@ if (isset($_POST['btn_submit'])) {
         $idCustomer = getIdPeople($_SESSION['name'], $_SESSION['firstname']);
 
         insertNewProject($idCustomer[0], $_POST['title'], $_POST['nbStudent'], $_POST['description'], $fichier, $_POST['automatique']);
-        echo "Le projet a bien été créé";
+        ajouterMessage('Le projet a bien été créé');
     } else {
         ajouterErreur('Vous devez renseigner tous les champs');
         include_once('./include/erreurs.php');
     }
+}
+
+if(isset($_REQUEST['messages'])) {
+  include('./include/messages.php');
 }
 ?>
 
@@ -124,5 +127,3 @@ if (isset($_POST['btn_submit'])) {
         </p>
     </div>
 </form>
-
-

@@ -6,7 +6,7 @@
 * se connecter à la BDD
 **/
 define('HOST', '127.0.0.1');
-define('DBNAME', 'projettic');
+define('DBNAME', 'testprojettic');
 define('SOURCE', 'mysql:host='.HOST.';dbname='.DBNAME);
 define('USER', 'root');
 define('PASSWORD', '');

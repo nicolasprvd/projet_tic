@@ -8,9 +8,9 @@ $chemin = './documents/export_notes.csv';
 $delimiteur = ';'; // Pour une tabulation, $delimiteur = "t";
 $fichier_csv = fopen($chemin, 'w+');
 fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+if(!empty($persEvalue)) {
 ?>
-
-
 <table id="visualisation">
     <tr class="upper txtcenter">
         <th> Nom personne</th>
@@ -23,7 +23,7 @@ fprintf($fichier_csv, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
     <?php
     // On affiche une fois l'entête sans boucle
-    $entetes = array('Nom personne', 'Prenom personne', 'Note CDC', 'Note soutenantce', 'Note rendu', 'Note fianle');
+    $entetes = array('Nom personne', 'Prénom personne', 'Note CDC', 'Note soutenance', 'Note rendu', 'Note finale');
     fputcsv($fichier_csv, $entetes, $delimiteur);
 
     foreach ($persEvalue as $eval) {
@@ -85,4 +85,7 @@ foreach ($export as $ligneaexporter) {
 // fermeture du fichier csv
 fclose($fichier_csv);
 export_csv($fichier_csv);
+}else {
+  echo '<strong>Aucun projet n\'a été évalué pour le moment.</strong>';
+}
 ?>

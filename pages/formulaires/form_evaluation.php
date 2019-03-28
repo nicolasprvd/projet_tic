@@ -47,7 +47,7 @@
         } else {
             $somme_coeff = $_POST['coeff_cdc'] + $_POST['coeff_soutenance'] + $_POST['coeff_rendu'];
             $moyenne = ((($_POST['note_cdc'] * $_POST['coeff_cdc']) + ($_POST['note_soutenance'] * $_POST['coeff_soutenance']) + ($_POST['note_rendu'] * $_POST['coeff_rendu'])) / $somme_coeff);
-            echo 'Note finale = ' . $moyenne;
+            echo '<strong>Note finale = ' . round($moyenne) . '</strong>';
 
             //Insertion en base de données
             $notes = array();

@@ -9,6 +9,10 @@ if (isset($_POST['btn_submit'])) {
     $date = date('Ymd');
     dumpBase(HOST, USER, PASSWORD, DBNAME, $date);
 }
+
+if(isset($_REQUEST['messages'])) {
+  include('../include/messages.php');
+}
 ?>
 
 <form enctype="multipart/form-data" action="<?php echo URL . 'historique.php'; ?>" method="POST" id="historique" class="mbl">

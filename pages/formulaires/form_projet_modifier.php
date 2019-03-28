@@ -39,8 +39,7 @@ if (isset($_POST['btn_submit'])) {
                 $target_path = $target_path . basename($_FILES['descriptionJoint']['name']);
                 $fichier = $_FILES['descriptionJoint']['name'];
                 if (move_uploaded_file($_FILES['descriptionJoint']['tmp_name'], $target_path)) {
-                    echo "Fichier ajouté avec succès";
-                    echo "<br>";
+                    ajouterMessage('Fichier ajouté avec succès');
                 } else {
                     ajouterErreur('Une erreur s est produite lors l enregistrement du fichier, réessayez!');
                     include_once('./include/erreurs.php');
@@ -52,8 +51,12 @@ if (isset($_POST['btn_submit'])) {
         }
 
         updateDataProject($_POST['input_project_name'], $_POST['select_nbStudent'], $_POST['textarea_description'], $fichier, $_POST['automatique'], $_GET['id']);
-        echo "Le projet a bien été modifié";
+        ajouterMessage('Le projet a bien été modifié');
     }
+}
+
+if(isset($_REQUEST['messages'])) {
+  include('./include/messages.php');
 }
 ?>
 
