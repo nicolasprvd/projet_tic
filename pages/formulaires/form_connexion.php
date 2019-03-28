@@ -7,7 +7,6 @@ if (isset($_POST['btn_cancel'])) {
 // Si l'utilisateur a tenté de s'authentifier
 if (isset($_POST['btn_signin'])) {
     $data = getUserDataAuth($_POST['input_login']);
-    session_regenerate_id();
     if ((!password_verify($_POST['input_password'], $data['password'])) || (!filter_var($_POST['input_login'], FILTER_VALIDATE_EMAIL))) {
         ajouterErreur('Identifiant ou mot de passe incorrect');
         $_SESSION['formSubmittedErrors'] = true;

@@ -85,7 +85,8 @@ $myProject = getProjectById($_GET['id']);
 <?php
 $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
 if (empty($docSubmit)) {
-    echo "Le cahier des charges n'a pas encore été déposé";
+    ajouterErreur('Le cahier des charges n\'a pas encore été déposé');
+    include('./include/erreurs.php');
 } else {
     echo 'Le cahier des charges a été déposé :' ?> <a
             href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>"
@@ -103,7 +104,8 @@ if (empty($docSubmit)) {
 <?php
 $docSubmit = getDocSubmit($myProject['idProjet'], 'GANTT');
 if (empty($docSubmit)) {
-    echo "Le gantt n'a pas encore été déposé";
+    ajouterErreur('Le gantt n\'a pas encore été déposé');
+    include('./include/erreurs.php');
 } else {
     echo 'Le gantt a été déposé :' ?> <a href="documents/gantt/<?php echo $docSubmit['chemindoc']; ?>"
                                          target=\"_BLANK\">> Télécharger</a>
@@ -120,7 +122,7 @@ if (empty($docSubmit)) {
 <?php
 $docSubmit = getDocSubmit($myProject['idProjet'], 'RF');
 if (empty($docSubmit)) {
-    echo "Le rendu final n'a pas encore été déposé";
+    ajouterErreur('Le rendu final n\'a pas encore été déposé');
 } else {
     echo 'Le rendu final a été déposé :' ?> <a href="documents/rendu_final/<?php echo $docSubmit['chemindoc']; ?>"
                                                target=\"_BLANK\">> Télécharger</a>

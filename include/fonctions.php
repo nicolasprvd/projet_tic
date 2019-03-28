@@ -178,15 +178,15 @@ function dumpBase($host, $user, $password, $base, $date) {
     }
     switch($worked) {
       case 0:
-        echo 'La base de données a été stockée avec succès dans le dossier de sauvegarde';
+        ajouterMessage('La base de données a été stockée avec succès dans le dossier de sauvegarde');
         break;
 
       case 1:
-        echo 'Une erreur s\'est produite lors de la exportation de la base de données.';
+        ajouterMessage('Une erreur s\'est produite lors de la exportation de la base de données.');
         break;
 
       case 2:
-        echo 'Une erreur d exportation s\'est produite, veuillez vérifier les informations suivantes : <br/><br/><table><tr><td>Base de données:</td><td><b>' .$base .'</b></td></tr><tr><td>Utilisateur mysql:</td><td><b>' .$user .'</b></td></tr><tr><td>Mot de passe mysql:</td><td><b>NOTSHOWN</b></td></tr><tr><td>Hôte mysql:</td><td><b>' .$host .'</b></td></tr></table>';
+        ajouterMessage('Une erreur d exportation s\'est produite, veuillez vérifier les informations suivantes : <br/><br/><table><tr><td>Base de données:</td><td><b>' .$base .'</b></td></tr><tr><td>Utilisateur mysql:</td><td><b>' .$user .'</b></td></tr><tr><td>Mot de passe mysql:</td><td><b>NOTSHOWN</b></td></tr><tr><td>Hôte mysql:</td><td><b>' .$host .'</b></td></tr></table>');
       break;
     }
 
