@@ -32,6 +32,8 @@
 </table>
 <?php
   }
+        //Récupère la liste des projets
+        $projects = getProjectsAttribuate();
 
     if(empty($projects)) {
       echo '<strong>Aucun groupe n\'a été constitué pour le moment.</strong>';
