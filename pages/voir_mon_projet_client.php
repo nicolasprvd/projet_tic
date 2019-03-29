@@ -86,7 +86,7 @@ $myProject = getProjectById($_GET['id']);
 $docSubmit = getDocSubmit($myProject['idProjet'], 'CDC');
 if (empty($docSubmit)) {
     ajouterErreur('Le cahier des charges n\'a pas encore été déposé');
-    include('./include/erreurs.php');
+    echo '<div class="erreur bold">'.array_values(array_slice($_REQUEST['erreurs'], -1))[0].'</div>';
 } else {
     echo 'Le cahier des charges a été déposé :' ?> <a
             href="documents/cahier_des_charges/<?php echo $docSubmit['chemindoc']; ?>"
@@ -105,7 +105,7 @@ if (empty($docSubmit)) {
 $docSubmit = getDocSubmit($myProject['idProjet'], 'GANTT');
 if (empty($docSubmit)) {
     ajouterErreur('Le gantt n\'a pas encore été déposé');
-    include('./include/erreurs.php');
+    echo '<div class="erreur bold">'.array_values(array_slice($_REQUEST['erreurs'], -1))[0].'</div>';
 } else {
     echo 'Le gantt a été déposé :' ?> <a href="documents/gantt/<?php echo $docSubmit['chemindoc']; ?>"
                                          target=\"_BLANK\">> Télécharger</a>
@@ -123,6 +123,7 @@ if (empty($docSubmit)) {
 $docSubmit = getDocSubmit($myProject['idProjet'], 'RF');
 if (empty($docSubmit)) {
     ajouterErreur('Le rendu final n\'a pas encore été déposé');
+    echo '<div class="erreur bold">'.array_values(array_slice($_REQUEST['erreurs'], -1))[0].'</div>';
 } else {
     echo 'Le rendu final a été déposé :' ?> <a href="documents/rendu_final/<?php echo $docSubmit['chemindoc']; ?>"
                                                target=\"_BLANK\">> Télécharger</a>
