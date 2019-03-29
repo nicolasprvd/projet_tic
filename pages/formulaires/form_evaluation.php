@@ -31,9 +31,9 @@
                 <td><?php define_list_coeff('coeff_rendu'); ?></td>
             </tr>
         </table>
-
+        
         <p class="mbxl">
-            <input type="submit" class="input_custom" name="btn_calcul" value="Calculer la note finale" />
+            <input type="submit" <?php if(isset($_POST['btn_calcul'])) echo 'disabled = "disabled"' ?> class="input_custom" name="btn_calcul" value="Calculer la note finale" />
         </p>
     </form>
     <?php
