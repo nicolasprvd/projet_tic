@@ -12,5 +12,5 @@ define('USER', 'root');
 define('PASSWORD', '');
 
 //Chemin de destination de l'exécutable mysqldump.exe
-define('CONF_MYSQLDUMP', 'C:\wamp64\bin\mysql\mysql5.7.14\bin\mysqldump.exe');
+define('CONF_MYSQLDUMP', 'C:\xampp\mysql\bin\mysqldump.exe');
 ?>
