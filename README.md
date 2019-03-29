@@ -36,6 +36,7 @@ define('SOURCE', 'mysql:host='.HOST.';dbname='.DBNAME);
 define('USER', '');
 define('PASSWORD', '');
 //Chemin de destination de l'exécutable mysqldump.exe
+// à modifier pour l'export de la base de données
 define('CONF_MYSQLDUMP', '');
 ```
 ## Connexion à l'application 
